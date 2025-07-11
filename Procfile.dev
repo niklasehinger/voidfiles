@@ -1,2 +1,3 @@
 web: env RUBY_DEBUG_OPEN=true bin/rails server
 css: yarn build:css --watch
+npx @tailwindcss/cli -i ./app/assets/stylesheets/application.css -o ./app/assets/builds/application.css --minify --watch

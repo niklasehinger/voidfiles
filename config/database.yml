@@ -1,2 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: niklasehinger
+  password: fass
+  host: localhost
+
+development:
+  <<: *default
+  database: voidfiles_development
+
+test:
+  <<: *default
+  database: voidfiles_test
+
 production:
   url: <%= ENV["DATABASE_URL"] %>
