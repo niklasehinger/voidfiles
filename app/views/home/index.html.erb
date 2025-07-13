@@ -1,40 +1,53 @@
 <div class="min-h-screen bg-gradient-to-br from-voidfiles-white to-gray-50">
   <!-- Header -->
-  <header class="bg-voidfiles-white shadow-sm border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-6">
-        <div class="flex items-center">
-          <div class="text-2xl font-bold text-voidfiles-navy">🧠 VoidFiles</div>
-        </div>
-        <nav class="hidden md:flex space-x-8">
-          <a href="#features" class="text-gray-600 hover:text-voidfiles-navy transition-colors">Features</a>
-          <a href="#how-it-works" class="text-gray-600 hover:text-voidfiles-navy transition-colors">So funktioniert's</a>
-          <a href="#upload" class="btn-primary">
-            Projekt analysieren
-          </a>
-        </nav>
+  <header class="w-full bg-white/80 backdrop-blur border-b border-gray-100 sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-8 h-8 rounded-lg bg-voidfiles-blue flex items-center justify-center text-white font-bold text-2xl">V</span>
+        <span class="font-bold text-lg text-voidfiles-navy tracking-tight">VoidFiles</span>
       </div>
+      <nav class="hidden md:flex gap-8 text-base font-medium">
+        <a href="#features" class="text-voidfiles-navy hover:text-voidfiles-blue transition">Features</a>
+        <a href="#pricing" class="text-voidfiles-navy hover:text-voidfiles-blue transition">Preise</a>
+        <a href="#integrations" class="text-voidfiles-navy hover:text-voidfiles-blue transition">Integrationen</a>
+        <a href="#faq" class="text-voidfiles-navy hover:text-voidfiles-blue transition">FAQ</a>
+      </nav>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-5xl font-bold text-voidfiles-navy mb-6">
-        Räume deine Videoprojekte auf
+  <section class="relative bg-gradient-to-br from-voidfiles-white to-[#f6f8ff] pt-16 pb-8 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="max-w-3xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-block mb-4 px-3 py-1 rounded-full bg-voidfiles-blue/10 text-voidfiles-blue text-xs font-semibold tracking-wide">
+        Update  VoidFiles jetzt live!
+      </div>
+      <!-- Headline -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+        <span class="text-voidfiles-navy">Dein</span>
+        <span class="text-voidfiles-blue"> smarter Assistent</span><br>
+        <span class="text-voidfiles-navy">für jedes</span>
+        <span class="text-voidfiles-red"> Video-Projekt</span>
       </h1>
-      <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-        VoidFiles analysiert Adobe Premiere Pro-Projektdateien und zeigt dir, welche Mediendateien verwendet werden, 
-        welche ungenutzt sind und welche fehlen. Spare Speicherplatz und organisiere deine Projekte effizient.
+      <!-- Subline -->
+      <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+        Spare Speicherplatz und Zeit: VoidFiles analysiert deine Adobe Premiere Pro-Projekte, erkennt genutzte, ungenutzte und fehlende Medien – alles auf einen Blick, KI-gestützt und sicher.
       </p>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button class="btn-primary text-lg px-8 py-4">
-          🚀 Jetzt starten
-        </button>
-        <button class="btn-secondary text-lg px-8 py-4">
-          📖 Demo ansehen
-        </button>
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-4">
+        <a href="#upload" class="btn-primary text-base px-8 py-3 font-semibold shadow-md">Jetzt starten</a>
+        <a href="#how-it-works" class="btn-secondary text-base px-8 py-3 font-semibold">So funktioniert's</a>
+      </div>
+      <!-- Hinweistext -->
+      <p class="text-xs text-gray-400">Keine Kreditkarte nötig – jederzeit kündbar</p>
+    </div>
+
+    <!-- App Mockup Platzhalter -->
+    <div class="max-w-5xl mx-auto mt-16 flex justify-center">
+      <div class="w-full max-w-4xl rounded-2xl shadow-2xl border border-gray-100 bg-white overflow-hidden">
+        <div class="aspect-[16/7] bg-gradient-to-br from-voidfiles-blue/10 to-voidfiles-navy/10 flex items-center justify-center">
+          <span class="text-voidfiles-navy text-2xl font-semibold opacity-40">[Hier könnte ein Screenshot deiner App stehen]</span>
+        </div>
       </div>
     </div>
   </section>
