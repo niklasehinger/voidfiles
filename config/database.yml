@@ -80,3 +80,5 @@ test:
 #
 production:
   url: <%= ENV["DATABASE_URL"] %>
+  cable:
+    url: <%= ENV["DATABASE_URL"] %>
