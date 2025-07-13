@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* VoidFiles Color System */
+:root {
+  --voidfiles-navy: #00005B;
+  --voidfiles-blue: #3B63FB;
+  --voidfiles-white: #FFFFFF;
+  --voidfiles-red: #EB1100;
+  --voidfiles-black: #161616;
+}
+
+/* Custom Tailwind Classes */
+@layer components {
+  .btn-primary {
+    @apply bg-[#3B63FB] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#2d4fd8] transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply border border-[#3B63FB] text-[#3B63FB] px-6 py-3 rounded-lg font-semibold hover:bg-[#3B63FB] hover:text-white transition-colors;
+  }
+  
+  .btn-danger {
+    @apply bg-[#EB1100] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#d10f00] transition-colors;
+  }
+  
+  .text-voidfiles-navy {
+    color: var(--voidfiles-navy);
+  }
+  
+  .text-voidfiles-blue {
+    color: var(--voidfiles-blue);
+  }
+  
+  .text-voidfiles-red {
+    color: var(--voidfiles-red);
+  }
+  
+  .bg-voidfiles-navy {
+    background-color: var(--voidfiles-navy);
+  }
+  
+  .bg-voidfiles-blue {
+    background-color: var(--voidfiles-blue);
+  }
+  
+  .bg-voidfiles-red {
+    background-color: var(--voidfiles-red);
+  }
+  
+  .border-voidfiles-blue {
+    border-color: var(--voidfiles-blue);
+  }
+}
