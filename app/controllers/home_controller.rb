@@ -24,6 +24,9 @@ class HomeController < ApplicationController
     end
   end
 
+  def faq
+  end
+
   private
 
   def prproj_upload_params
