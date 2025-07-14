@@ -6,22 +6,14 @@ class HomeController < ApplicationController
   def create
     @prproj_upload = PrprojUpload.new(prproj_upload_params)
     if @prproj_upload.save
-      respond_to do |format|
-        format.turbo_stream {
-          @prproj_upload = PrprojUpload.new # leeres Formular nach Erfolg
-          flash.now[:notice] = 'Datei erfolgreich hochgeladen!'
-          render turbo_stream: turbo_stream.replace('upload_form', partial: 'home/upload_form', locals: { prproj_upload: @prproj_upload })
-        }
-        format.html { redirect_to root_path, notice: 'Datei erfolgreich hochgeladen!' }
-      end
+      redirect_to prproj_upload_path(@prproj_upload)
     else
-      respond_to do |format|
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.replace('upload_form', partial: 'home/upload_form', locals: { prproj_upload: @prproj_upload })
-        }
-        format.html { render :index, status: :unprocessable_entity }
-      end
+      render :index, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @prproj_upload = PrprojUpload.find(params[:id])
   end
 
   def faq
