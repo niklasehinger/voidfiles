@@ -21,6 +21,7 @@
       <h1 class="text-3xl font-extrabold text-voidfiles-navy mb-8 text-center">Referenzierte Medien im Projekt</h1>
       <p class="text-center text-gray-700 mb-6">Deine Medien wurden erfolgreich erkannt. Du kannst jetzt selbst testen, ob alles korrekt ist – oder die KI genutzte und ungenutzte Medien sortieren lassen.</p>
       <div class="bg-white rounded-xl shadow p-8 border border-gray-100">
+        <div class="mb-4 text-sm text-gray-500 text-center">Sollten keine Medien angezeigt werden, lade die Seite bitte einmal neu. Die Analyse kann wenige Sekunden dauern.</div>
         <% tree = @prproj_upload.media_tree %>
         <% if tree.present? %>
           <style>
