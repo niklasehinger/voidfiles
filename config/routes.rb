@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   post "/", to: "home#create"
   get "home/index"
   get "faq", to: "home#faq", as: :faq
-  resources :prproj_uploads, only: [:show]
+  resources :prproj_uploads do
+    member do
+      get :analysis_result
+      post :analyze_ki
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

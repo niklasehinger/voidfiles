@@ -6,6 +6,10 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+puts "RUBY VERSION: #{RUBY_VERSION}"
+puts "BUNDLER: #{defined?(Bundler)}"
+puts "OPENAI GEM: #{Gem.loaded_specs['openai']&.version}"
+
 module Voidfiles
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

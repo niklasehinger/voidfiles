@@ -81,10 +81,10 @@ test:
 production:
   url: <%= ENV["DATABASE_URL"] %>
 
-queue:
+  queue:
   url: <%= ENV["DATABASE_URL"] %>
 
-cable:
+  cable:
   url: <%= ENV["DATABASE_URL"] %>
 
 cache:

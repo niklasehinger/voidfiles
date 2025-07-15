@@ -170,11 +170,45 @@
           <div class="text-gray-500 text-center py-8">Keine Medien im Projekt gefunden.</div>
         <% end %>
       </div>
+      <% if @ki_analysis.present? %>
+        <div class="mt-10">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow-sm">
+              <h2 class="text-xl font-bold text-voidfiles-blue mb-4 flex items-center gap-2">
+                <svg class="inline w-6 h-6 text-voidfiles-blue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                Genutzte Medien
+              </h2>
+              <% JSON.parse(@ki_analysis)["used"].each do |path| %>
+                <div class="py-1 px-2 rounded text-sm text-voidfiles-navy bg-white/80 mb-1 truncate border border-blue-100">
+                  <%= path %>
+                </div>
+              <% end %>
+              <% if JSON.parse(@ki_analysis)["used"].empty? %>
+                <div class="text-gray-400 italic">Keine genutzten Medien erkannt.</div>
+              <% end %>
+            </div>
+            <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
+              <h2 class="text-xl font-bold text-voidfiles-navy mb-4 flex items-center gap-2">
+                <svg class="inline w-6 h-6 text-voidfiles-navy" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h8M12 8v8"/></svg>
+                Ungenutzte Medien
+              </h2>
+              <% JSON.parse(@ki_analysis)["unused"].each do |path| %>
+                <div class="py-1 px-2 rounded text-sm text-gray-700 bg-white/80 mb-1 truncate border border-gray-100">
+                  <%= path %>
+                </div>
+              <% end %>
+              <% if JSON.parse(@ki_analysis)["unused"].empty? %>
+                <div class="text-gray-400 italic">Keine ungenutzten Medien erkannt.</div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
       <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
         <a href="/" class="btn-secondary px-6 py-3">Zurück zur Startseite</a>
-        <button type="button" class="px-6 py-3 rounded-lg font-semibold text-white bg-voidfiles-red hover:bg-red-700 transition shadow focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2">
-          KI-Analyse starten
-        </button>
+        <%= form_with url: analyze_ki_prproj_upload_path(@prproj_upload), method: :post, local: true, data: { turbo: false } do %>
+          <%= submit_tag "KI-Analyse starten", class: "px-6 py-3 rounded-lg font-semibold text-white bg-voidfiles-red hover:bg-red-700 transition shadow focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2" %>
+        <% end %>
       </div>
     </div>
   </div>
