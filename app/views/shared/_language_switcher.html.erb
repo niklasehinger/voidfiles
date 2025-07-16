@@ -1,0 +1,24 @@
+<div class="relative flex items-center h-full">
+  <button type="button" id="lang-switch-btn" class="flex items-center h-full px-0 py-0 text-base font-medium text-voidfiles-navy hover:text-voidfiles-blue focus:outline-none bg-transparent border-none shadow-none" onclick="document.getElementById('lang-switch-dropdown').classList.toggle('hidden')">
+    <span class="inline-flex items-center h-full">
+      <% case I18n.locale.to_s
+         when 'de' %>Deutsch<% when 'en' %>English<% when 'es' %>Español<% when 'fr' %>Français<% else %>Language<% end %>
+      <svg class="w-4 h-4 ml-1 text-voidfiles-navy transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+    </span>
+  </button>
+  <div id="lang-switch-dropdown" class="absolute right-0 top-full min-w-40 py-2 bg-white border border-gray-100 rounded shadow-lg hidden z-50 overflow-visible">
+    <%= link_to "Deutsch", url_for(locale: :de), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :de}" %>
+    <%= link_to "English", url_for(locale: :en), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :en}" %>
+    <%= link_to "Español", url_for(locale: :es), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :es}" %>
+    <%= link_to "Français", url_for(locale: :fr), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :fr}" %>
+  </div>
+  <script>
+    document.addEventListener('click', function(event) {
+      var btn = document.getElementById('lang-switch-btn');
+      var dropdown = document.getElementById('lang-switch-dropdown');
+      if (!btn.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  </script>
+</div> 

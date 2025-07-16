@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   def create
     @prproj_upload = PrprojUpload.new(prproj_upload_params)
     if @prproj_upload.save
-      redirect_to prproj_upload_path(@prproj_upload)
+      redirect_to prproj_upload_path(@prproj_upload, locale: I18n.locale)
     else
       render :index, status: :unprocessable_entity
     end

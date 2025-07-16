@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
-  root "home#index"
-  post "/", to: "home#create"
-  get "home/index"
-  get "faq", to: "home#faq", as: :faq
-  resources :prproj_uploads do
-    member do
-      get :analysis_result
-      post :analyze_ki
+  scope "(:locale)", locale: /en|de|es|fr/ do
+    root "home#index"
+    post "/", to: "home#create"
+    get "home/index"
+    get "faq", to: "home#faq", as: :faq
+    resources :prproj_uploads do
+      member do
+        get :analysis_result
+        post :analyze_ki
+      end
     end
+    # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

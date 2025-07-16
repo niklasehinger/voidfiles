@@ -1,44 +1,32 @@
 <div class="min-h-screen bg-gradient-to-br from-voidfiles-white to-gray-50">
   <!-- Header -->
-  <header class="w-full bg-white/80 backdrop-blur border-b border-gray-100 sticky top-0 z-30">
-    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-      <div class="flex items-center gap-2">
-        <span class="inline-block w-8 h-8 rounded-lg bg-voidfiles-blue flex items-center justify-center text-white font-bold text-2xl">V</span>
-        <span class="font-bold text-lg text-voidfiles-navy tracking-tight">VoidFiles</span>
-      </div>
-      <nav class="hidden md:flex gap-8 text-base font-medium">
-        <a href="#features" class="text-voidfiles-navy hover:text-voidfiles-blue transition">Features</a>
-        <a href="#pricing" class="text-voidfiles-navy hover:text-voidfiles-blue transition">Preise</a>
-        <a href="/faq" class="text-voidfiles-navy hover:text-voidfiles-blue transition">FAQ</a>
-      </nav>
-    </div>
-  </header>
+  <%= render 'shared/header' %>
 
   <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-voidfiles-white to-[#f6f8ff] pt-16 pb-8 px-4 sm:px-6 lg:px-8 overflow-hidden">
     <div class="max-w-3xl mx-auto text-center">
       <!-- Badge -->
       <div class="inline-block mb-4 px-3 py-1 rounded-full bg-voidfiles-blue/10 text-voidfiles-blue text-xs font-semibold tracking-wide">
-        Update  VoidFiles jetzt live!
+        <%= t('home.update_badge') %>
       </div>
       <!-- Headline -->
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-        <span class="text-voidfiles-navy">Dein</span>
-        <span class="text-voidfiles-blue"> smarter Assistent</span><br>
-        <span class="text-voidfiles-navy">für jedes</span>
-        <span class="text-voidfiles-red"> Video-Projekt</span>
+        <span class="text-voidfiles-navy"><%= t('home.headline.dein') %></span>
+        <span class="text-voidfiles-blue"> <%= t('home.headline.smarter_assistent') %></span><br>
+        <span class="text-voidfiles-navy"><%= t('home.headline.fuer_jedes') %></span>
+        <span class="text-voidfiles-red"> <%= t('home.headline.video_projekt') %></span>
       </h1>
       <!-- Subline -->
       <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-        Spare Speicherplatz und Zeit: VoidFiles analysiert deine Adobe Premiere Pro-Projekte, erkennt genutzte, ungenutzte und fehlende Medien – alles auf einen Blick, KI-gestützt und sicher.
+        <%= t('home.subline') %>
       </p>
       <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-4">
-        <a href="#upload" class="btn-primary text-base px-8 py-3 font-semibold shadow-md">Jetzt starten</a>
-        <a href="#how-it-works" class="btn-secondary text-base px-8 py-3 font-semibold">So funktioniert's</a>
+        <a href="#upload" class="btn-primary text-base px-8 py-3 font-semibold shadow-md"><%= t('home.cta_start') %></a>
+        <a href="#how-it-works" class="btn-secondary text-base px-8 py-3 font-semibold"><%= t('home.cta_how') %></a>
       </div>
       <!-- Hinweistext -->
-      <p class="text-xs text-gray-400">Keine Kreditkarte nötig – jederzeit kündbar</p>
+      <p class="text-xs text-gray-400"><%= t('home.cta_note') %></p>
     </div>
   </section>
 
@@ -46,9 +34,9 @@
   <section id="features" class="py-24 bg-voidfiles-white">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-extrabold text-voidfiles-navy mb-6">Was VoidFiles für dich macht</h2>
+        <h2 class="text-4xl font-extrabold text-voidfiles-navy mb-6"><%= t('home.features_title') %></h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          VoidFiles ist dein professioneller Assistent für die effiziente Organisation und Analyse deiner Adobe Premiere Pro-Projekte. Spare Zeit, Speicherplatz und Nerven – mit intelligenter Technologie, die dir volle Kontrolle und Übersicht über deine Medien gibt. Egal ob Freelancer, Agentur oder Unternehmen: Mit VoidFiles arbeitest du smarter, schneller und sicherer.
+          <%= t('home.features_subline') %>
         </p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -56,27 +44,27 @@
           <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
             <span class="text-3xl">✅</span>
           </div>
-          <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3">Genutzte Dateien erkennen</h3>
-          <p class="text-gray-700 text-base">VoidFiles analysiert dein Projekt und listet alle Mediendateien auf, die tatsächlich im Schnitt verwendet werden. So behältst du den Überblick und kannst gezielt aufräumen.</p>
+          <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3"><%= t('home.feature1_title') %></h3>
+          <p class="text-gray-700 text-base"><%= t('home.feature1_text') %></p>
         </div>
         <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex flex-col items-center text-center transition hover:shadow-2xl hover:-translate-y-1">
           <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
             <span class="text-3xl">📁</span>
           </div>
-          <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3">Unbenutzte Dateien finden</h3>
-          <p class="text-gray-700 text-base">Importierte, aber nicht verwendete Dateien werden automatisch erkannt. So kannst du Speicherplatz sparen und deine Projekte schlank halten.</p>
+          <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3"><%= t('home.feature2_title') %></h3>
+          <p class="text-gray-700 text-base"><%= t('home.feature2_text') %></p>
         </div>
         <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex flex-col items-center text-center transition hover:shadow-2xl hover:-translate-y-1">
           <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
             <span class="text-3xl">❌</span>
           </div>
-          <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3">Fehlende Medien aufspüren</h3>
-          <p class="text-gray-700 text-base">VoidFiles zeigt dir sofort, welche Dateien im Projekt referenziert, aber nicht mehr auffindbar sind. So vermeidest du böse Überraschungen beim Export oder in der Zusammenarbeit.</p>
+          <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3"><%= t('home.feature3_title') %></h3>
+          <p class="text-gray-700 text-base"><%= t('home.feature3_text') %></p>
         </div>
       </div>
       <div class="mt-16 text-center">
         <p class="text-lg text-gray-500 max-w-2xl mx-auto">
-          <span class="font-semibold text-voidfiles-blue">Sicher, schnell und intuitiv:</span> VoidFiles ist die moderne Lösung für alle, die mit Premiere Pro professionell arbeiten und Wert auf Übersicht und Effizienz legen.
+          <span class="font-semibold text-voidfiles-blue"><%= t('home.features_slogan_bold') %></span> <%= t('home.features_slogan') %>
         </p>
       </div>
     </div>
@@ -86,17 +74,17 @@
   <section id="how-it-works" class="py-24 bg-gradient-to-b from-gray-50 to-white">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-extrabold text-voidfiles-navy mb-6">So funktioniert's</h2>
+        <h2 class="text-4xl font-extrabold text-voidfiles-navy mb-6"><%= t('home.how_title') %></h2>
         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          In vier klaren Schritten von der Projektdatei zur perfekten Übersicht – einfach, sicher und effizient.
+          <%= t('home.how_subline') %>
         </p>
       </div>
       <div class="flex flex-col gap-12">
         <% steps = [
-          { num: 1, title: "Projektdatei hochladen", text: "Wähle deine .prproj-Datei aus oder ziehe sie ins Upload-Feld. Deine Daten bleiben geschützt." },
-          { num: 2, title: "(Optional) Medienliste ergänzen", text: "Füge eine CSV-Liste hinzu, um die Analyse zu verfeinern. Das ist hilfreich, aber kein Muss." },
-          { num: 3, title: "Automatische Analyse", text: "VoidFiles erkennt genutzte, ungenutzte und fehlende Medien – schnell, präzise und KI-gestützt." },
-          { num: 4, title: "Ergebnis erhalten", text: "Du bekommst eine übersichtliche Auswertung und kannst direkt Optimierungspotenzial erkennen." }
+          { num: 1, title: t('home.step1_title'), text: t('home.step1_text') },
+          { num: 2, title: t('home.step2_title'), text: t('home.step2_text') },
+          { num: 3, title: t('home.step3_title'), text: t('home.step3_text') },
+          { num: 4, title: t('home.step4_title'), text: t('home.step4_text') }
         ] %>
         <% steps.each_with_index do |step, i| %>
           <div class="flex items-start relative">
@@ -115,7 +103,7 @@
       </div>
       <div class="mt-16 text-center">
         <p class="text-lg text-gray-500 max-w-2xl mx-auto">
-          <span class="font-semibold text-voidfiles-blue">Schnell. Klar. Effizient.</span> So einfach war Projektanalyse noch nie.
+          <span class="font-semibold text-voidfiles-blue"><%= t('home.how_slogan_bold') %></span> <%= t('home.how_slogan') %>
         </p>
       </div>
     </div>
@@ -130,10 +118,10 @@
       <div class="text-center">
         <div class="text-2xl font-bold mb-4 text-white">VoidFiles</div>
         <p class="text-gray-300 mb-6">
-          Intelligente Analyse von Adobe Premiere Pro-Projekten
+          <%= t('footer.slogan') %>
         </p>
         <div class="text-sm text-gray-400">
-          © 2024 VoidFiles. Entwickelt mit Ruby on Rails, Tailwind CSS und GPT-4.
+          © 2024 VoidFiles. <%= t('footer.tech') %>
         </div>
       </div>
     </div>
