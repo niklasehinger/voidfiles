@@ -5,6 +5,8 @@ class PrprojUpload < ApplicationRecord
 
   require 'nokogiri'
 
+  before_validation :set_default_title, on: :create
+
   # Gibt ein Array aller im Projekt referenzierten Medienpfade zurück
   def referenced_media_paths
     return [] unless prproj_file.attached?
@@ -31,6 +33,12 @@ class PrprojUpload < ApplicationRecord
   end
 
   private
+
+  def set_default_title
+    if self.title.blank?
+      self.title = I18n.l(Time.current, format: :short)
+    end
+  end
 
   def xml_file_type
     return unless prproj_file.attached?

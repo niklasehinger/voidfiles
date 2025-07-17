@@ -154,4 +154,10 @@ es:
     future_note: "¡Como usuario temprano puedes influir activamente en el desarrollo y beneficiarte de ventajas exclusivas!"
   footer:
     slogan: "Análisis inteligente de proyectos de Adobe Premiere Pro"
-    tech: "Desarrollado con Ruby on Rails, Tailwind CSS y GPT-4." 
+    tech: "Desarrollado con Ruby on Rails, Tailwind CSS y GPT-4."
+  time:
+    formats:
+      short: "%d/%m/%Y, %H:%M"
+  date:
+    formats:
+      short: "%d/%m/%Y" 

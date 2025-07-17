@@ -155,3 +155,9 @@ de:
     future4: "Team- und Kollaborationsfunktionen"
     future5: "Erweiterte Sicherheits- und Datenschutzoptionen"
     future_note: "Als Early-User kannst du die Entwicklung aktiv mitgestalten und profitierst von exklusiven Vorteilen!" 
+  time:
+    formats:
+      short: "%d.%m.%Y, %H:%M Uhr"
+  date:
+    formats:
+      short: "%d.%m.%Y" 

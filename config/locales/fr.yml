@@ -154,4 +154,10 @@ fr:
     future3: "Intégration avec le stockage cloud (Dropbox, Google Drive, etc.)"
     future4: "Fonctionnalités d'équipe et de collaboration"
     future5: "Options de sécurité et de confidentialité avancées"
-    future_note: "En tant qu'utilisateur précoce, vous pouvez façonner activement le développement et bénéficier d'avantages exclusifs !" 
+    future_note: "En tant qu'utilisateur précoce, vous pouvez façonner activement le développement et bénéficier d'avantages exclusifs !"
+  time:
+    formats:
+      short: "%d/%m/%Y, %H:%M"
+  date:
+    formats:
+      short: "%d/%m/%Y" 
