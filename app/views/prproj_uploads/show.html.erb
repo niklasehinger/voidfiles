@@ -215,4 +215,30 @@
       </div>
     </div>
   </footer>
-</div> 
+</div>
+<div id="loading-modal" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh; background:rgba(255,255,255,0.85); align-items:center; justify-content:center;">
+  <div style="background:white; border-radius:1em; box-shadow:0 2px 16px rgba(0,0,0,0.12); padding:2em 6em; display:flex; flex-direction:column; align-items:center; max-width:650px;">
+    <svg style="width:48px; height:48px; margin-bottom:1em; animation:spin 1s linear infinite;" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="20" fill="none" stroke="#2563eb" stroke-width="5" stroke-linecap="round" stroke-dasharray="31.4 31.4"/>
+    </svg>
+    <div style="font-size:1.2em; color:#2563eb; font-weight:500;">KI-Analyse läuft...</div>
+    <div style="margin-top:1em; color:#64748b; font-size:0.9em; max-width:600px; text-align:center;">
+      Je nach Projektgröße kann die Analyse einige Minuten dauern.<br>Bitte dieses Fenster nicht schließen oder neu laden, bis die Ergebnisse angezeigt werden.
+    </div>
+  </div>
+</div>
+<style>
+@keyframes spin { 100% { transform: rotate(360deg); } }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var loadingModal = document.getElementById('loading-modal');
+  if (loadingModal) loadingModal.style.display = 'none'; // Modal immer ausblenden beim Laden
+  var form = document.querySelector('form[action*="analyze_ki"]');
+  if(form) {
+    form.addEventListener('submit', function() {
+      loadingModal.style.display = 'flex';
+    });
+  }
+});
+</script> 
