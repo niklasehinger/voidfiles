@@ -19,7 +19,7 @@ class PrprojUploadsController < ApplicationController
     result = OpenaiXmlAnalyzer.new(prompt).analyze
     if result
       session[:ki_analysis] = result
-      redirect_to analysis_result_prproj_upload_path(@prproj_upload)
+      redirect_to prproj_upload_path(@prproj_upload, locale: I18n.locale)
     else
       redirect_to @prproj_upload, alert: "KI-Analyse fehlgeschlagen. Bitte versuche es erneut."
     end

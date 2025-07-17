@@ -166,12 +166,12 @@
                 <svg class="inline w-6 h-6 text-voidfiles-blue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                 <%= t('general.used_media') %>
               </h2>
-              <% JSON.parse(@ki_analysis)["used"].each do |path| %>
+              <% @ki_analysis['used'].each do |path| %>
                 <div class="py-1 px-2 rounded text-sm text-voidfiles-navy bg-white/80 mb-1 truncate border border-blue-100">
                   <%= path %>
                 </div>
               <% end %>
-              <% if JSON.parse(@ki_analysis)["used"].empty? %>
+              <% if @ki_analysis['used'].empty? %>
                 <div class="text-gray-400 italic"><%= t('general.no_used_media') %></div>
               <% end %>
             </div>
@@ -180,12 +180,12 @@
                 <svg class="inline w-6 h-6 text-voidfiles-navy" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h8M12 8v8"/></svg>
                 <%= t('general.unused_media') %>
               </h2>
-              <% JSON.parse(@ki_analysis)["unused"].each do |path| %>
+              <% @ki_analysis['unused'].each do |path| %>
                 <div class="py-1 px-2 rounded text-sm text-gray-700 bg-white/80 mb-1 truncate border border-gray-100">
                   <%= path %>
                 </div>
               <% end %>
-              <% if JSON.parse(@ki_analysis)["unused"].empty? %>
+              <% if @ki_analysis['unused'].empty? %>
                 <div class="text-gray-400 italic"><%= t('general.no_unused_media') %></div>
               <% end %>
             </div>
@@ -194,7 +194,7 @@
       <% end %>
       <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
         <a href="/" class="btn-secondary px-6 py-3"><%= t('general.back_to_home') %></a>
-        <%= form_with url: analyze_ki_prproj_upload_path(@prproj_upload), method: :post, local: true, data: { turbo: false } do %>
+        <%= form_with url: analyze_ki_prproj_upload_path(@prproj_upload, locale: I18n.locale), method: :post, local: true, data: { turbo: false } do %>
           <%= submit_tag t('show.ki_start'), class: "px-6 py-3 rounded-lg font-semibold text-white bg-voidfiles-red hover:bg-red-700 transition shadow focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2" %>
         <% end %>
       </div>
