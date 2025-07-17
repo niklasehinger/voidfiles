@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     post "/", to: "home#create"
     get "home/index"
     get "faq", to: "home#faq", as: :faq
+    get "pricing", to: "home#pricing", as: :pricing
+    get "features", to: "home#features", as: :features
     resources :prproj_uploads do
       member do
         get :analysis_result

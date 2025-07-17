@@ -19,6 +19,12 @@ class HomeController < ApplicationController
   def faq
   end
 
+  def pricing
+  end
+
+  def features
+  end
+
   private
 
   def prproj_upload_params

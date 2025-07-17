@@ -7,9 +7,15 @@
       <% end %>
     </div>
     <nav class="hidden md:flex gap-8 text-base font-medium">
-      <a href="#features" class="text-voidfiles-navy hover:text-voidfiles-blue transition"><%= t('navigation.features') %></a>
-      <a href="#pricing" class="text-voidfiles-navy hover:text-voidfiles-blue transition"><%= t('navigation.pricing') %></a>
-      <a href="/faq" class="text-voidfiles-navy hover:text-voidfiles-blue transition"><%= t('navigation.faq') %></a>
+      <%= link_to features_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
+        <%= t('navigation.features') %>
+      <% end %>
+      <%= link_to pricing_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
+        <%= t('navigation.pricing') %>
+      <% end %>
+      <%= link_to faq_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
+        <%= t('navigation.faq') %>
+      <% end %>
       <span class="ml-8"><%= render 'shared/language_switcher' %></span>
     </nav>
   </div>
