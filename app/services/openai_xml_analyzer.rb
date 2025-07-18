@@ -11,7 +11,6 @@ class OpenaiXmlAnalyzer
     prompt = <<~PROMPT
       Analysiere die folgende Adobe Premiere Pro XML-Datei. Gib **ausschließlich** ein JSON-Objekt im folgenden Format zurück – ohne jeglichen Erklärungstext, ohne Einleitung, ohne Kommentare, ohne Markdown, nur reines JSON:
       {"used": ["/Pfad/zu/clip1.mov"], "unused": ["/Pfad/zu/clip2.mov"]}
-      **Gib maximal die ersten 10 genutzten und die ersten 10 ungenutzten Medien im jeweiligen Array zurück.**
       XML:
       #{@xml_string}
     PROMPT

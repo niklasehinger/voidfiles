@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       member do
         get :analysis_result
         post :analyze_ki
+        get :progress
       end
     end
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

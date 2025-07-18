@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_17_111756) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_18_082711) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -56,6 +56,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_111756) do
     t.json "unused_media"
     t.json "missing_media"
     t.text "media_paths"
+    t.string "ki_analysis_status"
+    t.text "ki_analysis_result"
+    t.integer "ki_analysis_progress"
+    t.integer "ki_analysis_total"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

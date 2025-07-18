@@ -1,5 +1,15 @@
 <% require 'cgi' %>
 <div class="min-h-screen flex flex-col bg-gradient-to-br from-voidfiles-white to-gray-50">
+  <% if flash[:notice] %>
+    <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded relative max-w-2xl mx-auto mt-6 text-center">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded relative max-w-2xl mx-auto mt-6 text-center">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
   <!-- Header -->
   <%= render 'shared/header' %>
 
@@ -158,7 +168,46 @@
           <div class="text-gray-500 text-center py-8"><%= t('show.no_media') %></div>
         <% end %>
       </div>
-      <% if @ki_analysis.present? %>
+      <% if @ki_status == 'pending' || @ki_status == 'running' %>
+        <div class="flex justify-center items-center mt-10">
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-8 shadow text-center max-w-xl mx-auto">
+            <div class="text-xl font-bold text-voidfiles-blue mb-2">KI-Analyse läuft...</div>
+            <div class="text-gray-500 mb-4">Die Analyse wird im Hintergrund durchgeführt. Bitte warte einen Moment.</div>
+            <div id="progress-bar-container" style="width:100%; background:#e0e7ef; border-radius:0.5em; height:1.5em; margin:1em 0;">
+              <div id="progress-bar" style="background:#2563eb; height:100%; width:0%; border-radius:0.5em; transition:width 0.5s;"></div>
+            </div>
+            <div id="progress-text" class="text-sm text-gray-600">0%</div>
+          </div>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            function pollProgress() {
+              fetch('<%= progress_prproj_upload_path(@prproj_upload, locale: I18n.locale) %>')
+                .then(response => response.json())
+                .then(data => {
+                  var percent = data.total > 0 ? Math.round(100 * data.progress / data.total) : 0;
+                  document.getElementById('progress-bar').style.width = percent + '%';
+                  document.getElementById('progress-text').textContent = percent + '%';
+                  if(data.status === 'done') {
+                    window.location.reload();
+                  } else if(data.status === 'failed') {
+                    window.location.reload();
+                  } else {
+                    setTimeout(pollProgress, 2000);
+                  }
+                });
+            }
+            pollProgress();
+          });
+        </script>
+      <% elsif @ki_status == 'failed' %>
+        <div class="flex justify-center items-center mt-10">
+          <div class="bg-red-50 border border-red-200 rounded-xl p-8 shadow text-center max-w-xl mx-auto">
+            <div class="text-xl font-bold text-red-700 mb-2">KI-Analyse fehlgeschlagen</div>
+            <div class="text-gray-500"><%= @ki_analysis && @ki_analysis['error'] ? @ki_analysis['error'] : 'Unbekannter Fehler.' %></div>
+          </div>
+        </div>
+      <% elsif @ki_analysis.present? %>
         <div class="mt-10">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow-sm">
