@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmeml version="5">
+  <project>
+    <name>Test Project</name>
+    <sequence id="seq-1">
+      <name>Test Sequence</name>
+      <duration>30000</duration>
+      <uuid>test-uuid-1</uuid>
+      <media>
+        <video>
+          <track>
+            <clipitem id="clip-1">
+              <file id="file-1"/>
+              <start>0</start>
+              <end>10000</end>
+            </clipitem>
+            <clipitem id="clip-2">
+              <file id="file-2"/>
+              <start>10000</start>
+              <end>20000</end>
+            </clipitem>
+          </track>
+        </video>
+        <audio>
+          <track>
+            <clipitem id="clip-3">
+              <file id="file-3"/>
+              <start>0</start>
+              <end>30000</end>
+            </clipitem>
+          </track>
+        </audio>
+      </media>
+    </sequence>
+  </project>
+  <file id="file-1">
+    <name>test_video_1.mp4</name>
+    <pathurl>file://localhost/Volumes/Test/Footage/test_video_1.mp4</pathurl>
+  </file>
+  <file id="file-2">
+    <name>test_video_2.mp4</name>
+    <pathurl>file://localhost/Volumes/Test/Footage/test_video_2.mp4</pathurl>
+  </file>
+  <file id="file-3">
+    <name>test_audio_1.wav</name>
+    <pathurl>file://localhost/Volumes/Test/Audio/test_audio_1.wav</pathurl>
+  </file>
+  <file id="file-4">
+    <name>unused_video.mp4</name>
+    <pathurl>file://localhost/Volumes/Test/Footage/unused_video.mp4</pathurl>
+  </file>
+</xmeml> 

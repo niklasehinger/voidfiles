@@ -19,6 +19,7 @@
       <h2 class="text-xl font-bold text-voidfiles-blue mb-2 text-center"><%= @prproj_upload.title %></h2>
       <p class="text-center text-gray-700 mb-6"><%= t('show.intro') %></p>
       <div class="bg-white rounded-xl shadow p-8 border border-gray-100">
+        <!-- Sequenzen-Liste entfernt für neuen Wizard-Schritt -->
         <div class="mb-4 text-sm text-gray-500 text-center"><%= t('show.hint_reload') %></div>
         <% tree = @prproj_upload.media_tree %>
         <% if tree.present? %>
@@ -168,6 +169,9 @@
           <div class="text-gray-500 text-center py-8"><%= t('show.no_media') %></div>
         <% end %>
       </div>
+      <div class="flex justify-center mb-8 mt-10">
+        <%= link_to "Sequenzen auswählen", sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale), class: "bg-voidfiles-blue hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow transition text-lg" %>
+      </div>
       <% if @ki_status == 'pending' || @ki_status == 'running' %>
         <div class="flex justify-center items-center mt-10">
           <div class="bg-blue-50 border border-blue-200 rounded-xl p-8 shadow text-center max-w-xl mx-auto">
@@ -177,6 +181,8 @@
               <div id="progress-bar" style="background:#2563eb; height:100%; width:0%; border-radius:0.5em; transition:width 0.5s;"></div>
             </div>
             <div id="progress-text" class="text-sm text-gray-600">0%</div>
+            <div id="progress-info" class="text-xs text-gray-500 mt-2"></div>
+            <div id="progress-sequence" class="text-xs text-gray-500 mt-1"></div>
           </div>
         </div>
         <script>
@@ -188,6 +194,10 @@
                   var percent = data.total > 0 ? Math.round(100 * data.progress / data.total) : 0;
                   document.getElementById('progress-bar').style.width = percent + '%';
                   document.getElementById('progress-text').textContent = percent + '%';
+                  document.getElementById('progress-info').textContent =
+                    data.total > 0 ? (data.progress + ' von ' + data.total + ' Sequenzen analysiert') : '';
+                  document.getElementById('progress-sequence').textContent =
+                    data.current_sequence ? ('Aktuelle Sequenz: ' + data.current_sequence) : '';
                   if(data.status === 'done') {
                     window.location.reload();
                   } else if(data.status === 'failed') {
@@ -200,52 +210,67 @@
             pollProgress();
           });
         </script>
-      <% elsif @ki_status == 'failed' %>
-        <div class="flex justify-center items-center mt-10">
-          <div class="bg-red-50 border border-red-200 rounded-xl p-8 shadow text-center max-w-xl mx-auto">
-            <div class="text-xl font-bold text-red-700 mb-2">KI-Analyse fehlgeschlagen</div>
-            <div class="text-gray-500"><%= @ki_analysis && @ki_analysis['error'] ? @ki_analysis['error'] : 'Unbekannter Fehler.' %></div>
-          </div>
-        </div>
       <% elsif @ki_analysis.present? %>
-        <div class="mt-10">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow-sm">
-              <h2 class="text-xl font-bold text-voidfiles-blue mb-4 flex items-center gap-2">
-                <svg class="inline w-6 h-6 text-voidfiles-blue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                <%= t('general.used_media') %>
-              </h2>
-              <% @ki_analysis['used'].each do |path| %>
-                <div class="py-1 px-2 rounded text-sm text-voidfiles-navy bg-white/80 mb-1 truncate border border-blue-100">
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow-sm">
+            <h2 class="text-xl font-bold text-voidfiles-blue mb-4 flex items-center gap-2">
+              <svg class="inline w-6 h-6 text-voidfiles-blue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <%= t('general.used_media') %>
+            </h2>
+            <% Array(@ki_analysis['used']).sort.each do |path| %>
+              <div class="py-1 px-2 rounded text-sm text-voidfiles-navy bg-white/80 mb-1 truncate border border-blue-100">
+                <%= path %>
+              </div>
+            <% end %>
+            <% if Array(@ki_analysis['used']).empty? %>
+              <div class="text-gray-400 italic"><%= t('general.no_used_media') %></div>
+            <% end %>
+          </div>
+          <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
+            <h2 class="text-xl font-bold text-voidfiles-navy mb-4 flex items-center gap-2">
+              <svg class="inline w-6 h-6 text-voidfiles-navy" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h8M12 8v8"/></svg>
+              <%= t('general.unused_media') %>
+            </h2>
+            <% Array(@ki_analysis['unused']).sort.each do |path| %>
+              <div class="py-1 px-2 rounded text-sm text-gray-700 bg-white/80 mb-1 truncate border border-gray-100">
+                <%= path %>
+              </div>
+            <% end %>
+            <% if Array(@ki_analysis['unused']).empty? %>
+              <div class="text-gray-400 italic"><%= t('general.no_unused_media') %></div>
+            <% end %>
+          </div>
+          <div class="bg-red-50 border border-red-200 rounded-xl p-6 shadow-sm">
+            <h2 class="text-xl font-bold text-red-700 mb-4 flex items-center gap-2">
+              <svg class="inline w-6 h-6 text-red-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01"/><circle cx="12" cy="12" r="10"/></svg>
+              Fehlende Medien
+            </h2>
+            <% if @prproj_upload.missing_media.present? %>
+              <% Array(@prproj_upload.missing_media).sort.each do |path| %>
+                <div class="py-1 px-2 rounded text-sm text-red-700 bg-white/80 mb-1 truncate border border-red-200">
                   <%= path %>
                 </div>
               <% end %>
-              <% if @ki_analysis['used'].empty? %>
-                <div class="text-gray-400 italic"><%= t('general.no_used_media') %></div>
-              <% end %>
-            </div>
-            <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
-              <h2 class="text-xl font-bold text-voidfiles-navy mb-4 flex items-center gap-2">
-                <svg class="inline w-6 h-6 text-voidfiles-navy" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h8M12 8v8"/></svg>
-                <%= t('general.unused_media') %>
-              </h2>
-              <% @ki_analysis['unused'].each do |path| %>
-                <div class="py-1 px-2 rounded text-sm text-gray-700 bg-white/80 mb-1 truncate border border-gray-100">
-                  <%= path %>
-                </div>
-              <% end %>
-              <% if @ki_analysis['unused'].empty? %>
-                <div class="text-gray-400 italic"><%= t('general.no_unused_media') %></div>
-              <% end %>
-            </div>
+            <% else %>
+              <div class="text-gray-400 italic">Keine fehlenden Medien erkannt.</div>
+            <% end %>
           </div>
         </div>
+        <% if Array(@ki_analysis['skipped_sequences']).present? %>
+          <div class="mt-8 bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-xl shadow text-yellow-900 max-w-2xl mx-auto">
+            <div class="font-bold mb-2">Folgende Sequenzen konnten nach 3 Versuchen nicht analysiert werden und wurden übersprungen:</div>
+            <ul class="list-disc pl-6">
+              <% Array(@ki_analysis['skipped_sequences']).each do |seq_name| %>
+                <li><%= seq_name %></li>
+              <% end %>
+            </ul>
+            <div class="text-xs text-yellow-700 mt-2">Bitte prüfe die XML oder versuche es ggf. mit einer anderen Export-Einstellung erneut.</div>
+          </div>
+        <% end %>
       <% end %>
       <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
         <a href="/" class="btn-secondary px-6 py-3"><%= t('general.back_to_home') %></a>
-        <%= form_with url: analyze_ki_prproj_upload_path(@prproj_upload, locale: I18n.locale), method: :post, local: true, data: { turbo: false } do %>
-          <%= submit_tag t('show.ki_start'), class: "px-6 py-3 rounded-lg font-semibold text-white bg-voidfiles-red hover:bg-red-700 transition shadow focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2" %>
-        <% end %>
+        <!-- KI-Analyse starten Button entfernt -->
       </div>
     </div>
   </div>

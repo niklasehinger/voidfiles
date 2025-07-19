@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         get :analysis_result
         post :analyze_ki
         get :progress
+        get :sequences_select
       end
     end
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
