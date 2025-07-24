@@ -193,3 +193,10 @@ en:
   header:
     login: "Log in"
     cta: "Get started for free"
+  profile:
+    title: "Your Profile"
+    welcome: "Welcome, %{name}!"
+    analyses_placeholder: "Here you will soon find your analyses and can start new ones."
+    logout: "Log out"
+    email_taken: "has already been taken. Please use another email address."
+    email_blank: "can't be blank."

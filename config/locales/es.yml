@@ -163,4 +163,9 @@ es:
       short: "%d/%m/%Y"
   header:
     login: "Iniciar sesión"
-    cta: "Comenzar gratis" 
+    cta: "Comenzar gratis"
+  profile:
+    title: "Tu perfil"
+    welcome: "¡Bienvenido, %{name}!"
+    analyses_placeholder: "Aquí pronto encontrarás tus análisis y podrás iniciar nuevos."
+  logout: "Cerrar sesión" 

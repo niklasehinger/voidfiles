@@ -5,8 +5,12 @@
       <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8">
         <h1 class="text-3xl font-extrabold text-voidfiles-navy mb-2 text-center"><%= t("devise.registrations.title") %></h1>
         <p class="text-center text-gray-500 mb-6"><%= t("devise.registrations.subtitle") %></p>
-        <%= form_for(resource, as: resource_name, url: new_user_registration_path(locale: I18n.locale)) do |f| %>
+        <%= form_for(resource, as: resource_name, url: user_registration_path(locale: I18n.locale), local: true) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="mb-4">
+            <%= f.label :name, class: "block text-sm font-medium text-voidfiles-navy mb-1" %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", required: true, class: "w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-voidfiles-blue focus:outline-none text-base" %>
+          </div>
           <div class="mb-4">
             <%= f.label :email, class: "block text-sm font-medium text-voidfiles-navy mb-1" %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-voidfiles-blue focus:outline-none text-base" %>

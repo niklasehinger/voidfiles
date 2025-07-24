@@ -163,4 +163,12 @@ fr:
       short: "%d/%m/%Y, %H:%M"
   date:
     formats:
-      short: "%d/%m/%Y" 
+      short: "%d/%m/%Y"
+profile:
+  title: "Votre profil"
+  welcome: "Bienvenue, %{name} !"
+  analyses_placeholder: "Vous trouverez bientôt ici vos analyses et pourrez en lancer de nouvelles."
+  logout: "Se déconnecter"
+  messages:
+    taken: "est déjà utilisé. Veuillez utiliser une autre adresse e-mail."
+    blank: "ne peut pas être vide." 

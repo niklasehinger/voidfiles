@@ -5,7 +5,7 @@
       <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8">
         <h1 class="text-3xl font-extrabold text-voidfiles-navy mb-2 text-center"><%= t("devise.sessions.title") %></h1>
         <p class="text-center text-gray-500 mb-6"><%= t("devise.sessions.subtitle") %></p>
-        <%= form_for(resource, as: resource_name, url: new_user_session_path(locale: I18n.locale)) do |f| %>
+        <%= form_for(resource, as: resource_name, url: user_session_path(locale: I18n.locale), local: true, html: { 'data-turbo' => 'false' }) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
           <div class="mb-4">
             <%= f.label :email, class: "block text-sm font-medium text-voidfiles-navy mb-1" %>

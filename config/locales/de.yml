@@ -164,3 +164,12 @@ de:
   header:
     login: "Anmelden"
     cta: "Kostenlos starten" 
+  profile:
+    title: "Dein Profil"
+    welcome: "Willkommen, %{name}!"
+    analyses_placeholder: "Hier findest du bald deine Analysen und kannst neue starten." 
+  logout: "Abmelden" 
+  errors:
+    messages:
+      taken: "ist bereits vergeben. Bitte verwende eine andere E-Mail-Adresse."
+      blank: "darf nicht leer sein." 

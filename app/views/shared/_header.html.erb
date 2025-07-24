@@ -20,8 +20,14 @@
       </nav>
     </div>
     <div class="flex items-center gap-3">
-      <%= link_to t('header.login', default: 'Anmelden'), new_user_session_path(locale: I18n.locale), class: 'px-4 py-2 rounded-lg font-medium text-voidfiles-navy hover:text-voidfiles-blue transition' %>
-      <%= link_to t('header.cta', default: 'Kostenlos starten'), new_user_registration_path(locale: I18n.locale), class: 'px-4 py-2 rounded-lg font-medium bg-voidfiles-blue text-white shadow hover:bg-voidfiles-navy transition' %>
+      <% unless user_signed_in? %>
+        <%= link_to t('header.login', default: 'Anmelden'), new_user_session_path(locale: I18n.locale), class: 'px-4 py-2 rounded-lg font-medium text-voidfiles-navy hover:text-voidfiles-blue transition' %>
+      <% end %>
+      <% if user_signed_in? %>
+        <%= link_to t('profile.title', default: 'Mein Profil'), profile_path(locale: I18n.locale), class: 'px-4 py-2 rounded-lg font-medium bg-voidfiles-blue text-white shadow hover:bg-voidfiles-navy transition' %>
+      <% else %>
+        <%= link_to t('header.cta', default: 'Kostenlos starten'), new_user_registration_path(locale: I18n.locale), class: 'px-4 py-2 rounded-lg font-medium bg-voidfiles-blue text-white shadow hover:bg-voidfiles-navy transition' %>
+      <% end %>
       <span class="ml-4"><%= render 'shared/language_switcher' %></span>
     </div>
   </div>

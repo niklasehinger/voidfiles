@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "profiles/show"
   scope "(:locale)", locale: /en|de|es|fr/ do
     devise_for :users
     root "home#index"
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
         get :sequences_select
       end
     end
+    resource :profile, only: [:show]
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   end
 
