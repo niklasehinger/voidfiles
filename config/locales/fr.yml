@@ -155,6 +155,9 @@ fr:
     future4: "Fonctionnalités d'équipe et de collaboration"
     future5: "Options de sécurité et de confidentialité avancées"
     future_note: "En tant qu'utilisateur précoce, vous pouvez façonner activement le développement et bénéficier d'avantages exclusifs !"
+  header:
+    login: "Se connecter"
+    cta: "Commencer gratuitement"
   time:
     formats:
       short: "%d/%m/%Y, %H:%M"

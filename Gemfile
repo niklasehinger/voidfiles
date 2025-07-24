@@ -66,3 +66,6 @@ group :test do
 end
 
 gem "openai"
+
+# --- Authentifizierung ---
+gem 'devise'

@@ -7,10 +7,43 @@
     </span>
   </button>
   <div id="lang-switch-dropdown" class="absolute right-0 top-full min-w-40 py-2 bg-white border border-gray-100 rounded shadow-lg hidden z-50 overflow-visible">
-    <%= link_to "Deutsch", url_for(locale: :de), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :de}" %>
-    <%= link_to "English", url_for(locale: :en), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :en}" %>
-    <%= link_to "Español", url_for(locale: :es), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :es}" %>
-    <%= link_to "Français", url_for(locale: :fr), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :fr}" %>
+    <% if controller_path.starts_with?("devise/") %>
+      <% # Devise-Controller: Route je nach Action setzen %>
+      <% case action_name
+         when 'new' %>
+        <% if controller_name == 'registrations' %>
+          <%= link_to "Deutsch", new_user_registration_path(locale: :de), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :de}" %>
+          <%= link_to "English", new_user_registration_path(locale: :en), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :en}" %>
+          <%= link_to "Español", new_user_registration_path(locale: :es), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :es}" %>
+          <%= link_to "Français", new_user_registration_path(locale: :fr), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :fr}" %>
+        <% elsif controller_name == 'sessions' %>
+          <%= link_to "Deutsch", new_user_session_path(locale: :de), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :de}" %>
+          <%= link_to "English", new_user_session_path(locale: :en), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :en}" %>
+          <%= link_to "Español", new_user_session_path(locale: :es), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :es}" %>
+          <%= link_to "Français", new_user_session_path(locale: :fr), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :fr}" %>
+        <% elsif controller_name == 'passwords' %>
+          <%= link_to "Deutsch", new_user_password_path(locale: :de), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :de}" %>
+          <%= link_to "English", new_user_password_path(locale: :en), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :en}" %>
+          <%= link_to "Español", new_user_password_path(locale: :es), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :es}" %>
+          <%= link_to "Français", new_user_password_path(locale: :fr), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :fr}" %>
+        <% else %>
+          <%= link_to "Deutsch", url_for(locale: :de), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :de}" %>
+          <%= link_to "English", url_for(locale: :en), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :en}" %>
+          <%= link_to "Español", url_for(locale: :es), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :es}" %>
+          <%= link_to "Français", url_for(locale: :fr), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :fr}" %>
+        <% end %>
+      <% else %>
+        <%= link_to "Deutsch", url_for(locale: :de), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :de}" %>
+        <%= link_to "English", url_for(locale: :en), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :en}" %>
+        <%= link_to "Español", url_for(locale: :es), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :es}" %>
+        <%= link_to "Français", url_for(locale: :fr), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :fr}" %>
+      <% end %>
+    <% else %>
+      <%= link_to "Deutsch", url_for(locale: :de), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :de}" %>
+      <%= link_to "English", url_for(locale: :en), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :en}" %>
+      <%= link_to "Español", url_for(locale: :es), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :es}" %>
+      <%= link_to "Français", url_for(locale: :fr), class: "block px-4 py-2 hover:bg-voidfiles-blue/10 text-voidfiles-navy hover:text-voidfiles-blue #{'font-bold' if I18n.locale == :fr}" %>
+    <% end %>
   </div>
   <script>
     document.addEventListener('click', function(event) {

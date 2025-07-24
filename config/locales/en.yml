@@ -190,3 +190,6 @@ en:
   date:
     formats:
       short: "%Y-%m-%d"
+  header:
+    login: "Log in"
+    cta: "Get started for free"

@@ -6,17 +6,23 @@
         <span class="font-bold text-lg text-voidfiles-navy tracking-tight">VoidFiles</span>
       <% end %>
     </div>
-    <nav class="hidden md:flex gap-8 text-base font-medium">
-      <%= link_to features_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
-        <%= t('navigation.features') %>
-      <% end %>
-      <%= link_to pricing_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
-        <%= t('navigation.pricing') %>
-      <% end %>
-      <%= link_to faq_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
-        <%= t('navigation.faq') %>
-      <% end %>
-      <span class="ml-8"><%= render 'shared/language_switcher' %></span>
-    </nav>
+    <div class="flex-1 flex justify-center">
+      <nav class="hidden md:flex gap-8 text-base font-medium">
+        <%= link_to features_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
+          <%= t('navigation.features') %>
+        <% end %>
+        <%= link_to pricing_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
+          <%= t('navigation.pricing') %>
+        <% end %>
+        <%= link_to faq_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
+          <%= t('navigation.faq') %>
+        <% end %>
+      </nav>
+    </div>
+    <div class="flex items-center gap-3">
+      <%= link_to t('header.login', default: 'Anmelden'), new_user_session_path(locale: I18n.locale), class: 'px-4 py-2 rounded-lg font-medium text-voidfiles-navy hover:text-voidfiles-blue transition' %>
+      <%= link_to t('header.cta', default: 'Kostenlos starten'), new_user_registration_path(locale: I18n.locale), class: 'px-4 py-2 rounded-lg font-medium bg-voidfiles-blue text-white shadow hover:bg-voidfiles-navy transition' %>
+      <span class="ml-4"><%= render 'shared/language_switcher' %></span>
+    </div>
   </div>
 </header> 

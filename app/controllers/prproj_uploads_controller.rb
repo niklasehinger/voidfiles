@@ -1,4 +1,6 @@
 class PrprojUploadsController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     @prproj_upload = PrprojUpload.find(params[:id])
     @ki_analysis = @prproj_upload.ki_analysis_result.present? ? JSON.parse(@prproj_upload.ki_analysis_result) : nil

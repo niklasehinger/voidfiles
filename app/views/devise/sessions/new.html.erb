@@ -1,0 +1,34 @@
+<div class="min-h-screen bg-gradient-to-br from-voidfiles-white to-gray-50">
+  <%= render 'shared/header' %>
+  <section class="relative bg-gradient-to-br from-voidfiles-white to-[#f6f8ff] pt-16 pb-8 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="max-w-3xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8">
+        <h1 class="text-3xl font-extrabold text-voidfiles-navy mb-2 text-center"><%= t("devise.sessions.title") %></h1>
+        <p class="text-center text-gray-500 mb-6"><%= t("devise.sessions.subtitle") %></p>
+        <%= form_for(resource, as: resource_name, url: new_user_session_path(locale: I18n.locale)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="mb-4">
+            <%= f.label :email, class: "block text-sm font-medium text-voidfiles-navy mb-1" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-voidfiles-blue focus:outline-none text-base" %>
+          </div>
+          <div class="mb-4">
+            <%= f.label :password, class: "block text-sm font-medium text-voidfiles-navy mb-1" %>
+            <%= f.password_field :password, autocomplete: "current-password", class: "w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-voidfiles-blue focus:outline-none text-base" %>
+          </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="mb-4 flex items-center">
+              <%= f.check_box :remember_me, class: "mr-2" %>
+              <%= f.label :remember_me, class: "text-sm text-gray-600" %>
+            </div>
+          <% end %>
+          <div class="mb-4">
+            <%= f.submit t("devise.sessions.submit"), class: "btn-primary w-full text-lg" %>
+          </div>
+        <% end %>
+        <div class="mt-4 text-center text-sm text-gray-500">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

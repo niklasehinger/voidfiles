@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /en|de|es|fr/ do
+    devise_for :users
     root "home#index"
     post "/", to: "home#create"
     get "home/index"

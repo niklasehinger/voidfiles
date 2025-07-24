@@ -160,4 +160,7 @@ es:
       short: "%d/%m/%Y, %H:%M"
   date:
     formats:
-      short: "%d/%m/%Y" 
+      short: "%d/%m/%Y"
+  header:
+    login: "Iniciar sesión"
+    cta: "Comenzar gratis" 

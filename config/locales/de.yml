@@ -161,3 +161,6 @@ de:
   date:
     formats:
       short: "%d.%m.%Y" 
+  header:
+    login: "Anmelden"
+    cta: "Kostenlos starten" 
