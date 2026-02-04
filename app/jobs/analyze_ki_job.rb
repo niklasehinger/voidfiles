@@ -6,7 +6,10 @@ class AnalyzeKiJob < ApplicationJob
     prproj_upload.update(ki_analysis_status: "running", ki_analysis_result: nil)
     begin
       xml = prproj_upload.prproj_file.download.force_encoding("UTF-8")
-      doc = Nokogiri::XML(xml)
+      # Safe XML parsing with XXE protection
+      doc = Nokogiri::XML(xml) do |config|
+        config.nonet.noent # Disable external entities and network access
+      end
       # Alle <file>-Pfade im Projekt
       all_paths = doc.xpath("//file/pathurl").map(&:text).uniq
       # Nur Sequenzen analysieren, die im Projektfenster sichtbar sind
