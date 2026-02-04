@@ -8,16 +8,16 @@ class OpenaiXmlAnalyzer
 
   def analyze(prompt = nil)
     prompt ||= @prompt
-    
+
     unless @client
       Rails.logger.error "[OpenaiXmlAnalyzer] OpenAI client not configured. Please set OPENAI_API_KEY."
       return nil
     end
-    
+
     begin
       Rails.logger.info "[OpenaiXmlAnalyzer] Sende Prompt an OpenAI:\n#{prompt}"
       response = @client.chat.completions.create(
-        messages: [{role: "user", content: prompt}],
+        messages: [ { role: "user", content: prompt } ],
         model: :"gpt-4o",
         temperature: 0.0,
         max_tokens: 4096
@@ -25,10 +25,10 @@ class OpenaiXmlAnalyzer
       Rails.logger.info "[OpenaiXmlAnalyzer] OpenAI-Response: #{response.inspect}"
       result = response.choices.first.message.content
       Rails.logger.info "[OpenaiXmlAnalyzer] KI-Rohantwort: #{result.inspect}"
-      
+
       # Robusteres JSON-Parsing
       parsed = parse_json_response(result)
-      
+
       Rails.logger.info "[OpenaiXmlAnalyzer] Geparstes Ergebnis: #{parsed.inspect}"
       parsed
     rescue => e
@@ -84,9 +84,9 @@ class OpenaiXmlAnalyzer
 
   def remove_markdown_backticks(result)
     # Entferne ```json am Anfang und ``` am Ende
-    cleaned = result.gsub(/^```json\s*/, '').gsub(/\s*```$/, '').strip
+    cleaned = result.gsub(/^```json\s*/, "").gsub(/\s*```$/, "").strip
     # Entferne auch ``` ohne json am Anfang
-    cleaned = cleaned.gsub(/^```\s*/, '').gsub(/\s*```$/, '').strip
+    cleaned = cleaned.gsub(/^```\s*/, "").gsub(/\s*```$/, "").strip
     cleaned
   end
 
@@ -99,7 +99,7 @@ class OpenaiXmlAnalyzer
     while last_complete_line >= 0
       line = lines[last_complete_line].strip
       # Eine Zeile ist vollständig, wenn sie mit ", }, ], oder , endet
-      if line.end_with?('"') || line.end_with?('}') || line.end_with?(']') || line.end_with?(',')
+      if line.end_with?('"') || line.end_with?("}") || line.end_with?("]") || line.end_with?(",")
         break
       end
       last_complete_line -= 1
@@ -110,10 +110,10 @@ class OpenaiXmlAnalyzer
     repaired_json = repaired_lines.join
 
     # Zähle Klammern und füge fehlende hinzu
-    open_braces = repaired_json.count('{')
-    close_braces = repaired_json.count('}')
-    open_brackets = repaired_json.count('[')
-    close_brackets = repaired_json.count(']')
+    open_braces = repaired_json.count("{")
+    close_braces = repaired_json.count("}")
+    open_brackets = repaired_json.count("[")
+    close_brackets = repaired_json.count("]")
 
     # Füge fehlende schließende Klammern hinzu
     while close_brackets < open_brackets
@@ -134,9 +134,9 @@ class OpenaiXmlAnalyzer
 
   def extract_json_from_text(text)
     # Suche nach JSON-Struktur im Text
-    if text.include?('{') && text.include?('}')
-      json_start = text.index('{')
-      json_end = text.rindex('}') + 1
+    if text.include?("{") && text.include?("}")
+      json_start = text.index("{")
+      json_end = text.rindex("}") + 1
       json_text = text[json_start...json_end]
       Rails.logger.info "[OpenaiXmlAnalyzer] Extrahierte JSON: #{json_text}"
       return json_text
@@ -147,12 +147,12 @@ class OpenaiXmlAnalyzer
   def find_best_json_candidate(text)
     # Suche nach dem längsten JSON-ähnlichen String
     candidates = []
-    
+
     # Suche nach JSON-Objekten
     text.scan(/\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/) do |match|
       candidates << match
     end
-    
+
     # Suche nach JSON-Arrays
     text.scan(/\[[^\[\]]*(?:\[[^\[\]]*\][^\[\]]*)*\]/) do |match|
       candidates << match
@@ -163,4 +163,4 @@ class OpenaiXmlAnalyzer
     Rails.logger.info "[OpenaiXmlAnalyzer] Bester JSON-Kandidat: #{best_candidate}"
     best_candidate || text
   end
-end 
+end

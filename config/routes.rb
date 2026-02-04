@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         get :sequences_select
       end
     end
-    resource :profile, only: [:show]
+    resource :profile, only: [ :show ]
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   end
 

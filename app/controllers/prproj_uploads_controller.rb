@@ -11,9 +11,9 @@ class PrprojUploadsController < ApplicationController
   def analyze_ki
     @prproj_upload = PrprojUpload.find(params[:id])
     selected_sequences = params[:sequences] || []
-    @prproj_upload.update(ki_analysis_status: 'pending', ki_analysis_result: nil, ki_selected_sequences: selected_sequences)
+    @prproj_upload.update(ki_analysis_status: "pending", ki_analysis_result: nil, ki_selected_sequences: selected_sequences)
     AnalyzeKiJob.perform_later(@prproj_upload.id, selected_sequences)
-    redirect_to prproj_upload_path(@prproj_upload, locale: I18n.locale), notice: 'Die KI-Analyse wurde für die ausgewählten Sequenzen gestartet und läuft im Hintergrund.'
+    redirect_to prproj_upload_path(@prproj_upload, locale: I18n.locale), notice: "Die KI-Analyse wurde für die ausgewählten Sequenzen gestartet und läuft im Hintergrund."
   end
 
   def analysis_result
@@ -38,4 +38,4 @@ class PrprojUploadsController < ApplicationController
     @prproj_upload = PrprojUpload.find(params[:id])
     @sequences = @prproj_upload.sequences
   end
-end 
+end

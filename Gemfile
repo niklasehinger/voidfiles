@@ -68,4 +68,4 @@ end
 gem "openai"
 
 # --- Authentifizierung ---
-gem 'devise'
+gem "devise"

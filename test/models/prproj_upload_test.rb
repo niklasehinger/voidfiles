@@ -8,7 +8,7 @@ class PrprojUploadTest < ActiveSupport::TestCase
       filename: "sample.xml",
       content_type: "application/xml"
     )
-    
+
     assert upload.save
     assert upload.prproj_file.attached?
   end
@@ -21,7 +21,7 @@ class PrprojUploadTest < ActiveSupport::TestCase
       content_type: "application/xml"
     )
     upload.save!
-    
+
     sequences = upload.sequences
     assert_not_empty sequences
     assert sequences.first.is_a?(Hash)
@@ -36,10 +36,10 @@ class PrprojUploadTest < ActiveSupport::TestCase
       content_type: "application/xml"
     )
     upload.save!
-    
+
     sequences = upload.sequences
     if sequences.any?
-      sequence_node = Nokogiri::XML(upload.prproj_file.download).at_xpath('//sequence')
+      sequence_node = Nokogiri::XML(upload.prproj_file.download).at_xpath("//sequence")
       if sequence_node
         media_paths = upload.media_paths_for_sequence(sequence_node)
         assert media_paths.is_a?(Array)
@@ -55,7 +55,7 @@ class PrprojUploadTest < ActiveSupport::TestCase
       content_type: "application/xml"
     )
     upload.save!
-    
+
     tree = upload.media_tree
     assert tree.is_a?(Hash)
   end
@@ -67,7 +67,7 @@ class PrprojUploadTest < ActiveSupport::TestCase
       filename: "sample.xml",
       content_type: "application/xml"
     )
-    
+
     assert upload.save
     assert_not_nil upload.title
     assert_not_empty upload.title
@@ -80,7 +80,7 @@ class PrprojUploadTest < ActiveSupport::TestCase
       filename: "test.txt",
       content_type: "text/plain"
     )
-    
+
     assert_not upload.valid?
     assert_includes upload.errors[:prproj_file], "muss eine .xml-Datei sein"
   end

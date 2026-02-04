@@ -7,4 +7,4 @@ if api_key.present?
 else
   Rails.logger.warn "[OpenAI] No API key configured. AI features will be disabled."
   OPENAI_CLIENT = nil
-end 
+end

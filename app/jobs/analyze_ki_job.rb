@@ -3,24 +3,24 @@ class AnalyzeKiJob < ApplicationJob
 
   def perform(prproj_upload_id, selected_sequence_ids = nil)
     prproj_upload = PrprojUpload.find(prproj_upload_id)
-    prproj_upload.update(ki_analysis_status: 'running', ki_analysis_result: nil)
+    prproj_upload.update(ki_analysis_status: "running", ki_analysis_result: nil)
     begin
       xml = prproj_upload.prproj_file.download.force_encoding("UTF-8")
       doc = Nokogiri::XML(xml)
       # Alle <file>-Pfade im Projekt
-      all_paths = doc.xpath('//file/pathurl').map(&:text).uniq
+      all_paths = doc.xpath("//file/pathurl").map(&:text).uniq
       # Nur Sequenzen analysieren, die im Projektfenster sichtbar sind
-      main_sequence_names = doc.xpath('//project//sequence/name').map(&:text).uniq
-      all_sequences = doc.xpath('//sequence')
+      main_sequence_names = doc.xpath("//project//sequence/name").map(&:text).uniq
+      all_sequences = doc.xpath("//sequence")
       if selected_sequence_ids.present?
         # Filtere nach übergebenen IDs (oder Fallback: nach Namen)
         sequences = all_sequences.select do |seq|
-          id = seq['id'] || seq.at_xpath('uuid')&.text
+          id = seq["id"] || seq.at_xpath("uuid")&.text
           selected_sequence_ids.include?(id)
         end
       else
         sequences = all_sequences.select do |seq|
-          name = seq.at_xpath('name')&.text
+          name = seq.at_xpath("name")&.text
           main_sequence_names.include?(name)
         end
       end
@@ -30,7 +30,7 @@ class AnalyzeKiJob < ApplicationJob
       skipped_sequences = []
       Rails.logger.info "KI-Analyse: Starte Analyse von #{sequences.size} Sequenzen..."
       sequences.each_with_index do |seq, idx|
-        seq_name = seq.at_xpath('name')&.text || "(ohne Namen)"
+        seq_name = seq.at_xpath("name")&.text || "(ohne Namen)"
         retries = 0
         success = false
         begin
@@ -90,9 +90,9 @@ class AnalyzeKiJob < ApplicationJob
       end
       used_total.uniq!
       unused_total.uniq!
-      prproj_upload.update(ki_analysis_status: 'done', ki_analysis_result: {used: used_total, unused: unused_total, skipped_sequences: skipped_sequences}.to_json)
+      prproj_upload.update(ki_analysis_status: "done", ki_analysis_result: { used: used_total, unused: unused_total, skipped_sequences: skipped_sequences }.to_json)
     rescue => e
-      prproj_upload.update(ki_analysis_status: 'failed', ki_analysis_result: {error: e.message}.to_json)
+      prproj_upload.update(ki_analysis_status: "failed", ki_analysis_result: { error: e.message }.to_json)
       raise e
     end
   end
