@@ -170,13 +170,13 @@
         <% end %>
       </div>
       <div class="flex justify-center mb-8 mt-10">
-        <%= link_to "Sequenzen auswählen", sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale), class: "bg-voidfiles-blue hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow transition text-lg" %>
+        <%= link_to t('show.select_sequences'), sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale), class: "bg-voidfiles-blue hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow transition text-lg" %>
       </div>
       <% if @ki_status == 'pending' || @ki_status == 'running' %>
         <div class="flex justify-center items-center mt-10">
           <div class="bg-blue-50 border border-blue-200 rounded-xl p-8 shadow text-center max-w-xl mx-auto">
-            <div class="text-xl font-bold text-voidfiles-blue mb-2">KI-Analyse läuft...</div>
-            <div class="text-gray-500 mb-4">Die Analyse wird im Hintergrund durchgeführt. Bitte warte einen Moment.</div>
+            <div class="text-xl font-bold text-voidfiles-blue mb-2"><%= t('show.ki_running') %></div>
+            <div class="text-gray-500 mb-4"><%= t('show.ki_running_hint') %></div>
             <div id="progress-bar-container" style="width:100%; background:#e0e7ef; border-radius:0.5em; height:1.5em; margin:1em 0;">
               <div id="progress-bar" style="background:#2563eb; height:100%; width:0%; border-radius:0.5em; transition:width 0.5s;"></div>
             </div>
@@ -243,7 +243,7 @@
           <div class="bg-red-50 border border-red-200 rounded-xl p-6 shadow-sm">
             <h2 class="text-xl font-bold text-red-700 mb-4 flex items-center gap-2">
               <svg class="inline w-6 h-6 text-red-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01"/><circle cx="12" cy="12" r="10"/></svg>
-              Fehlende Medien
+              <%= t('show.missing_media') %>
             </h2>
             <% if @prproj_upload.missing_media.present? %>
               <% Array(@prproj_upload.missing_media).sort.each do |path| %>
@@ -252,19 +252,19 @@
                 </div>
               <% end %>
             <% else %>
-              <div class="text-gray-400 italic">Keine fehlenden Medien erkannt.</div>
+              <div class="text-gray-400 italic"><%= t('show.no_missing_media') %></div>
             <% end %>
           </div>
         </div>
         <% if Array(@ki_analysis['skipped_sequences']).present? %>
           <div class="mt-8 bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-xl shadow text-yellow-900 max-w-2xl mx-auto">
-            <div class="font-bold mb-2">Folgende Sequenzen konnten nach 3 Versuchen nicht analysiert werden und wurden übersprungen:</div>
+            <div class="font-bold mb-2"><%= t('show.skipped_sequences_title') %></div>
             <ul class="list-disc pl-6">
               <% Array(@ki_analysis['skipped_sequences']).each do |seq_name| %>
                 <li><%= seq_name %></li>
               <% end %>
             </ul>
-            <div class="text-xs text-yellow-700 mt-2">Bitte prüfe die XML oder versuche es ggf. mit einer anderen Export-Einstellung erneut.</div>
+            <div class="text-xs text-yellow-700 mt-2"><%= t('show.skipped_sequences_hint') %></div>
           </div>
         <% end %>
       <% end %>

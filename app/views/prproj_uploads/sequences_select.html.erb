@@ -2,8 +2,8 @@
   <%= render 'shared/header' %>
   <div class="flex-1 py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-2xl font-extrabold text-voidfiles-navy mb-8 text-center">Sequenzen auswählen</h1>
-      <p class="text-center text-gray-700 mb-6">Wähle die Sequenzen aus, die für dein finales Video relevant sind. Nur diese werden von der KI analysiert.</p>
+      <h1 class="text-2xl font-extrabold text-voidfiles-navy mb-8 text-center"><%= t('sequences_select.title') %></h1>
+      <p class="text-center text-gray-700 mb-6"><%= t('sequences_select.intro') %></p>
       <%= form_with url: analyze_ki_prproj_upload_path(@prproj_upload, locale: I18n.locale), method: :post, local: true do |f| %>
         <div class="bg-white rounded-xl shadow p-8 border border-gray-100 mb-8">
           <% if @sequences.present? %>
@@ -11,9 +11,9 @@
               <% @sequences.each_with_index do |seq, idx| %>
                 <label class="flex flex-col items-start gap-2 p-6 rounded-xl border border-gray-200 hover:bg-blue-50 transition cursor-pointer shadow-sm">
                   <%= check_box_tag "sequences[]", seq[:id] || idx, false, class: "h-6 w-6 text-blue-600 rounded border-gray-300 focus:ring-blue-500 mb-2" %>
-                  <div class="font-semibold text-lg text-voidfiles-navy mb-1"><%= seq[:name] || 'Unbenannt' %></div>
+                  <div class="font-semibold text-lg text-voidfiles-navy mb-1"><%= seq[:name] || t('sequences_select.unnamed') %></div>
                   <% if seq[:duration].present? %>
-                    <div class="text-xs text-gray-500">Dauer: <%= seq[:duration] %></div>
+                    <div class="text-xs text-gray-500"><%= t('sequences_select.duration') %>: <%= seq[:duration] %></div>
                   <% end %>
                   <% if seq[:id].present? %>
                     <div class="text-xs text-gray-400">ID: <%= seq[:id] %></div>
@@ -22,11 +22,11 @@
               <% end %>
             </div>
           <% else %>
-            <div class="text-gray-400 italic">Keine Sequenzen gefunden.</div>
+            <div class="text-gray-400 italic"><%= t('sequences_select.no_sequences') %></div>
           <% end %>
         </div>
         <div class="flex justify-center">
-          <%= f.submit "KI-Analyse für ausgewählte Sequenzen starten", class: "bg-voidfiles-blue hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow transition text-lg" %>
+          <%= f.submit t('sequences_select.submit'), class: "bg-voidfiles-blue hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow transition text-lg" %>
         </div>
       <% end %>
     </div>

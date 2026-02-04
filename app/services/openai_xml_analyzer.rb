@@ -1,16 +1,19 @@
-require "openai"
 require "json"
 
 class OpenaiXmlAnalyzer
   def initialize(prompt = nil)
     @prompt = prompt
-    @client = OpenAI::Client.new(
-      api_key: ENV["OPENAI_API_KEY"] || Rails.application.credentials.dig(:openai, :api_key)
-    )
+    @client = OPENAI_CLIENT
   end
 
   def analyze(prompt = nil)
     prompt ||= @prompt
+    
+    unless @client
+      Rails.logger.error "[OpenaiXmlAnalyzer] OpenAI client not configured. Please set OPENAI_API_KEY."
+      return nil
+    end
+    
     begin
       Rails.logger.info "[OpenaiXmlAnalyzer] Sende Prompt an OpenAI:\n#{prompt}"
       response = @client.chat.completions.create(

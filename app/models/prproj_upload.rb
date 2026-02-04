@@ -1,9 +1,9 @@
 class PrprojUpload < ApplicationRecord
+  belongs_to :user, optional: true
+
   has_one_attached :prproj_file
   validates :prproj_file, presence: true
   validate :xml_file_type
-
-  require 'nokogiri'
 
   before_validation :set_default_title, on: :create
 
