@@ -16,8 +16,6 @@ Rails.application.routes.draw do
 
     resources :prproj_uploads do
       member do
-        post :analyze_ki
-        post :analyze_local
         get :progress
         get :sequences_select
         get :export_unused

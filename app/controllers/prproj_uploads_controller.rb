@@ -1,7 +1,7 @@
 class PrprojUploadsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_prproj_upload, only: [:show, :sequences_select, :analyze_ki, :analyze_local, :progress, :export_unused, :batch_analyze, :destroy]
-  before_action :authorize_prproj_upload, only: [:show, :sequences_select, :analyze_ki, :analyze_local, :progress, :export_unused, :batch_analyze, :destroy]
+  before_action :set_prproj_upload, only: [:show, :sequences_select, :analyze_local, :progress, :export_unused, :batch_analyze, :destroy]
+  before_action :authorize_prproj_upload, only: [:show, :sequences_select, :analyze_local, :progress, :export_unused, :batch_analyze, :destroy]
 
   def show
     @ki_analysis = @prproj_upload.ki_analysis_result.present? ? JSON.parse(@prproj_upload.ki_analysis_result) : nil
@@ -23,13 +23,6 @@ class PrprojUploadsController < ApplicationController
     end
   end
 
-  def analyze_ki
-    selected_sequences = params[:sequences] || []
-    @prproj_upload.update(ki_analysis_status: "pending", ki_analysis_result: nil, ki_selected_sequences: selected_sequences)
-    AnalyzeKiJob.perform_later(@prproj_upload.id, selected_sequences)
-    redirect_to prproj_upload_path(@prproj_upload, locale: I18n.locale), notice: "Die KI-Analyse wurde für die ausgewählten Sequenzen gestartet und läuft im Hintergrund."
-  end
-
   def analyze_local
     selected_sequences = params[:sequences] || []
 
@@ -42,7 +35,7 @@ class PrprojUploadsController < ApplicationController
     AnalyzeLocalJob.perform_later(@prproj_upload.id, selected_sequences)
 
     redirect_to prproj_upload_path(@prproj_upload, locale: I18n.locale),
-                notice: "Die lokale Analyse wurde gestartet und läuft im Hintergrund. Keine KI-Kosten."
+                notice: "Die lokale Analyse wurde gestartet und läuft im Hintergrund."
   end
 
   def progress
@@ -121,13 +114,7 @@ class PrprojUploadsController < ApplicationController
       return
     end
 
-    analysis_type = params[:analysis_type] || "local"
-
-    if analysis_type == "ki"
-      analyze_ki
-    else
-      analyze_local
-    end
+    analyze_local
   end
 
   def destroy

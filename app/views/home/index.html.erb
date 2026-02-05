@@ -26,7 +26,31 @@
         <a href="#how-it-works" class="btn-secondary text-base px-8 py-3 font-semibold"><%= t('home.cta_how') %></a>
       </div>
       <!-- Hinweistext -->
-      <p class="text-xs text-gray-400"><%= t('home.cta_note') %></p>
+      <p class="text-xs text-gray-400 mb-8"><%= t('home.cta_note') %></p>
+      
+      <!-- Video Placeholder -->
+      <div class="max-w-3xl mx-auto">
+        <div class="relative rounded-2xl overflow-hidden shadow-xl bg-gray-900 aspect-video group cursor-pointer">
+          <!-- Placeholder Thumbnail -->
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-voidfiles-navy to-gray-800">
+            <div class="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-4 group-hover:bg-white/20 transition-all duration-300 group-hover:scale-110">
+              <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+            <p class="text-white/80 text-lg font-medium">Video: So funktioniert VoidFiles</p>
+            <p class="text-white/50 text-sm mt-2">Klicke zum Abspielen</p>
+          </div>
+          <!-- Play Button Overlay -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-24 h-24 rounded-full bg-voidfiles-blue/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <svg class="w-12 h-12 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 

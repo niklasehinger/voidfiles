@@ -7,7 +7,7 @@ VoidFiles ist ein SaaS-Tool zur Analyse von Adobe Premiere Pro-Projektdateien (.
 ## ✨ Features
 
 - **📁 XML-Parsing**: Automatische Extraktion aller Medienpfade aus .prproj-Dateien
-- **🤖 KI-gestützte Analyse**: GPT-4 zur intelligenten Pfadklassifikation
+- **⚡ Lokale Analyse**: Schnelle, deterministische Medienklassifikation ohne API-Kosten
 - **📊 CSV-Integration**: Optional Upload von Medienlisten für präzise Analyse
 - **🎯 Drei Kategorien**:
   - ✅ **Used Files** - Verwendete Mediendateien
@@ -20,7 +20,6 @@ VoidFiles ist ein SaaS-Tool zur Analyse von Adobe Premiere Pro-Projektdateien (.
 - **Database**: PostgreSQL
 - **Frontend**: Tailwind CSS, Stimulus.js
 - **Asset Pipeline**: esbuild
-- **AI Integration**: GPT-4 API
 - **File Processing**: Nokogiri (XML), ActiveStorage
 
 ## 🛠️ Installation
@@ -54,7 +53,6 @@ VoidFiles ist ein SaaS-Tool zur Analyse von Adobe Premiere Pro-Projektdateien (.
 4. **Umgebungsvariablen konfigurieren**
    ```bash
    cp .env.example .env
-   # Bearbeite .env mit deinen API-Keys
    ```
 
 5. **Server starten**
@@ -80,7 +78,7 @@ VoidFiles verwendet ein konsistentes Farbsystem:
 
 1. **Projekt hochladen**: .prproj-Datei in die Anwendung ziehen
 2. **Medienliste (optional)**: CSV-Datei mit tatsächlicher Medienablage hinzufügen
-3. **Analyse starten**: Automatische Verarbeitung mit GPT-4
+3. **Analyse starten**: Automatische Verarbeitung der Medienpfade
 4. **Ergebnis erhalten**: Übersichtliche Tabelle mit Used/Unused/Missing-Kategorien
 5. **Aktionen**: Export oder Löschung nicht verwendeter Dateien
 
@@ -132,7 +130,6 @@ Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe [LICENSE](LICENSE) Da
 ## 🙏 Danksagungen
 
 - Adobe für Premiere Pro
-- OpenAI für GPT-4 API
 - Ruby on Rails Community
 - Tailwind CSS Team
 

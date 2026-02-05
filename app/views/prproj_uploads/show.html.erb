@@ -62,9 +62,9 @@
       </div>
 
       <!-- Navigation to other tabs -->
-      <div class="flex justify-center gap-4">
+      <div class="flex justify-center gap-4 mt-6">
         <%= link_to sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale), 
-            class: "inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition" do %>
+            class: "inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 ring-2 ring-blue-700 ring-offset-2" do %>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
           </svg>
@@ -183,10 +183,10 @@
         <!-- Actions -->
         <div class="flex justify-center gap-4 mt-8">
           <%= link_to sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale),
-              class: "inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-6 rounded-xl transition" do %>
+              class: "inline-flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-xl shadow-sm transition" do %>
             🔄 Neue Analyse
           <% end %>
-          <a href="<%= dashboard_path(locale: I18n.locale) %>" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition">
+          <a href="<%= dashboard_path(locale: I18n.locale) %>" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl shadow-sm transition">
             ➕ Weiteres Projekt
           </a>
         </div>

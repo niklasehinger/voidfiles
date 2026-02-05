@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <%= form_with url: batch_analyze_prproj_upload_path(@prproj_upload, locale: I18n.locale), method: :post, local: true do |f| %>
+      <%= form_with url: batch_analyze_prproj_upload_path(@prproj_upload, locale: I18n.locale), method: :post, local: true do |f| %>
       <!-- Sequenzen Liste (kompakt) -->
       <div class="divide-y divide-gray-100 border border-gray-200 rounded-lg mb-8 bg-white">
         <% @sequences.each do |seq| %>
@@ -42,64 +42,11 @@
         <% end %>
       </div>
 
-      <!-- Analysis Type Selection -->
-      <div class="border-t border-gray-200 pt-6">
-        <div class="mb-4">
-          <span class="text-gray-600">Analysemethode:</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <!-- Local -->
-          <label class="block cursor-pointer">
-            <input type="radio" name="analysis_type" value="local" checked
-                   class="sr-only peer">
-            <div class="p-4 rounded-xl border-2 border-green-500 bg-green-50 peer-checked:border-green-500 peer-checked:bg-green-100 transition-all">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
-                  <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="font-medium text-gray-900">Schnell (lokal)</div>
-                  <div class="text-sm text-gray-500">Kostenlos & sofort</div>
-                </div>
-                <svg class="w-5 h-5 text-green-500 ml-auto opacity-0 peer-checked:opacity-100" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-            </div>
-          </label>
-
-          <!-- KI -->
-          <label class="block cursor-pointer">
-            <input type="radio" name="analysis_type" value="ki"
-                   class="sr-only peer">
-            <div class="p-4 rounded-xl border-2 border-gray-200 peer-checked:border-purple-500 peer-checked:bg-purple-50 transition-all">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
-                  <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="font-medium text-gray-900">Intelligent (KI)</div>
-                  <div class="text-sm text-gray-500">GPT-4 Analyse</div>
-                </div>
-                <svg class="w-5 h-5 text-purple-500 ml-auto opacity-0 peer-checked:opacity-100" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-            </div>
-          </label>
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit" 
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 rounded-xl mt-6 block">
-          Analyse starten
-        </button>
-      </div>
+      <!-- Submit Button -->
+      <button type="submit" 
+              class="w-full bg-voidfiles-blue hover:bg-voidfiles-blue/90 text-white font-semibold py-4 rounded-xl mt-6 block">
+        Analyse starten
+      </button>
     <% end %>
   </main>
 
