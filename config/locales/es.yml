@@ -5,6 +5,7 @@ es:
     features: "Características"
     pricing: "Precios"
     faq: "FAQ"
+    dashboard: "Panel"
   general:
     back_to_overview: "Volver al resumen del proyecto"
     back_to_home: "Volver al inicio"
@@ -60,6 +61,10 @@ es:
     hint_reload: "Si no se muestran medios, por favor recarga la página. El análisis puede tardar unos segundos."
     no_media: "No se encontraron medios en el proyecto."
     ki_start: "Iniciar análisis con IA"
+    ki_running: "Análisis con IA en ejecución..."
+    ki_running_hint: "El análisis se está ejecutando en segundo plano. Por favor espera un momento."
+    ki_failed: "Análisis fallido"
+    ki_failed_hint: "El análisis con IA no pudo completarse. Por favor consulta los registros del servidor para obtener detalles."
   faq:
     title: "Preguntas Frecuentes (FAQ)"
     subtitle: "Todo lo que necesitas saber sobre VoidFiles"
@@ -158,6 +163,7 @@ es:
   time:
     formats:
       short: "%d/%m/%Y, %H:%M"
+      long: "%d de %B de %Y, %H:%M"
   date:
     formats:
       short: "%d/%m/%Y"
@@ -168,4 +174,9 @@ es:
     title: "Tu perfil"
     welcome: "¡Bienvenido, %{name}!"
     analyses_placeholder: "Aquí pronto encontrarás tus análisis y podrás iniciar nuevos."
-  logout: "Cerrar sesión" 
+  logout: "Cerrar sesión"
+  dashboard:
+    welcome: "Bienvenido de nuevo"
+    subtitle: "Sube tu proyecto de Premiere Pro para analizarlo"
+    recent_uploads: "Tus últimas subida"
+    view: "Ver" 

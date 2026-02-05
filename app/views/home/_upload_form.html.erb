@@ -19,7 +19,7 @@
       <h3 class="text-xl font-semibold text-voidfiles-navy mb-2"><%= t('upload.form_title') %></h3>
       <p class="text-gray-600 mb-6"><%= t('upload.form_hint') %></p>
       
-      <%= form_with model: prproj_upload, url: root_path, local: true, html: {multipart: true, class: "flex flex-col sm:flex-row gap-4 justify-center"} do |f| %>
+      <%= form_with model: prproj_upload, url: dashboard_index_path(locale: I18n.locale), local: true, html: {multipart: true, class: "flex flex-col sm:flex-row gap-4 justify-center"} do |f| %>
         <div class="flex flex-col sm:flex-row gap-4 justify-center w-full">
           <div class="flex-1">
             <%= f.file_field :prproj_file, accept: ".xml", class: "btn-primary w-full text-base px-8 py-3 font-semibold shadow-md cursor-pointer" %>
@@ -38,4 +38,4 @@
       </p>
     </div>
   </div>
-</section> 
+</section>

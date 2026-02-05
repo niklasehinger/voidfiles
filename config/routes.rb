@@ -1,21 +1,30 @@
 Rails.application.routes.draw do
   get "profiles/show"
+
   scope "(:locale)", locale: /en|de|es|fr/ do
     devise_for :users
+
+    # Root path based on authentication
     root "home#index"
-    post "/", to: "home#create"
+
     get "home/index"
     get "faq", to: "home#faq", as: :faq
     get "pricing", to: "home#pricing", as: :pricing
     get "features", to: "home#features", as: :features
+    get "dashboard", to: "dashboard#index", as: :dashboard
+    post "dashboard", to: "dashboard#create", as: :dashboard_index
+
     resources :prproj_uploads do
       member do
-        get :analysis_result
         post :analyze_ki
+        post :analyze_local
         get :progress
         get :sequences_select
+        get :export_unused
+        post :batch_analyze
       end
     end
+
     resource :profile, only: [ :show ]
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   end

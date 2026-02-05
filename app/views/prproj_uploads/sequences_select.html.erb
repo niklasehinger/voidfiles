@@ -1,34 +1,161 @@
-<div class="min-h-screen flex flex-col bg-gradient-to-br from-voidfiles-white to-gray-50">
+<div class="min-h-screen bg-gradient-to-br from-voidfiles-white to-gray-50">
+  <!-- Header -->
   <%= render 'shared/header' %>
-  <div class="flex-1 py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-2xl font-extrabold text-voidfiles-navy mb-8 text-center"><%= t('sequences_select.title') %></h1>
-      <p class="text-center text-gray-700 mb-6"><%= t('sequences_select.intro') %></p>
-      <%= form_with url: analyze_ki_prproj_upload_path(@prproj_upload, locale: I18n.locale), method: :post, local: true do |f| %>
-        <div class="bg-white rounded-xl shadow p-8 border border-gray-100 mb-8">
-          <% if @sequences.present? %>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              <% @sequences.each_with_index do |seq, idx| %>
-                <label class="flex flex-col items-start gap-2 p-6 rounded-xl border border-gray-200 hover:bg-blue-50 transition cursor-pointer shadow-sm">
-                  <%= check_box_tag "sequences[]", seq[:id] || idx, false, class: "h-6 w-6 text-blue-600 rounded border-gray-300 focus:ring-blue-500 mb-2" %>
-                  <div class="font-semibold text-lg text-voidfiles-navy mb-1"><%= seq[:name] || t('sequences_select.unnamed') %></div>
-                  <% if seq[:duration].present? %>
-                    <div class="text-xs text-gray-500"><%= t('sequences_select.duration') %>: <%= seq[:duration] %></div>
-                  <% end %>
-                  <% if seq[:id].present? %>
-                    <div class="text-xs text-gray-400">ID: <%= seq[:id] %></div>
-                  <% end %>
-                </label>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <!-- Title -->
+    <div class="text-center mb-8">
+      <h1 class="text-2xl font-bold text-gray-900 mb-2">Sequenzen auswählen</h1>
+      <p class="text-gray-600">Wähle die Sequenzen aus, die analysiert werden sollen</p>
+    </div>
+
+    <!-- Selection Info -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-gray-600"><%= @sequences.size %> Sequenzen gefunden</span>
+        <span id="selected-count" class="text-gray-500 font-medium">0 ausgewählt</span>
+      </div>
+      <div class="flex gap-2">
+        <button type="button" id="select-all" class="text-sm text-blue-600 hover:text-blue-800 font-medium">Alle</button>
+        <span class="text-gray-300">|</span>
+        <button type="button" id="deselect-all" class="text-sm text-gray-600 hover:text-gray-800 font-medium">Keine</button>
+      </div>
+    </div>
+
+    <%= form_with url: batch_analyze_prproj_upload_path(@prproj_upload, locale: I18n.locale), method: :post, local: true do |f| %>
+      <!-- Sequenzen Liste (kompakt) -->
+      <div class="divide-y divide-gray-100 border border-gray-200 rounded-lg mb-8 bg-white">
+        <% @sequences.each do |seq| %>
+          <label class="flex items-center gap-3 px-4 py-3">
+            <input type="checkbox" name="sequences[]" value="<%= seq[:id] %>" 
+                   class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 sequence-checkbox">
+            <div class="flex-1 min-w-0">
+              <div class="font-medium text-gray-900 truncate"><%= seq[:name] || "Unbenannt" %></div>
+            </div>
+            <div class="text-sm text-gray-500 whitespace-nowrap">
+              <% if seq[:duration].present? %>
+                <%= seq[:duration] %>
               <% end %>
             </div>
-          <% else %>
-            <div class="text-gray-400 italic"><%= t('sequences_select.no_sequences') %></div>
-          <% end %>
+          </label>
+        <% end %>
+      </div>
+
+      <!-- Analysis Type Selection -->
+      <div class="border-t border-gray-200 pt-6">
+        <div class="mb-4">
+          <span class="text-gray-600">Analysemethode:</span>
         </div>
-        <div class="flex justify-center">
-          <%= f.submit t('sequences_select.submit'), class: "bg-voidfiles-blue hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow transition text-lg" %>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <!-- Local -->
+          <label class="block cursor-pointer">
+            <input type="radio" name="analysis_type" value="local" checked
+                   class="sr-only peer">
+            <div class="p-4 rounded-xl border-2 border-green-500 bg-green-50 peer-checked:border-green-500 peer-checked:bg-green-100 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-medium text-gray-900">Schnell (lokal)</div>
+                  <div class="text-sm text-gray-500">Kostenlos & sofort</div>
+                </div>
+                <svg class="w-5 h-5 text-green-500 ml-auto opacity-0 peer-checked:opacity-100" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+            </div>
+          </label>
+
+          <!-- KI -->
+          <label class="block cursor-pointer">
+            <input type="radio" name="analysis_type" value="ki"
+                   class="sr-only peer">
+            <div class="p-4 rounded-xl border-2 border-gray-200 peer-checked:border-purple-500 peer-checked:bg-purple-50 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-medium text-gray-900">Intelligent (KI)</div>
+                  <div class="text-sm text-gray-500">GPT-4 Analyse</div>
+                </div>
+                <svg class="w-5 h-5 text-purple-500 ml-auto opacity-0 peer-checked:opacity-100" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+            </div>
+          </label>
         </div>
-      <% end %>
-    </div>
-  </div>
-</div> 
+
+        <!-- Submit Button -->
+        <button type="submit" 
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 rounded-xl mt-6 block">
+          Analyse starten
+        </button>
+      </div>
+    <% end %>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-400 py-8">
+    VoidFiles • Premiere Pro Projekt-Analyse
+  </footer>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const checkboxes = document.querySelectorAll('.sequence-checkbox');
+  const selectAllBtn = document.getElementById('select-all');
+  const deselectAllBtn = document.getElementById('deselect-all');
+  const form = document.querySelector('form');
+  const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+
+  // Update counter
+  function updateCounter() {
+    const checked = document.querySelectorAll('.sequence-checkbox:checked').length;
+    const counter = document.getElementById('selected-count');
+    if (counter) {
+      counter.textContent = `${checked} Sequenz${checked !== 1 ? 'en' : ''} ausgewählt`;
+      counter.className = checked > 0 ? 'text-green-600 font-medium' : 'text-gray-500';
+    }
+  }
+
+  selectAllBtn?.addEventListener('click', function() {
+    checkboxes.forEach(cb => cb.checked = true);
+    updateCounter();
+  });
+
+  deselectAllBtn?.addEventListener('click', function() {
+    checkboxes.forEach(cb => cb.checked = false);
+    updateCounter();
+  });
+
+  checkboxes.forEach(cb => cb.addEventListener('change', updateCounter));
+
+  // Form validation and submission
+  form?.addEventListener('submit', function(e) {
+    const checked = document.querySelectorAll('.sequence-checkbox:checked').length;
+    if (checked === 0) {
+      e.preventDefault();
+      alert('Bitte wähle mindestens eine Sequenz aus.');
+      return false;
+    }
+
+    // Show loading state
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Analyse wird gestartet...`;
+    }
+  });
+
+  // Initial counter
+  updateCounter();
+});
+</script>

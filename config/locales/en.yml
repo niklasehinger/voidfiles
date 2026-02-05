@@ -1,39 +1,11 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello World"
+  hello: "Hello world"
   navigation:
     home: "Home"
     features: "Features"
     pricing: "Pricing"
     faq: "FAQ"
+    dashboard: "Dashboard"
   general:
     back_to_overview: "Back to project overview"
     back_to_home: "Back to home"
@@ -46,38 +18,35 @@ en:
     update_badge: "Update VoidFiles now live!"
     headline:
       dein: "Your"
-      smarter_assistent: "smart assistant"
+      smarter_assistent: "smarter assistant"
       fuer_jedes: "for every"
       video_projekt: "video project"
-    subline: "Save storage space and time: VoidFiles analyzes your Adobe Premiere Pro projects, detects used, unused, and missing media – all at a glance, AI-powered and secure."
-    cta_start: "Get started"
+    subline: "Save storage space and time: VoidFiles analyzes your Adobe Premiere Pro projects, identifies used, unused, and missing media - all at a glance, AI-powered and secure."
+    cta_start: "Get started now"
     cta_how: "How it works"
-    cta_note: "No credit card required – cancel anytime"
+    cta_note: "No credit card required - cancel anytime"
     features_title: "What VoidFiles does for you"
-    features_subline: "VoidFiles is your professional assistant for efficient organization and analysis of your Adobe Premiere Pro projects. Save time, storage space, and nerves – with intelligent technology that gives you full control and overview of your media. Whether freelancer, agency or company: With VoidFiles you work smarter, faster and safer."
-    feature1_title: "Detect used files"
+    features_subline: "VoidFiles is your professional assistant for efficient organization and analysis of your Adobe Premiere Pro projects. Save time, storage space, and nerves - with intelligent technology that gives you full control and overview of your media. Whether freelancer, agency, or company: With VoidFiles you work smarter, faster, and more securely."
+    feature1_title: "Recognize used files"
     feature1_text: "VoidFiles analyzes your project and lists all media files that are actually used in the edit. This way you keep track and can clean up specifically."
     feature2_title: "Find unused files"
-    feature2_text: "Imported but unused files are automatically detected. This way you can save storage space and keep your projects lean."
-    feature3_title: "Track missing media"
-    feature3_text: "VoidFiles immediately shows you which files are referenced in the project but can no longer be found. This way you avoid nasty surprises during export or collaboration."
-    features_slogan_bold: "Secure, fast and intuitive:"
-    features_slogan: "VoidFiles is the modern solution for everyone who works professionally with Premiere Pro and values clarity and efficiency."
+    feature2_text: "Imported but unused files are automatically recognized. This saves storage space and keeps your projects lean."
+    feature3_title: "Detect missing media"
+    feature3_text: "VoidFiles immediately shows you which files are referenced in the project but can no longer be found. This prevents unpleasant surprises during export or collaboration."
+    features_slogan_bold: "Safe, fast and intuitive:"
+    features_slogan: "VoidFiles is the modern solution for everyone who works professionally with Premiere Pro and values overview and efficiency."
     how_title: "How it works"
-    how_subline: "In four clear steps from project file to perfect overview – simple, secure and efficient."
+    how_subline: "In four clear steps from project file to perfect overview - simple, safe, and efficient."
     step1_title: "Export project as XML"
-    step1_text: "Open your Premiere Pro project and export it as XML via 'File > Export > Final Cut Pro XML'. This makes your project readable for VoidFiles."
+    step1_text: "Open your Premiere Pro project and export it as an XML file via 'File > Export > Final Cut Pro XML'. This makes your project readable by VoidFiles."
     step2_title: "Upload XML file"
     step2_text: "Select your .xml file or drag it into the upload field. Your data remains protected."
     step3_title: "Automatic analysis"
-    step3_text: "VoidFiles detects used, unused and missing media – fast, precise and AI-powered."
+    step3_text: "VoidFiles recognizes used, unused, and missing media - quickly, precisely, and AI-powered."
     step4_title: "Get results"
-    step4_text: "You receive a clear evaluation and can immediately recognize optimization potential."
+    step4_text: "You receive a clear evaluation and can directly identify optimization potential."
     how_slogan_bold: "Fast. Clear. Efficient."
-    how_slogan: "Project analysis has never been so easy."
-  footer:
-    slogan: "Intelligent analysis of Adobe Premiere Pro projects"
-    tech: "Built with Ruby on Rails, Tailwind CSS and GPT-4."
+    how_slogan: "Project analysis has never been this easy."
   upload:
     ready_title: "Ready for your first analysis?"
     error_file_missing: "Please select a .xml file before uploading."
@@ -86,9 +55,12 @@ en:
     form_placeholder: "Project title (optional)"
     form_submit: "🚀 Upload"
     supported_format: "Supported format: .xml"
+  footer:
+    slogan: "Intelligent analysis of Adobe Premiere Pro projects"
+    tech: "Built with Ruby on Rails, Tailwind CSS, and GPT-4."
   show:
     title: "Referenced media in the project"
-    intro: "Your media has been successfully detected. You can now check yourself if everything is correct – or let the AI sort used and unused media."
+    intro: "Your media has been successfully detected. You can now test it yourself whether everything is correct - or let the AI sort used and unused media."
     hint_reload: "If no media is displayed, please reload the page. The analysis may take a few seconds."
     no_media: "No media found in the project."
     ki_start: "Start AI analysis"
@@ -96,7 +68,9 @@ en:
     no_missing_media: "No missing media detected."
     ki_running: "AI analysis running..."
     ki_running_hint: "The analysis is running in the background. Please wait a moment."
-    ki_progress_text: "sequences analyzed"
+    ki_failed: "Analysis failed"
+    ki_failed_hint: "The AI analysis could not be completed. Please check the server logs for details."
+    ki_progress_text: "Sequences analyzed"
     ki_current_sequence: "Current sequence"
     select_sequences: "Select sequences"
     skipped_sequences_title: "The following sequences could not be analyzed after 3 attempts and were skipped:"
@@ -112,17 +86,17 @@ en:
     title: "Frequently Asked Questions (FAQ)"
     subtitle: "Everything you need to know about VoidFiles"
     what_is_title: "What is VoidFiles?"
-    what_is_text: "VoidFiles is a smart assistant for analyzing Adobe Premiere Pro projects. It detects used, unused, and missing media files in your .prproj projects – fast, secure, and AI-powered."
+    what_is_text: "VoidFiles is a smart assistant for analyzing Adobe Premiere Pro projects. It detects used, unused, and missing media files in your .xml projects - quickly, securely, and AI-powered."
     file_types_title: "What file types can I upload?"
-    file_types_text: "Currently, .xml files (exported Adobe Premiere Pro projects) are supported. You need to export your project as XML first."
+    file_types_text: "Currently, .xml files (exported Adobe Premiere Pro projects) are supported. You must first export your project as XML."
     how_upload_title: "How does the upload work?"
-    how_upload_text: "Simply drag your .xml file into the upload field or select it by clicking. After uploading, the file will be analyzed and you'll receive an overview of the media used."
-    security_title: "Is my data secure?"
-    security_text: "Yes! Your files are treated confidentially and used exclusively for analysis. There is no sharing with third parties."
+    how_upload_text: "Simply drag your .xml file into the upload field or select it by clicking. After uploading, the file is analyzed and you receive an overview of the media used."
+    security_title: "Is my data safe?"
+    security_text: "Yes! Your files are treated confidentially and used exclusively for analysis. There is no disclosure to third parties."
     pricing_title: "What does VoidFiles cost?"
-    pricing_text: "VoidFiles is currently free to use. Future premium features will be announced in advance."
+    pricing_text: "VoidFiles is currently free to use. Future premium features will be announced in time."
     feedback_title: "I have feedback or more questions!"
-    feedback_text: "We welcome your feedback! Simply write to us via the contact form on the homepage or by email."
+    feedback_text: "We welcome your feedback! Just write to us via the contact form on the homepage or by email."
   pricing:
     title: "Pricing & Plans"
     subtitle: "Choose the plan that best fits your needs. All plans include our core features."
@@ -132,7 +106,7 @@ en:
       period: "/month"
       feature1: "5 analyses per month"
       feature2: "Basic media analysis"
-      feature3: "CSV export"
+      feature3: "Export as CSV"
       feature4: "Email support"
       cta: "Get started"
     pro:
@@ -155,24 +129,24 @@ en:
       feature3: "Custom integration"
       feature4: "SLA guarantee"
       cta: "Contact us"
-    faq_title: "Frequently Asked Questions about Pricing"
+    faq_title: "Frequently asked questions about pricing"
     faq1:
       question: "Can I cancel anytime?"
-      answer: "Yes, all plans can be cancelled at any time without notice period."
+      answer: "Yes, all plans can be cancelled at any time without notice."
     faq2:
       question: "Is there a trial version?"
-      answer: "Yes, the free plan is already a full-featured trial with all core functions."
+      answer: "Yes, the free plan is already a full-featured trial version with all core features."
     faq3:
-      question: "What happens when I exceed the limits?"
-      answer: "You'll receive a notification and can upgrade to a higher plan."
+      question: "What happens if I exceed the limits?"
+      answer: "You will receive a notification and can upgrade to a higher plan."
     faq4:
       question: "Are prices including VAT?"
-      answer: "Yes, all displayed prices include statutory VAT."
+      answer: "Yes, all prices shown include statutory value-added tax."
   features:
     title: "What makes VoidFiles unique?"
-    subtitle: "The smart solution for media management in Premiere Pro – now and in the future."
-    early_access_badge: "Early Access – actively in development!"
-    early_access_text: "VoidFiles is under active development. As an early user, you benefit from rapid improvements, new features, and exclusive advantages. Your feedback directly shapes the future of the product!"
+    subtitle: "The smart solution for media management in Premiere Pro - now and in the future."
+    early_access_badge: "Early Access - actively in development!"
+    early_access_text: "VoidFiles is in active development. As an early user, you benefit from fast improvements, new features, and exclusive advantages. Your feedback directly influences further development!"
     how_title: "How does VoidFiles work?"
     how_step1_title: "Export project as XML"
     how_step1_text: "Export your Premiere Pro project as an XML file. This allows VoidFiles to read all media paths."
@@ -181,38 +155,46 @@ en:
     how_step3_title: "Automatic analysis"
     how_step3_text: "VoidFiles analyzes your project with AI and detects used, unused, and missing media."
     how_step4_title: "Get results"
-    how_step4_text: "You receive a clear evaluation and can immediately spot optimization potential."
-    benefits_title: "Your benefits with VoidFiles"
-    benefit1_title: "Save time & storage"
+    how_step4_text: "You receive a clear evaluation and can directly identify optimization potential."
+    benefits_title: "Your advantages with VoidFiles"
+    benefit1_title: "Save time & storage space"
     benefit1_text: "Find unused files and clean up projects in minutes instead of hours."
-    benefit2_title: "Avoid mistakes"
-    benefit2_text: "Detect missing media instantly and prevent nasty surprises during export."
+    benefit2_title: "Avoid errors"
+    benefit2_text: "Detect missing media immediately and prevent unpleasant surprises during export."
     benefit3_title: "AI-powered analysis"
     benefit3_text: "Benefit from intelligent media classification and precise results."
-    benefit4_title: "Secure & privacy-compliant"
+    benefit4_title: "Secure & compliant"
     benefit4_text: "Your data is treated confidentially and not shared with third parties."
-    nobrainer_title: "Why is it a no-brainer?"
-    nobrainer_text: "VoidFiles automates one of the most tedious tasks in video editing. Instead of hours of searching, sorting, and checking, you do everything with a few clicks – safe, fast, and reliable. Save time, nerves, and money!"
-    future_title: "Upcoming Features (Roadmap)"
-    future1: "Direct .prproj upload (no XML export needed)"
+    nobrainer_title: "Why a no-brainer?"
+    nobrainer_text: "VoidFiles automates one of the most tedious tasks in video editing. Instead of hours of searching, sorting, and checking, you do everything with a few clicks - safely, quickly, and reliably. Save time, nerves, and real money!"
+    future_title: "Future features (Roadmap)"
+    future1: "Direct .prproj upload (without XML export)"
     future2: "Even smarter AI analysis and media suggestions"
     future3: "Integration with cloud storage (Dropbox, Google Drive, etc.)"
     future4: "Team and collaboration features"
-    future5: "Advanced security and privacy options"
-    future_note: "As an early user, you can actively shape the development and benefit from exclusive advantages!"
+    future5: "Enhanced security and privacy options"
+    future_note: "As an early user, you can actively shape development and benefit from exclusive advantages!"
   time:
     formats:
-      short: "%Y-%m-%d, %H:%M"
+      short: "%m/%d/%Y, %H:%M"
+      long: "%B %d, %Y, %H:%M"
   date:
     formats:
-      short: "%Y-%m-%d"
+      short: "%m/%d/%Y"
   header:
-    login: "Log in"
-    cta: "Get started for free"
+    login: "Sign in"
+    cta: "Get started free"
   profile:
     title: "Your Profile"
     welcome: "Welcome, %{name}!"
     analyses_placeholder: "Here you will soon find your analyses and can start new ones."
-    logout: "Log out"
-    email_taken: "has already been taken. Please use another email address."
-    email_blank: "can't be blank."
+  logout: "Log out"
+  dashboard:
+    welcome: "Welcome back"
+    subtitle: "Upload your Premiere Pro project to analyze it"
+    recent_uploads: "Your recent uploads"
+    view: "View"
+  errors:
+    messages:
+      taken: "is already taken. Please use a different email address."
+      blank: "cannot be blank."

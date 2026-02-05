@@ -5,6 +5,7 @@ de:
     features: "Features"
     pricing: "Preise"
     faq: "FAQ"
+    dashboard: "Dashboard"
   general:
     back_to_overview: "Zurück zur Projektübersicht"
     back_to_home: "Zur Startseite"
@@ -67,6 +68,8 @@ de:
     no_missing_media: "Keine fehlenden Medien erkannt."
     ki_running: "KI-Analyse läuft..."
     ki_running_hint: "Die Analyse wird im Hintergrund durchgeführt. Bitte warte einen Moment."
+    ki_failed: "Analyse fehlgeschlagen"
+    ki_failed_hint: "Die KI-Analyse konnte nicht abgeschlossen werden. Bitte überprüfe die Server-Logs für Details."
     ki_progress_text: "Sequenzen analysiert"
     ki_current_sequence: "Aktuelle Sequenz"
     select_sequences: "Sequenzen auswählen"
@@ -174,6 +177,7 @@ de:
   time:
     formats:
       short: "%d.%m.%Y, %H:%M Uhr"
+      long: "%d. %B %Y, %H:%M Uhr"
   date:
     formats:
       short: "%d.%m.%Y" 
@@ -185,6 +189,11 @@ de:
     welcome: "Willkommen, %{name}!"
     analyses_placeholder: "Hier findest du bald deine Analysen und kannst neue starten." 
   logout: "Abmelden" 
+  dashboard:
+    welcome: "Willkommen zurück"
+    subtitle: "Lade dein Premiere Pro-Projekt hoch, um es zu analysieren"
+    recent_uploads: "Deine letzten Uploads"
+    view: "Ansehen"
   errors:
     messages:
       taken: "ist bereits vergeben. Bitte verwende eine andere E-Mail-Adresse."

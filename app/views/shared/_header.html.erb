@@ -8,6 +8,9 @@
     </div>
     <div class="flex-1 flex justify-center">
       <nav class="hidden md:flex gap-8 text-base font-medium">
+        <% if user_signed_in? %>
+          <%= link_to t('navigation.dashboard', default: 'Dashboard'), dashboard_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' %>
+        <% end %>
         <%= link_to features_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
           <%= t('navigation.features') %>
         <% end %>

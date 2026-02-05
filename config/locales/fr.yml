@@ -5,6 +5,7 @@ fr:
     features: "Fonctionnalités"
     pricing: "Tarifs"
     faq: "FAQ"
+    dashboard: "Tableau de bord"
   general:
     back_to_overview: "Retour à l'aperçu du projet"
     back_to_home: "Retour à l'accueil"
@@ -60,6 +61,10 @@ fr:
     hint_reload: "Si aucun média n'est affiché, veuillez recharger la page. L'analyse peut prendre quelques secondes."
     no_media: "Aucun média trouvé dans le projet."
     ki_start: "Démarrer l'analyse IA"
+    ki_running: "Analyse IA en cours..."
+    ki_running_hint: "L'analyse s'exécute en arrière-plan. Veuillez patienter un moment."
+    ki_failed: "Analyse échouée"
+    ki_failed_hint: "L'analyse IA n'a pas pu être terminée. Veuillez consulter les journaux du serveur pour plus de détails."
   faq:
     title: "Questions Fréquemment Posées (FAQ)"
     subtitle: "Tout ce que vous devez savoir sur VoidFiles"
@@ -161,6 +166,7 @@ fr:
   time:
     formats:
       short: "%d/%m/%Y, %H:%M"
+      long: "%d %B %Y, %H:%M"
   date:
     formats:
       short: "%d/%m/%Y"
@@ -169,6 +175,11 @@ profile:
   welcome: "Bienvenue, %{name} !"
   analyses_placeholder: "Vous trouverez bientôt ici vos analyses et pourrez en lancer de nouvelles."
   logout: "Se déconnecter"
+  dashboard:
+    welcome: "Bienvenue"
+    subtitle: "Téléversez votre projet Premiere Pro pour l'analyser"
+    recent_uploads: "Vos derniers téléversements"
+    view: "Voir"
   messages:
     taken: "est déjà utilisé. Veuillez utiliser une autre adresse e-mail."
     blank: "ne peut pas être vide." 
