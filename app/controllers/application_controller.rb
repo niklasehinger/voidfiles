@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_dashboard_if_authenticated
     # Only redirect for GET requests to root path (with or without locale)
-    if user_signed_in? && request.get? && [root_path, "/"].include?(request.path)
+    if user_signed_in? && request.get? && [ root_path, "/" ].include?(request.path)
       redirect_to dashboard_path(locale: I18n.locale)
     end
   end

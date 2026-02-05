@@ -1,7 +1,7 @@
 class PrprojUploadsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_prproj_upload, only: [:show, :sequences_select, :analyze_local, :progress, :export_unused, :batch_analyze, :destroy]
-  before_action :authorize_prproj_upload, only: [:show, :sequences_select, :analyze_local, :progress, :export_unused, :batch_analyze, :destroy]
+  before_action :set_prproj_upload, only: [ :show, :sequences_select, :analyze_local, :progress, :export_unused, :batch_analyze, :destroy ]
+  before_action :authorize_prproj_upload, only: [ :show, :sequences_select, :analyze_local, :progress, :export_unused, :batch_analyze, :destroy ]
 
   def show
     @ki_analysis = @prproj_upload.ki_analysis_result.present? ? JSON.parse(@prproj_upload.ki_analysis_result) : nil
@@ -13,8 +13,7 @@ class PrprojUploadsController < ApplicationController
     @prproj_upload = PrprojUpload.new(prproj_upload_params)
     @prproj_upload.user = current_user
 
-    if @prproj_upload.save
-      redirect_to prproj_upload_path(@prproj_upload, locale: I18n.locale), 
+    if @prproj_upload.save redirect_to prproj_upload_path(@prproj_upload, locale: I18n.locale),
                   notice: "Datei erfolgreich hochgeladen. Wähle die zu analysierenden Sequenzen aus."
     else
       # Render the dashboard with errors
@@ -73,7 +72,7 @@ class PrprojUploadsController < ApplicationController
           "#{'=' * 80}\n" +
           paths.map { |p| "  #{File.basename(p)}" }.join("\n")
         end.join("\n\n")
-        
+
         render plain: content,
                content_type: "text/plain",
                filename: "unused_media_#{Date.today}.txt"
@@ -81,9 +80,9 @@ class PrprojUploadsController < ApplicationController
       format.csv do
         # CSV with folder structure
         csv_string = CSV.generate do |csv|
-          csv << ["Folder", "Filename", "Full Path"]
+          csv << [ "Folder", "Filename", "Full Path" ]
           unused_paths.each do |p|
-            csv << [File.dirname(p), File.basename(p), p]
+            csv << [ File.dirname(p), File.basename(p), p ]
           end
         end
         send_data csv_string,
