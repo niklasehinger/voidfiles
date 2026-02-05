@@ -14,7 +14,7 @@ class PrprojUpload < ApplicationRecord
   # Note: Nokogiri::XML::Document cannot be cached in Rails.cache because
   # it doesn't support serialization. Using instance variable memoization only.
   # =============================================================================
-  
+
   # Returns a memoized Nokogiri XML document for efficient repeated access within a single request
   def document
     return @document if @document.present?
@@ -108,12 +108,12 @@ class PrprojUpload < ApplicationRecord
       # Determine the parent context for better categorization
       parent = element.parent
       context = case parent.name
-                when "file" then "main"
-                when "media-rep" then "proxy"
-                when "audio" then "audio_track"
-                when "video" then "video_track"
-                else "other"
-                end
+      when "file" then "main"
+      when "media-rep" then "proxy"
+      when "audio" then "audio_track"
+      when "video" then "video_track"
+      else "other"
+      end
 
       all_paths << {
         path: normalize_path(path),
@@ -217,9 +217,9 @@ class PrprojUpload < ApplicationRecord
       path = file_node.at_xpath("./pathurl")&.text
       all_file_ids[fid] = path if path.present?
     end
-    
+
     # Filter für relevante Audio-Dateien (DEBUG - zeigt RAW-Pfade)
-    relevant_patterns = ["career-journey", "emotional-piano", "soft-piano", "calm piano", "career_journey", "emotional piano"]
+    relevant_patterns = [ "career-journey", "emotional-piano", "soft-piano", "calm piano", "career_journey", "emotional piano" ]
     relevant_patterns.each do |pattern|
       all_file_ids.each do |fid, path|
         if path&.downcase&.include?(pattern.downcase)
@@ -327,7 +327,7 @@ class PrprojUpload < ApplicationRecord
 
     # === 2e. Alle direkten audio pathurl Referenzen ===
     # Erweiterte Suche: auch pathurl-Elemente außerhalb von audio-Elementen, die auf Audio-Dateien verweisen
-    audio_extensions = ["mp3", "wav", "aiff", "aif", "m4a", "aac", "ogg"]
+    audio_extensions = [ "mp3", "wav", "aiff", "aif", "m4a", "aac", "ogg" ]
     sequence_node.xpath(".//*[contains(translate(@nameurl, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'audio')]//pathurl").each do |pathurl|
       if pathurl.text.present?
         normalized = normalize_path(pathurl.text)
@@ -335,7 +335,7 @@ class PrprojUpload < ApplicationRecord
         Rails.logger.debug "  Audio-related pathurl: #{normalized}"
       end
     end
-    
+
     # Fallback: Suche nach Audio-Dateien anhand der Dateiendung im gesamten sequence_node
     audio_extensions.each do |ext|
       sequence_node.xpath(".//pathurl[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '.#{ext}')]").each do |pathurl|
@@ -469,7 +469,7 @@ class PrprojUpload < ApplicationRecord
     # === 6. fileID Referenzen in beliebigen Elementen ===
     # Suche nach allen Elementen mit fileID Attribut (alle Varianten)
     sequence_node.xpath(".//*[@fileID or @file_id or @fileRef or @fileref or @srcclipid or @srcClipID or @srcID or @SrcID]").each do |elem|
-      ["fileID", "file_id", "fileRef", "fileref", "srcclipid", "srcClipID", "srcID", "SrcID"].each do |attr|
+      [ "fileID", "file_id", "fileRef", "fileref", "srcclipid", "srcClipID", "srcID", "SrcID" ].each do |attr|
         if ref_id = elem[attr]
           path = extract_path_by_file_id(ref_id, doc)
           if path.present?
@@ -501,7 +501,7 @@ class PrprojUpload < ApplicationRecord
     # === 7. FALLBACK: Explizite Suche nach bekannten Audio-Dateien ===
     # Da der User bestätigt hat, dass diese Dateien in den Sequenzen sind,
     # suchen wir explizit nach ihnen
-    
+
     # Bekannte Audio-Patterns (basierend auf DEBUG-AUDIO Output)
     known_audio_patterns = [
       "career-journey",
@@ -513,7 +513,7 @@ class PrprojUpload < ApplicationRecord
       "inspiring",
       "this-soft-piano"
     ]
-    
+
     # Sammle alle Audio-Dateien aus dem gesamten Dokument
     all_audio_files = {}
     doc.xpath("//file").each do |file_node|
@@ -527,7 +527,7 @@ class PrprojUpload < ApplicationRecord
         end
       end
     end
-    
+
     # Für jede Sequenz: Prüfe ob diese Audio-Dateien referenziert werden
     all_audio_files.each do |file_id, audio_path|
       # Suche nach diesem file_id als Attribut-Wert in der Sequenz
@@ -539,12 +539,12 @@ class PrprojUpload < ApplicationRecord
         end
       end
     end
-    
+
     # Noch aggressivere Suche: Wenn der Audio-Dateiname (nicht ID) in der Sequenz vorkommt
     all_audio_files.each do |file_id, audio_path|
       # Extrahiere den Dateinamen aus dem Pfad
       filename = File.basename(audio_path, ".*").downcase
-      
+
       # Prüfe ob der Dateiname (oder ein Teil davon) in der Sequenz vorkommt
       known_audio_patterns.each do |pattern|
         if filename.include?(pattern.downcase)
@@ -562,13 +562,13 @@ class PrprojUpload < ApplicationRecord
     # === 8. Ultimate Fallback: Wenn alle Stricke reißen ===
     # Diese Methode fügt ALLE Audio-Dateien hinzu, die im Dokument definiert sind
     # UND deren Dateiname in der Sequenz vorkommt (als Text)
-    
+
     all_audio_files.each do |file_id, audio_path|
       # Prüfe ob der Audio-Pfad (oder Teile davon) als Text in der Sequenz vorkommt
       # Wir suchen nach dem Ordner-Namen oder Datei-Namen
       path_parts = audio_path.split("/").map(&:downcase)
       audio_folder = path_parts[-2] # Der Ordner-Name (z.B. "career-journey-2024-08-21-08-24-21-utc")
-      
+
       if audio_folder.present? && sequence_node.to_s.downcase.include?(audio_folder)
         normalized = normalize_path(audio_path)
         if normalized.present? && !used_paths.include?(normalized)

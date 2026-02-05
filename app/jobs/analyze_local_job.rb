@@ -55,9 +55,9 @@ class AnalyzeLocalJob < ApplicationJob
       # Filter to selected sequences if provided
       sequences = if selected_sequence_ids.present? && selected_sequence_ids.any?
                    all_sequences.select { |seq| selected_sequence_ids.include?(seq[:id]) }
-                 else
+      else
                    all_sequences
-                 end
+      end
 
       Rails.logger.info "[AnalyzeLocalJob] Analysiere #{sequences.size} ausgewählte Sequenzen"
 
