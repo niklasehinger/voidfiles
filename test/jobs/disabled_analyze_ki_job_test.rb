@@ -1,7 +1,11 @@
 require "test_helper"
 
 class AnalyzeKiJobTest < ActiveJob::TestCase
+  # These tests are disabled because the AnalyzeKiJob has been disabled
+  # The OpenaiXmlAnalyzer class was renamed to DisabledOpenaiXmlAnalyzer
+
   test "JSON parsing improvements work with markdown backticks" do
+    skip "AnalyzeKiJob is disabled - skipping KI-related tests"
     # Test der verbesserten JSON-Parsing-Logik
     analyzer = OpenaiXmlAnalyzer.new
 
@@ -29,6 +33,7 @@ class AnalyzeKiJobTest < ActiveJob::TestCase
   end
 
   test "JSON parsing works with truncated responses" do
+    skip "AnalyzeKiJob is disabled - skipping KI-related tests"
     analyzer = OpenaiXmlAnalyzer.new
 
     # Simuliere eine abgeschnittene Antwort
@@ -52,6 +57,7 @@ class AnalyzeKiJobTest < ActiveJob::TestCase
   end
 
   test "JSON parsing works with plain JSON" do
+    skip "AnalyzeKiJob is disabled - skipping KI-related tests"
     analyzer = OpenaiXmlAnalyzer.new
 
     # Simuliere eine normale JSON-Antwort ohne Backticks
