@@ -1,4 +1,4 @@
-class AnalyzeKiJob < ApplicationJob
+class DisabledAnalyzeKiJob < ApplicationJob
   queue_as :default
 
   def perform(prproj_upload_id, selected_sequence_ids = nil)
