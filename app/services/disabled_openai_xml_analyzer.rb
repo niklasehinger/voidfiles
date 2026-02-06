@@ -1,6 +1,6 @@
 require "json"
 
-class OpenaiXmlAnalyzer
+class DisabledOpenaiXmlAnalyzer
   def initialize(prompt = nil)
     @prompt = prompt
     @client = OPENAI_CLIENT
