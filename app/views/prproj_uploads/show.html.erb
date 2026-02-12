@@ -1,201 +1,170 @@
 <% require 'cgi' %>
-<div class="min-h-screen bg-gradient-to-br from-voidfiles-white to-gray-50">
-  <!-- Header -->
-  <%= render 'shared/header' %>
+<!-- Main Content -->
+<main class="max-w-5xl mx-auto px-4 py-12">
+  <!-- Title -->
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2"><%= @prproj_upload.title %></h1>
+    <p class="text-gray-600"><%= t('prproj_uploads.analyze_project') %></p>
+  </div>
 
-  <!-- Main Content -->
-  <main class="max-w-5xl mx-auto px-4 py-12">
-    <!-- Title -->
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2"><%= @prproj_upload.title %></h1>
-      <p class="text-gray-600">Analysiere dein Premiere Pro Projekt</p>
+  <!-- Tabs Navigation -->
+  <div class="flex justify-center mb-8">
+    <div class="inline-flex bg-gray-100 rounded-xl p-1">
+      <%= link_to prproj_upload_path(@prproj_upload, locale: I18n.locale), 
+          class: "px-6 py-2 rounded-lg text-sm font-medium transition #{controller.action_name == 'show' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" do %>
+        📁 <%= t('prproj_uploads.uploaded') %>
+      <% end %>
+      <%= link_to sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale), 
+          class: "px-6 py-2 rounded-lg text-sm font-medium transition #{controller.action_name == 'sequences_select' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" do %>
+        🎬 <%= t('prproj_uploads.sequences') %>
+      <% end %>
+      <% if @ki_analysis.present? || @ki_status == 'done' %>
+        <%= link_to "#{prproj_upload_path(@prproj_upload, locale: I18n.locale)}#results", 
+            class: "px-6 py-2 rounded-lg text-sm font-medium transition text-gray-600 hover:text-gray-900" do %>
+          📊 <%= t('prproj_uploads.results') %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Flash Messages -->
+  <% if flash[:notice] %>
+    <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6 text-center">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-center">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <!-- Content -->
+  <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-3 gap-4 mb-8">
+      <div class="bg-gray-50 rounded-xl p-6 text-center">
+        <div class="text-3xl font-bold text-gray-900"><%= @prproj_upload.referenced_media_paths.size %></div>
+        <div class="text-sm text-gray-500"><%= t('prproj_uploads.media') %></div>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-6 text-center">
+        <div class="text-3xl font-bold text-gray-900"><%= @sequences.size %></div>
+        <div class="text-sm text-gray-500"><%= t('prproj_uploads.sequences') %></div>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-6 text-center">
+        <div class="text-3xl font-bold text-gray-900"><%= @prproj_upload.referenced_media_paths.count { |p| p.match?(/\.(mp3|wav|aac)$/i) } %></div>
+        <div class="text-sm text-gray-500"><%= t('prproj_uploads.audio_files') %></div>
+      </div>
     </div>
 
-    <!-- Tabs Navigation -->
-    <div class="flex justify-center mb-8">
-      <div class="inline-flex bg-gray-100 rounded-xl p-1">
-        <%= link_to prproj_upload_path(@prproj_upload, locale: I18n.locale), 
-            class: "px-6 py-2 rounded-lg text-sm font-medium transition #{controller.action_name == 'show' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" do %>
-          📁 Hochgeladen
-        <% end %>
-        <%= link_to sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale), 
-            class: "px-6 py-2 rounded-lg text-sm font-medium transition #{controller.action_name == 'sequences_select' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" do %>
-          🎬 Sequenzen
-        <% end %>
-        <% if @ki_analysis.present? || @ki_status == 'done' %>
-          <%= link_to "#{prproj_upload_path(@prproj_upload, locale: I18n.locale)}#results", 
-              class: "px-6 py-2 rounded-lg text-sm font-medium transition text-gray-600 hover:text-gray-900" do %>
-            📊 Ergebnisse
-          <% end %>
-        <% end %>
-      </div>
+    <!-- Navigation to other tabs -->
+    <div class="flex justify-center gap-4 mt-6">
+      <%= link_to sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale), 
+          class: "inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 ring-2 ring-blue-700 ring-offset-2" do %>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+        </svg>
+        <%= t('prproj_uploads.select_sequences') %>
+      <% end %>
     </div>
+  </div>
 
-    <!-- Flash Messages -->
-    <% if flash[:notice] %>
-      <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6 text-center">
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
-    <% if flash[:alert] %>
-      <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-center">
-        <%= flash[:alert] %>
-      </div>
-    <% end %>
+  <!-- Results Section (shown when analysis is done) -->
+  <% if @ki_analysis.present? || @ki_status == 'done' %>
+    <div id="results" class="mt-8 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+      <%
+        used_count = Array(@ki_analysis['used']).size
+        unused_count = Array(@ki_analysis['unused']).size
+        total_count = used_count + unused_count
+        unused_percentage = total_count > 0 ? ((unused_count.to_f / total_count) * 100).round(0) : 0
+      %>
 
-    <!-- Content -->
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-      <!-- Quick Stats -->
+      <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        📊 <%= t('prproj_uploads.analysis_results') %>
+      </h2>
+
+      <!-- Summary Cards -->
       <div class="grid grid-cols-3 gap-4 mb-8">
         <div class="bg-gray-50 rounded-xl p-6 text-center">
-          <div class="text-3xl font-bold text-gray-900"><%= @prproj_upload.referenced_media_paths.size %></div>
-          <div class="text-sm text-gray-500">Medien</div>
+          <div class="text-3xl font-bold text-gray-900"><%= total_count %></div>
+          <div class="text-sm text-gray-500"><%= t('prproj_uploads.total') %></div>
         </div>
-        <div class="bg-gray-50 rounded-xl p-6 text-center">
-          <div class="text-3xl font-bold text-gray-900"><%= @sequences.size %></div>
-          <div class="text-sm text-gray-500">Sequenzen</div>
+        <div class="bg-green-50 rounded-xl p-6 text-center">
+          <div class="text-3xl font-bold text-green-600"><%= used_count %></div>
+          <div class="text-sm text-gray-600"><%= t('prproj_uploads.used') %></div>
         </div>
-        <div class="bg-gray-50 rounded-xl p-6 text-center">
-          <div class="text-3xl font-bold text-gray-900"><%= @prproj_upload.referenced_media_paths.count { |p| p.match?(/\.(mp3|wav|aac)$/i) } %></div>
-          <div class="text-sm text-gray-500">Audio-Dateien</div>
+        <div class="bg-red-50 rounded-xl p-6 text-center">
+          <div class="text-3xl font-bold text-red-600"><%= unused_count %></div>
+          <div class="text-sm text-gray-600"><%= t('prproj_uploads.deletable') %></div>
         </div>
       </div>
 
-      <!-- Navigation to other tabs -->
-      <div class="flex justify-center gap-4 mt-6">
-        <%= link_to sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale), 
-            class: "inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 ring-2 ring-blue-700 ring-offset-2" do %>
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+      <!-- Unused Files Highlight -->
+      <% if unused_count > 0 %>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-semibold text-red-800 flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+              </svg>
+              <%= unused_count %> <%= t('prproj_uploads.unused_media') %>
+            </h3>
+            <span class="text-sm text-red-600"><%= unused_percentage %>% <%= t('prproj_uploads.storage_percentage') %></span>
+          </div>
+
+          <!-- All unused files - Grouped by Folder -->
+          <div class="bg-white rounded-lg p-4 max-h-96 overflow-y-auto border border-gray-200">
+            <%# Group unused paths by folder %>
+            <% unused_by_folder = Hash.new { |h, k| h[k] = [] } 
+               unused_paths = Array(@ki_analysis['unused'])
+               unused_paths.each do |path| 
+                 folder = File.dirname(path)
+                 unused_by_folder[folder] << path
+               end
+            %>
+            
+            <% unused_by_folder.each do |folder, paths| %>
+              <div class="mb-4">
+                <div class="font-medium text-gray-800 flex items-center gap-2 mb-2">
+                  <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                  </svg>
+                  <%= folder %>
+                  <span class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full"><%= paths.size %></span>
+                </div>
+                <div class="ml-6 space-y-1 border-l-2 border-gray-200 pl-3">
+                  <% paths.each do |path| %>
+                    <div class="text-sm text-gray-600 truncate" title="<%= CGI.unescapeHTML(path) %>">
+                      <span class="w-2 h-2 inline-block rounded-full mr-2 <%= path.match?(/\.(mp4|mov|avi)$/i) ? 'bg-blue-400' : (path.match?(/\.(mp3|wav|aac)$/i) ? 'bg-green-400' : 'bg-gray-400') %>"></span>
+                      <%= File.basename(CGI.unescapeHTML(path)) %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <!-- All files used -->
+        <div class="text-center py-8 bg-green-50 rounded-xl mb-8">
+          <svg class="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
-          Sequenzen auswählen
+          <h3 class="text-xl font-semibold text-green-800 mb-2"><%= t('prproj_uploads.all_media_used') %></h3>
+          <p class="text-gray-600"><%= t('prproj_uploads.no_unnecessary_files') %></p>
+        </div>
+      <% end %>
+
+      <!-- Actions -->
+      <div class="flex justify-center gap-4 mt-8">
+        <%= link_to sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale),
+            class: "inline-flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-xl shadow-sm transition" do %>
+          <%= t('prproj_uploads.new_analysis') %>
         <% end %>
+        <a href="<%= dashboard_path(locale: I18n.locale) %>" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl shadow-sm transition">
+          <%= t('prproj_uploads.another_project') %>
+        </a>
       </div>
     </div>
-
-    <!-- Results Section (shown when analysis is done) -->
-    <% if @ki_analysis.present? || @ki_status == 'done' %>
-      <div id="results" class="mt-8 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        <%
-          used_count = Array(@ki_analysis['used']).size
-          unused_count = Array(@ki_analysis['unused']).size
-          total_count = used_count + unused_count
-          unused_percentage = total_count > 0 ? ((unused_count.to_f / total_count) * 100).round(0) : 0
-        %>
-
-        <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          📊 Analyseergebnisse
-        </h2>
-
-        <!-- Summary Cards -->
-        <div class="grid grid-cols-3 gap-4 mb-8">
-          <div class="bg-gray-50 rounded-xl p-6 text-center">
-            <div class="text-3xl font-bold text-gray-900"><%= total_count %></div>
-            <div class="text-sm text-gray-500">Gesamt</div>
-          </div>
-          <div class="bg-green-50 rounded-xl p-6 text-center">
-            <div class="text-3xl font-bold text-green-600"><%= used_count %></div>
-            <div class="text-sm text-gray-600">Verwendet</div>
-          </div>
-          <div class="bg-red-50 rounded-xl p-6 text-center">
-            <div class="text-3xl font-bold text-red-600"><%= unused_count %></div>
-            <div class="text-sm text-gray-600">Löschbar</div>
-          </div>
-        </div>
-
-        <!-- Unused Files Highlight -->
-        <% if unused_count > 0 %>
-          <div class="bg-red-50 border border-red-200 rounded-xl p-6 mb-8">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="font-semibold text-red-800 flex items-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                </svg>
-                <%= unused_count %> nicht verwendete Medien
-              </h3>
-              <span class="text-sm text-red-600"><%= unused_percentage %>% des Speichers</span>
-            </div>
-
-            <!-- All unused files - Grouped by Folder -->
-            <div class="bg-white rounded-lg p-4 max-h-96 overflow-y-auto border border-gray-200">
-              <%# Group unused paths by folder %>
-              <% unused_by_folder = Hash.new { |h, k| h[k] = [] } 
-                 unused_paths = Array(@ki_analysis['unused'])
-                 unused_paths.each do |path| 
-                   folder = File.dirname(path)
-                   unused_by_folder[folder] << path
-                 end
-              %>
-              
-              <% unused_by_folder.each do |folder, paths| %>
-                <div class="mb-4">
-                  <div class="font-medium text-gray-800 flex items-center gap-2 mb-2">
-                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
-                    </svg>
-                    <%= folder %>
-                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full"><%= paths.size %></span>
-                  </div>
-                  <div class="ml-6 space-y-1 border-l-2 border-gray-200 pl-3">
-                    <% paths.each do |path| %>
-                      <div class="text-sm text-gray-600 truncate" title="<%= CGI.unescapeHTML(path) %>">
-                        <span class="w-2 h-2 inline-block rounded-full mr-2 <%= path.match?(/\.(mp4|mov|avi)$/i) ? 'bg-blue-400' : (path.match?(/\.(mp3|wav|aac)$/i) ? 'bg-green-400' : 'bg-gray-400') %>"></span>
-                        <%= File.basename(CGI.unescapeHTML(path)) %>
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-
-          <!-- Export Buttons -->
-          <div class="flex justify-center gap-4">
-            <div class="relative group">
-              <button class="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-xl transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                </svg>
-                Exportieren
-              </button>
-              <!-- Dropdown -->
-              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-10">
-                <%= link_to "TXT (Ordner)", export_unused_prproj_upload_path(@prproj_upload, format: :txt, locale: I18n.locale),
-                    class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
-                <%= link_to "CSV (detailliert)", export_unused_prproj_upload_path(@prproj_upload, format: :csv, locale: I18n.locale),
-                    class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
-                <%= link_to "JSON (alle Daten)", export_unused_prproj_upload_path(@prproj_upload, format: :json, locale: I18n.locale),
-                    class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
-              </div>
-            </div>
-          </div>
-        <% else %>
-          <!-- All files used -->
-          <div class="text-center py-8 bg-green-50 rounded-xl mb-8">
-            <svg class="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <h3 class="text-xl font-semibold text-green-800 mb-2">Alle Medien werden verwendet</h3>
-            <p class="text-gray-600">Keine unnötigen Dateien gefunden</p>
-          </div>
-        <% end %>
-
-        <!-- Actions -->
-        <div class="flex justify-center gap-4 mt-8">
-          <%= link_to sequences_select_prproj_upload_path(@prproj_upload, locale: I18n.locale),
-              class: "inline-flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-xl shadow-sm transition" do %>
-            🔄 Neue Analyse
-          <% end %>
-          <a href="<%= dashboard_path(locale: I18n.locale) %>" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl shadow-sm transition">
-            ➕ Weiteres Projekt
-          </a>
-        </div>
-      </div>
-    <% end %>
-
-    <!-- Footer -->
-    <footer class="mt-12 text-center text-sm text-gray-400">
-      VoidFiles • Premiere Pro Projekt-Analyse
-    </footer>
-  </main>
-</div>
+  <% end %>
+</main>

@@ -1,151 +1,144 @@
-<div class="min-h-screen bg-gradient-to-br from-voidfiles-white to-gray-50">
-  <!-- Header -->
-  <%= render 'shared/header' %>
+<!-- Test Phase Banner -->
+<div class="bg-gradient-to-r from-voidfiles-blue via-blue-500 to-voidfiles-navy text-white py-6 px-4 mb-12 rounded-2xl shadow-lg relative overflow-hidden">
+  <div class="absolute inset-0 bg-white/10 pattern-dots"></div>
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <div class="flex items-center justify-center mb-2">
+      <span class="text-3xl mr-3">🎉</span>
+      <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Du hast Glück!!!</h2>
+      <span class="text-3xl ml-3">🎉</span>
+    </div>
+    <p class="text-lg md:text-xl font-medium text-white/95">VoidFiles befindet sich gerade in der Testphase und du kannst es <span class="underline decoration-2 decoration-yellow-300">uneingeschränkt kostenlos nutzen</span>.</p>
+  </div>
+</div>
 
-  <!-- Pricing Section -->
-  <section class="py-20 bg-voidfiles-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h1 class="text-4xl font-extrabold text-voidfiles-navy mb-6"><%= t('pricing.title') %></h1>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto"><%= t('pricing.subtitle') %></p>
-      </div>
+<!-- Pricing Section -->
+<section class="py-12 bg-voidfiles-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl font-extrabold text-voidfiles-navy mb-6"><%= t('pricing.title') %></h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto"><%= t('pricing.subtitle') %></p>
+    </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <!-- Free Plan -->
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 relative">
-          <div class="text-center">
-            <h3 class="text-2xl font-bold text-voidfiles-navy mb-4"><%= t('pricing.free.title') %></h3>
-            <div class="mb-6">
-              <span class="text-4xl font-bold text-voidfiles-blue"><%= t('pricing.free.price') %></span>
-              <span class="text-gray-500"><%= t('pricing.free.period') %></span>
-            </div>
-            <ul class="space-y-4 mb-8 text-left">
-              <li class="flex items-center">
-                <span class="text-green-500 mr-3">✅</span>
-                <span class="text-gray-700"><%= t('pricing.free.feature1') %></span>
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-500 mr-3">✅</span>
-                <span class="text-gray-700"><%= t('pricing.free.feature2') %></span>
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-500 mr-3">✅</span>
-                <span class="text-gray-700"><%= t('pricing.free.feature3') %></span>
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-500 mr-3">✅</span>
-                <span class="text-gray-700"><%= t('pricing.free.feature4') %></span>
-              </li>
-            </ul>
-            <a href="/" class="btn-secondary w-full text-center"><%= t('pricing.free.cta') %></a>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <!-- Free Plan -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 relative">
+        <div class="text-center">
+          <h3 class="text-2xl font-bold text-voidfiles-navy mb-4"><%= t('pricing.free.title') %></h3>
+          <div class="mb-6">
+            <span class="text-4xl font-bold text-voidfiles-blue"><%= t('pricing.free.price') %></span>
+            <span class="text-gray-500"><%= t('pricing.free.period') %></span>
           </div>
-        </div>
-
-        <!-- Pro Plan -->
-        <div class="bg-gradient-to-br from-voidfiles-blue to-blue-600 rounded-2xl shadow-xl border-2 border-voidfiles-blue p-8 relative transform scale-105">
-          <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-            <span class="bg-voidfiles-red text-white px-4 py-1 rounded-full text-sm font-semibold"><%= t('pricing.pro.badge') %></span>
-          </div>
-          <div class="text-center">
-            <h3 class="text-2xl font-bold text-white mb-4"><%= t('pricing.pro.title') %></h3>
-            <div class="mb-6">
-              <span class="text-4xl font-bold text-white"><%= t('pricing.pro.price') %></span>
-              <span class="text-blue-100"><%= t('pricing.pro.period') %></span>
-            </div>
-            <ul class="space-y-4 mb-8 text-left">
-              <li class="flex items-center">
-                <span class="text-green-300 mr-3">✅</span>
-                <span class="text-white"><%= t('pricing.pro.feature1') %></span>
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-300 mr-3">✅</span>
-                <span class="text-white"><%= t('pricing.pro.feature2') %></span>
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-300 mr-3">✅</span>
-                <span class="text-white"><%= t('pricing.pro.feature3') %></span>
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-300 mr-3">✅</span>
-                <span class="text-white"><%= t('pricing.pro.feature4') %></span>
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-300 mr-3">✅</span>
-                <span class="text-white"><%= t('pricing.pro.feature5') %></span>
-              </li>
-            </ul>
-            <a href="/" class="bg-white text-voidfiles-blue font-semibold py-3 px-6 rounded-lg hover:bg-gray-50 transition w-full text-center block"><%= t('pricing.pro.cta') %></a>
-          </div>
-        </div>
-
-        <!-- Enterprise Plan -->
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 relative">
-          <div class="text-center">
-            <h3 class="text-2xl font-bold text-voidfiles-navy mb-4"><%= t('pricing.enterprise.title') %></h3>
-            <div class="mb-6">
-              <span class="text-4xl font-bold text-voidfiles-blue"><%= t('pricing.enterprise.price') %></span>
-              <span class="text-gray-500"><%= t('pricing.enterprise.period') %></span>
-            </div>
-            <ul class="space-y-4 mb-8 text-left">
-              <li class="flex items-center">
-                <span class="text-green-500 mr-3">✅</span>
-                <span class="text-gray-700"><%= t('pricing.enterprise.feature1') %></span>
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-500 mr-3">✅</span>
-                <span class="text-gray-700"><%= t('pricing.enterprise.feature2') %></span>
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-500 mr-3">✅</span>
-                <span class="text-gray-700"><%= t('pricing.enterprise.feature3') %></span>
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-500 mr-3">✅</span>
-                <span class="text-gray-700"><%= t('pricing.enterprise.feature4') %></span>
-              </li>
-            </ul>
-            <a href="/" class="btn-secondary w-full text-center"><%= t('pricing.enterprise.cta') %></a>
-          </div>
+          <ul class="space-y-4 mb-8 text-left">
+            <li class="flex items-center">
+              <span class="text-green-500 mr-3">✅</span>
+              <span class="text-gray-700"><%= t('pricing.free.feature1') %></span>
+            </li>
+            <li class="flex items-center">
+              <span class="text-green-500 mr-3">✅</span>
+              <span class="text-gray-700"><%= t('pricing.free.feature2') %></span>
+            </li>
+            <li class="flex items-center">
+              <span class="text-green-500 mr-3">✅</span>
+              <span class="text-gray-700"><%= t('pricing.free.feature3') %></span>
+            </li>
+            <li class="flex items-center">
+              <span class="text-green-500 mr-3">✅</span>
+              <span class="text-gray-700"><%= t('pricing.free.feature4') %></span>
+            </li>
+          </ul>
+          <a href="/" class="btn-secondary w-full text-center"><%= t('pricing.free.cta') %></a>
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="mt-20 text-center">
-        <h2 class="text-3xl font-bold text-voidfiles-navy mb-8"><%= t('pricing.faq_title') %></h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div class="text-left">
-            <h3 class="text-lg font-semibold text-voidfiles-blue mb-2"><%= t('pricing.faq1.question') %></h3>
-            <p class="text-gray-600"><%= t('pricing.faq1.answer') %></p>
+      <!-- Pro Plan -->
+      <div class="bg-gradient-to-br from-voidfiles-blue to-blue-600 rounded-2xl shadow-xl border-2 border-voidfiles-blue p-8 relative transform scale-105">
+        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+          <span class="bg-voidfiles-red text-white px-4 py-1 rounded-full text-sm font-semibold"><%= t('pricing.pro.badge') %></span>
+        </div>
+        <div class="text-center">
+          <h3 class="text-2xl font-bold text-white mb-4"><%= t('pricing.pro.title') %></h3>
+          <div class="mb-6">
+            <span class="text-4xl font-bold text-white"><%= t('pricing.pro.price') %></span>
+            <span class="text-blue-100"><%= t('pricing.pro.period') %></span>
           </div>
-          <div class="text-left">
-            <h3 class="text-lg font-semibold text-voidfiles-blue mb-2"><%= t('pricing.faq2.question') %></h3>
-            <p class="text-gray-600"><%= t('pricing.faq2.answer') %></p>
+          <ul class="space-y-4 mb-8 text-left">
+            <li class="flex items-center">
+              <span class="text-green-300 mr-3">✅</span>
+              <span class="text-white"><%= t('pricing.pro.feature1') %></span>
+            </li>
+            <li class="flex items-center">
+              <span class="text-green-300 mr-3">✅</span>
+              <span class="text-white"><%= t('pricing.pro.feature2') %></span>
+            </li>
+            <li class="flex items-center">
+              <span class="text-green-300 mr-3">✅</span>
+              <span class="text-white"><%= t('pricing.pro.feature3') %></span>
+            </li>
+            <li class="flex items-center">
+              <span class="text-green-300 mr-3">✅</span>
+              <span class="text-white"><%= t('pricing.pro.feature4') %></span>
+            </li>
+            <li class="flex items-center">
+              <span class="text-green-300 mr-3">✅</span>
+              <span class="text-white"><%= t('pricing.pro.feature5') %></span>
+            </li>
+          </ul>
+          <a href="/" class="bg-white text-voidfiles-blue font-semibold py-3 px-6 rounded-lg hover:bg-gray-50 transition w-full text-center block"><%= t('pricing.pro.cta') %></a>
+        </div>
+      </div>
+
+      <!-- Enterprise Plan -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 relative">
+        <div class="text-center">
+          <h3 class="text-2xl font-bold text-voidfiles-navy mb-4"><%= t('pricing.enterprise.title') %></h3>
+          <div class="mb-6">
+            <span class="text-4xl font-bold text-voidfiles-blue"><%= t('pricing.enterprise.price') %></span>
+            <span class="text-gray-500"><%= t('pricing.enterprise.period') %></span>
           </div>
-          <div class="text-left">
-            <h3 class="text-lg font-semibold text-voidfiles-blue mb-2"><%= t('pricing.faq3.question') %></h3>
-            <p class="text-gray-600"><%= t('pricing.faq3.answer') %></p>
-          </div>
-          <div class="text-left">
-            <h3 class="text-lg font-semibold text-voidfiles-blue mb-2"><%= t('pricing.faq4.question') %></h3>
-            <p class="text-gray-600"><%= t('pricing.faq4.answer') %></p>
-          </div>
+          <ul class="space-y-4 mb-8 text-left">
+            <li class="flex items-center">
+              <span class="text-green-500 mr-3">✅</span>
+              <span class="text-gray-700"><%= t('pricing.enterprise.feature1') %></span>
+            </li>
+            <li class="flex items-center">
+              <span class="text-green-500 mr-3">✅</span>
+              <span class="text-gray-700"><%= t('pricing.enterprise.feature2') %></span>
+            </li>
+            <li class="flex items-center">
+              <span class="text-green-500 mr-3">✅</span>
+              <span class="text-gray-700"><%= t('pricing.enterprise.feature3') %></span>
+            </li>
+            <li class="flex items-center">
+              <span class="text-green-500 mr-3">✅</span>
+              <span class="text-gray-700"><%= t('pricing.enterprise.feature4') %></span>
+            </li>
+          </ul>
+          <a href="/" class="btn-secondary w-full text-center"><%= t('pricing.enterprise.cta') %></a>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="bg-voidfiles-navy text-voidfiles-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <div class="text-2xl font-bold mb-4 text-white">VoidFiles</div>
-        <p class="text-gray-300 mb-6">
-          <%= t('footer.slogan') %>
-        </p>
-        <div class="text-sm text-gray-400">
-          © 2024 VoidFiles. <%= t('footer.tech') %>
+    <!-- FAQ Section -->
+    <div class="mt-20 text-center">
+      <h2 class="text-3xl font-bold text-voidfiles-navy mb-8"><%= t('pricing.faq_title') %></h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="text-left">
+          <h3 class="text-lg font-semibold text-voidfiles-blue mb-2"><%= t('pricing.faq1.question') %></h3>
+          <p class="text-gray-600"><%= t('pricing.faq1.answer') %></p>
+        </div>
+        <div class="text-left">
+          <h3 class="text-lg font-semibold text-voidfiles-blue mb-2"><%= t('pricing.faq2.question') %></h3>
+          <p class="text-gray-600"><%= t('pricing.faq2.answer') %></p>
+        </div>
+        <div class="text-left">
+          <h3 class="text-lg font-semibold text-voidfiles-blue mb-2"><%= t('pricing.faq3.question') %></h3>
+          <p class="text-gray-600"><%= t('pricing.faq3.answer') %></p>
+        </div>
+        <div class="text-left">
+          <h3 class="text-lg font-semibold text-voidfiles-blue mb-2"><%= t('pricing.faq4.question') %></h3>
+          <p class="text-gray-600"><%= t('pricing.faq4.answer') %></p>
         </div>
       </div>
     </div>
-  </footer>
-</div> 
+  </div>
+</section>

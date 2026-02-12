@@ -6,4 +6,9 @@
       <% end %>
     </ul>
   </div>
+<% elsif flash[:alert] %>
+  <div class="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 animate-fade-in">
+    <span class="text-2xl">❌</span>
+    <span><%= flash[:alert] %></span>
+  </div>
 <% end %>

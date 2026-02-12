@@ -10,6 +10,9 @@
       <nav class="hidden md:flex gap-8 text-base font-medium">
         <% if user_signed_in? %>
           <%= link_to t('navigation.dashboard', default: 'Dashboard'), dashboard_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' %>
+          <% if current_user.admin? %>
+            <%= link_to 'Admin', admin_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' %>
+          <% end %>
         <% end %>
         <%= link_to features_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
           <%= t('navigation.features') %>

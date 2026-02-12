@@ -1,150 +1,120 @@
-<div class="min-h-screen bg-gradient-to-br from-voidfiles-white to-gray-50">
-  <!-- Header -->
-  <%= render 'shared/header' %>
-
-  <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-voidfiles-white to-[#f6f8ff] pt-16 pb-8 px-4 sm:px-6 lg:px-8 overflow-hidden">
-    <div class="max-w-3xl mx-auto text-center">
-      <!-- Badge -->
-      <div class="inline-block mb-4 px-3 py-1 rounded-full bg-voidfiles-blue/10 text-voidfiles-blue text-xs font-semibold tracking-wide">
-        <%= t('home.update_badge') %>
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-br from-voidfiles-white to-[#f6f8ff] pt-16 pb-8 px-4 sm:px-6 lg:px-8 overflow-hidden">
+  <div class="max-w-3xl mx-auto text-center">
+    <!-- Badge -->
+    <div class="inline-block mb-4 px-3 py-1 rounded-full bg-voidfiles-blue/10 text-voidfiles-blue text-xs font-semibold tracking-wide">
+      <%= t('home.update_badge') %>
+    </div>
+    <!-- Headline -->
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+      <span class="text-voidfiles-navy"><%= t('home.headline.dein') %></span>
+      <span class="text-voidfiles-blue"> <%= t('home.headline.smarter_assistent') %></span><br>
+      <span class="text-voidfiles-navy"><%= t('home.headline.fuer_jedes') %></span>
+      <span class="text-voidfiles-red"> <%= t('home.headline.video_projekt') %></span>
+    </h1>
+    <!-- Subline -->
+    <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+      <%= t('home.subline') %>
+    </p>
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-4">
+      <a href="<%= new_user_session_path %>" class="btn-primary text-base px-8 py-3 font-semibold shadow-md"><%= t('home.cta_start') %></a>
+      <a href="#how-it-works" class="btn-secondary text-base px-8 py-3 font-semibold"><%= t('home.cta_how') %></a>
+    </div>
+    <!-- Hinweistext -->
+    <p class="text-xs text-gray-400 mb-8"><%= t('home.cta_note') %></p>
+    
+    <!-- YouTube Video -->
+    <div class="max-w-3xl mx-auto">
+      <div class="relative rounded-2xl overflow-hidden shadow-xl bg-gray-900 aspect-video">
+        <iframe 
+          class="absolute inset-0 w-full h-full"
+          src="https://www.youtube.com/embed/mQqFcY2C3MY"
+          title="VoidFiles Demo Video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
       </div>
-      <!-- Headline -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-        <span class="text-voidfiles-navy"><%= t('home.headline.dein') %></span>
-        <span class="text-voidfiles-blue"> <%= t('home.headline.smarter_assistent') %></span><br>
-        <span class="text-voidfiles-navy"><%= t('home.headline.fuer_jedes') %></span>
-        <span class="text-voidfiles-red"> <%= t('home.headline.video_projekt') %></span>
-      </h1>
-      <!-- Subline -->
-      <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-        <%= t('home.subline') %>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-24 bg-voidfiles-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-extrabold text-voidfiles-navy mb-6"><%= t('home.features_title') %></h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        <%= t('home.features_subline') %>
       </p>
-      <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-4">
-        <a href="<%= new_user_session_path %>" class="btn-primary text-base px-8 py-3 font-semibold shadow-md"><%= t('home.cta_start') %></a>
-        <a href="#how-it-works" class="btn-secondary text-base px-8 py-3 font-semibold"><%= t('home.cta_how') %></a>
-      </div>
-      <!-- Hinweistext -->
-      <p class="text-xs text-gray-400 mb-8"><%= t('home.cta_note') %></p>
-      
-      <!-- Video Placeholder -->
-      <div class="max-w-3xl mx-auto">
-        <div class="relative rounded-2xl overflow-hidden shadow-xl bg-gray-900 aspect-video group cursor-pointer">
-          <!-- Placeholder Thumbnail -->
-          <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-voidfiles-navy to-gray-800">
-            <div class="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-4 group-hover:bg-white/20 transition-all duration-300 group-hover:scale-110">
-              <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            </div>
-            <p class="text-white/80 text-lg font-medium">Video: So funktioniert VoidFiles</p>
-            <p class="text-white/50 text-sm mt-2">Klicke zum Abspielen</p>
-          </div>
-          <!-- Play Button Overlay -->
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="w-24 h-24 rounded-full bg-voidfiles-blue/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <svg class="w-12 h-12 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            </div>
-          </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex flex-col items-center text-center transition hover:shadow-2xl hover:-translate-y-1">
+        <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
+          <span class="text-3xl">✅</span>
         </div>
+        <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3"><%= t('home.feature1_title') %></h3>
+        <p class="text-gray-700 text-base"><%= t('home.feature1_text') %></p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex flex-col items-center text-center transition hover:shadow-2xl hover:-translate-y-1">
+        <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
+          <span class="text-3xl">📁</span>
+        </div>
+        <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3"><%= t('home.feature2_title') %></h3>
+        <p class="text-gray-700 text-base"><%= t('home.feature2_text') %></p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex flex-col items-center text-center transition hover:shadow-2xl hover:-translate-y-1">
+        <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
+          <span class="text-3xl">❌</span>
+        </div>
+        <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3"><%= t('home.feature3_title') %></h3>
+        <p class="text-gray-700 text-base"><%= t('home.feature3_text') %></p>
       </div>
     </div>
-  </section>
+    <div class="mt-16 text-center">
+      <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+        <span class="font-semibold text-voidfiles-blue"><%= t('home.features_slogan_bold') %></span> <%= t('home.features_slogan') %>
+      </p>
+    </div>
+  </div>
+</section>
 
-  <!-- Features Section -->
-  <section id="features" class="py-24 bg-voidfiles-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-extrabold text-voidfiles-navy mb-6"><%= t('home.features_title') %></h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          <%= t('home.features_subline') %>
-        </p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex flex-col items-center text-center transition hover:shadow-2xl hover:-translate-y-1">
-          <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
-            <span class="text-3xl">✅</span>
-          </div>
-          <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3"><%= t('home.feature1_title') %></h3>
-          <p class="text-gray-700 text-base"><%= t('home.feature1_text') %></p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex flex-col items-center text-center transition hover:shadow-2xl hover:-translate-y-1">
-          <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
-            <span class="text-3xl">📁</span>
-          </div>
-          <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3"><%= t('home.feature2_title') %></h3>
-          <p class="text-gray-700 text-base"><%= t('home.feature2_text') %></p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex flex-col items-center text-center transition hover:shadow-2xl hover:-translate-y-1">
-          <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
-            <span class="text-3xl">❌</span>
-          </div>
-          <h3 class="text-2xl font-semibold text-voidfiles-navy mb-3"><%= t('home.feature3_title') %></h3>
-          <p class="text-gray-700 text-base"><%= t('home.feature3_text') %></p>
-        </div>
-      </div>
-      <div class="mt-16 text-center">
-        <p class="text-lg text-gray-500 max-w-2xl mx-auto">
-          <span class="font-semibold text-voidfiles-blue"><%= t('home.features_slogan_bold') %></span> <%= t('home.features_slogan') %>
-        </p>
-      </div>
+<!-- How it works Section -->
+<section id="how-it-works" class="py-24 bg-gradient-to-b from-gray-50 to-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-extrabold text-voidfiles-navy mb-6"><%= t('home.how_title') %></h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        <%= t('home.how_subline') %>
+      </p>
     </div>
-  </section>
-
-  <!-- How it works Section -->
-  <section id="how-it-works" class="py-24 bg-gradient-to-b from-gray-50 to-white">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-extrabold text-voidfiles-navy mb-6"><%= t('home.how_title') %></h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          <%= t('home.how_subline') %>
-        </p>
-      </div>
-      <div class="flex flex-col gap-12">
-        <% steps = [
-          { num: 1, title: t('home.step1_title'), text: t('home.step1_text') },
-          { num: 2, title: t('home.step2_title'), text: t('home.step2_text') },
-          { num: 3, title: t('home.step3_title'), text: t('home.step3_text') },
-          { num: 4, title: t('home.step4_title'), text: t('home.step4_text') }
-        ] %>
-        <% steps.each_with_index do |step, i| %>
-          <div class="flex items-start relative">
-            <div class="flex flex-col items-center mr-6">
-              <div class="w-12 h-12 flex items-center justify-center rounded-full bg-voidfiles-blue text-white text-2xl font-bold shadow-lg z-10"><%= step[:num] %></div>
-              <% unless i == steps.size - 1 %>
-                <div class="w-1 bg-voidfiles-blue/20 flex-1" style="min-height: 48px;"></div>
-              <% end %>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold text-voidfiles-navy mb-1 mt-1"><%= step[:title] %></h3>
-              <p class="text-gray-700 text-base"><%= step[:text] %></p>
-            </div>
+    <div class="flex flex-col gap-12">
+      <% steps = [
+        { num: 1, title: t('home.step1_title'), text: t('home.step1_text') },
+        { num: 2, title: t('home.step2_title'), text: t('home.step2_text') },
+        { num: 3, title: t('home.step3_title'), text: t('home.step3_text') },
+        { num: 4, title: t('home.step4_title'), text: t('home.step4_text') }
+      ] %>
+      <% steps.each_with_index do |step, i| %>
+        <div class="flex items-start relative">
+          <div class="flex flex-col items-center mr-6">
+            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-voidfiles-blue text-white text-2xl font-bold shadow-lg z-10"><%= step[:num] %></div>
+            <% unless i == steps.size - 1 %>
+              <div class="w-1 bg-voidfiles-blue/20 flex-1" style="min-height: 48px;"></div>
+            <% end %>
           </div>
-        <% end %>
-      </div>
-      <div class="mt-16 text-center">
-        <p class="text-lg text-gray-500 max-w-2xl mx-auto">
-          <span class="font-semibold text-voidfiles-blue"><%= t('home.how_slogan_bold') %></span> <%= t('home.how_slogan') %>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-voidfiles-navy text-voidfiles-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <div class="text-2xl font-bold mb-4 text-white">VoidFiles</div>
-        <p class="text-gray-300 mb-6">
-          <%= t('footer.slogan') %>
-        </p>
-        <div class="text-sm text-gray-400">
-          © 2024 VoidFiles. <%= t('footer.tech') %>
+          <div>
+            <h3 class="text-xl font-semibold text-voidfiles-navy mb-1 mt-1"><%= step[:title] %></h3>
+            <p class="text-gray-700 text-base"><%= step[:text] %></p>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
-  </footer>
-</div>
+    <div class="mt-16 text-center">
+      <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+        <span class="font-semibold text-voidfiles-blue"><%= t('home.how_slogan_bold') %></span> <%= t('home.how_slogan') %>
+      </p>
+    </div>
+  </div>
+</section>

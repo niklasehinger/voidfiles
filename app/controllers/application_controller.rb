@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_up_path_for(resource)
+    flash[:notice] = t('devise.registrations.signed_up')
     dashboard_path(locale: I18n.locale)
   end
 
@@ -24,10 +25,8 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_dashboard_if_authenticated
-    # Only redirect for GET requests to root path (with or without locale)
-    if user_signed_in? && request.get? && [ root_path, "/" ].include?(request.path)
-      redirect_to dashboard_path(locale: I18n.locale)
-    end
+    # Skip redirect - allow authenticated users to access all pages including index
+    # The dashboard is the default after sign-in, but users can navigate to index manually
   end
 
   protected

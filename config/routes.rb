@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get "profiles/show"
 
   scope "(:locale)", locale: /en|de|es|fr/ do
-    devise_for :users
+    devise_for :users, controllers: { sessions: "sessions" }
 
     # Root path based on authentication
     root "home#index"
@@ -13,12 +13,13 @@ Rails.application.routes.draw do
     get "features", to: "home#features", as: :features
     get "dashboard", to: "dashboard#index", as: :dashboard
     post "dashboard", to: "dashboard#create", as: :dashboard_index
+    get "admin", to: "admin#index", as: :admin
+    delete "admin/users/:id", to: "admin#destroy", as: :admin_user_destroy
 
     resources :prproj_uploads do
       member do
         get :progress
         get :sequences_select
-        get :export_unused
         post :batch_analyze
       end
     end

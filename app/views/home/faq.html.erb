@@ -1,55 +1,35 @@
-<div class="min-h-screen bg-gradient-to-br from-voidfiles-white to-gray-50">
-  <!-- Header -->
-  <%= render 'shared/header' %>
-
-  <!-- FAQ Section -->
-  <section class="py-20 bg-voidfiles-white">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl font-extrabold text-voidfiles-navy mb-4"><%= t('faq.title') %></h1>
-        <p class="text-lg text-gray-600"><%= t('faq.subtitle') %></p>
+<!-- FAQ Section -->
+<section class="py-20 bg-voidfiles-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-extrabold text-voidfiles-navy mb-4"><%= t('faq.title') %></h1>
+      <p class="text-lg text-gray-600"><%= t('faq.subtitle') %></p>
+    </div>
+    <div class="space-y-8">
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.what_is_title') %></h2>
+        <p class="text-gray-700"><%= t('faq.what_is_text') %></p>
       </div>
-      <div class="space-y-8">
-        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
-          <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.what_is_title') %></h2>
-          <p class="text-gray-700"><%= t('faq.what_is_text') %></p>
-        </div>
-        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
-          <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.file_types_title') %></h2>
-          <p class="text-gray-700"><%= t('faq.file_types_text') %></p>
-        </div>
-        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
-          <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.how_upload_title') %></h2>
-          <p class="text-gray-700"><%= t('faq.how_upload_text') %></p>
-        </div>
-        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
-          <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.security_title') %></h2>
-          <p class="text-gray-700"><%= t('faq.security_text') %></p>
-        </div>
-        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
-          <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.pricing_title') %></h2>
-          <p class="text-gray-700"><%= t('faq.pricing_text') %></p>
-        </div>
-        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
-          <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.feedback_title') %></h2>
-          <p class="text-gray-700"><%= t('faq.feedback_text') %></p>
-        </div>
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.file_types_title') %></h2>
+        <p class="text-gray-700"><%= t('faq.file_types_text') %></p>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.how_upload_title') %></h2>
+        <p class="text-gray-700"><%= t('faq.how_upload_text') %></p>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.security_title') %></h2>
+        <p class="text-gray-700"><%= t('faq.security_text') %></p>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.pricing_title') %></h2>
+        <p class="text-gray-700"><%= t('faq.pricing_text') %></p>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-2"><%= t('faq.feedback_title') %></h2>
+        <p class="text-gray-700"><%= t('faq.feedback_text') %></p>
       </div>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-voidfiles-navy text-voidfiles-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <div class="text-2xl font-bold mb-4 text-white">VoidFiles</div>
-        <p class="text-gray-300 mb-6">
-          <%= t('footer.slogan') %>
-        </p>
-        <div class="text-sm text-gray-400">
-          © 2024 VoidFiles. <%= t('footer.tech') %>
-        </div>
-      </div>
-    </div>
-  </footer>
-</div> 
+  </div>
+</section>

@@ -1,7 +1,7 @@
 class PrprojUploadsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_prproj_upload, only: [ :show, :sequences_select, :analyze_local, :progress, :export_unused, :batch_analyze, :destroy ]
-  before_action :authorize_prproj_upload, only: [ :show, :sequences_select, :analyze_local, :progress, :export_unused, :batch_analyze, :destroy ]
+  before_action :set_prproj_upload, only: [ :show, :sequences_select, :analyze_local, :progress, :batch_analyze, :destroy ]
+  before_action :authorize_prproj_upload, only: [ :show, :sequences_select, :analyze_local, :progress, :batch_analyze, :destroy ]
 
   def show
     @ki_analysis = @prproj_upload.ki_analysis_result.present? ? JSON.parse(@prproj_upload.ki_analysis_result) : nil
@@ -51,58 +51,6 @@ class PrprojUploadsController < ApplicationController
     @sequences = @prproj_upload.sequences
   end
 
-  def export_unused
-    unless @prproj_upload.ki_analysis_result.present?
-      redirect_to @prproj_upload, alert: "Keine Analyseergebnisse vorhanden. Bitte führe zuerst eine Analyse durch."
-      return
-    end
-
-    analysis = JSON.parse(@prproj_upload.ki_analysis_result)
-    unused_paths = analysis["unused"] || []
-
-    # Group by folder for better organization
-    unused_by_folder = Hash.new { |h, k| h[k] = [] }
-    unused_paths.each { |path| unused_by_folder[File.dirname(path)] << path }
-
-    respond_to do |format|
-      format.txt do
-        # Organized TXT export with folders
-        content = unused_by_folder.map do |folder, paths|
-          "#{folder}/\n" +
-          "#{'=' * 80}\n" +
-          paths.map { |p| "  #{File.basename(p)}" }.join("\n")
-        end.join("\n\n")
-
-        render plain: content,
-               content_type: "text/plain",
-               filename: "unused_media_#{Date.today}.txt"
-      end
-      format.csv do
-        # CSV with folder structure
-        csv_string = CSV.generate do |csv|
-          csv << [ "Folder", "Filename", "Full Path" ]
-          unused_paths.each do |p|
-            csv << [ File.dirname(p), File.basename(p), p ]
-          end
-        end
-        send_data csv_string,
-                  filename: "unused_media_#{Date.today}.csv",
-                  type: "text/csv"
-      end
-      format.json do
-        result = {
-          export_date: Time.current.iso8601,
-          project: @prproj_upload.title,
-          unused_count: unused_paths.size,
-          grouped_by_folder: unused_by_folder.transform_keys(&:to_s),
-          paths: unused_paths
-        }
-        render json: result
-      end
-    end
-  rescue JSON::ParserError => e
-    redirect_to @prproj_upload, alert: "Fehler beim Parsen der Analyseergebnisse: #{e.message}"
-  end
 
   def batch_analyze
     selected_sequences = params[:sequences] || []

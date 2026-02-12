@@ -7,10 +7,10 @@ de:
     failure:
       already_authenticated: "Du bist bereits angemeldet."
       inactive: "Dein Account ist noch nicht aktiviert."
-      invalid: "Ungültige %{authentication_keys} oder Passwort."
+      invalid: "Ungültige E-Mail-Adresse oder Passwort."
       locked: "Dein Account ist gesperrt."
       last_attempt: "Du hast noch einen Versuch, bevor dein Account gesperrt wird."
-      not_found_in_database: "Ungültige %{authentication_keys} oder Passwort."
+      not_found_in_database: "Ungültige E-Mail-Adresse oder Passwort."
       timeout: "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an."
       unauthenticated: "Du musst dich anmelden oder registrieren, um fortzufahren."
       unconfirmed: "Du musst deine E-Mail-Adresse bestätigen, um fortzufahren."

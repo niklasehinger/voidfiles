@@ -1,60 +1,52 @@
-<div class="min-h-screen bg-gradient-to-br from-voidfiles-white to-gray-50">
-  <!-- Header -->
-  <%= render 'shared/header' %>
+<!-- Main Content -->
+<main class="max-w-4xl mx-auto px-4 py-12">
+  <!-- Title -->
+  <div class="text-center mb-8">
+    <h1 class="text-2xl font-bold text-gray-900 mb-2"><%= t('prproj_uploads.select_sequences_title') %></h1>
+    <p class="text-gray-600"><%= t('prproj_uploads.select_sequences_intro') %></p>
+  </div>
 
-  <!-- Main Content -->
-  <main class="max-w-4xl mx-auto px-4 py-12">
-    <!-- Title -->
-    <div class="text-center mb-8">
-      <h1 class="text-2xl font-bold text-gray-900 mb-2">Sequenzen auswählen</h1>
-      <p class="text-gray-600">Wähle die Sequenzen aus, die analysiert werden sollen</p>
+  <!-- Selection Info -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-gray-600"><%= @sequences.size %> <%= t('prproj_uploads.sequences_found') %></span>
+      <span id="selected-count" class="text-gray-500 font-medium" data-zero="<%= t('prproj_uploads.selected_count') %>"><%= t('prproj_uploads.selected_count') %></span>
+    </div>
+    <div class="flex gap-2">
+      <button type="button" id="select-all" class="text-sm text-blue-600 hover:text-blue-800 font-medium"><%= t('prproj_uploads.select_all') %></button>
+      <span class="text-gray-300">|</span>
+      <button type="button" id="deselect-all" class="text-sm text-gray-600 hover:text-gray-800 font-medium"><%= t('prproj_uploads.deselect_all') %></button>
+    </div>
+  </div>
+
+    <%= form_with url: batch_analyze_prproj_upload_path(@prproj_upload, locale: I18n.locale), method: :post, local: true do |f| %>
+    <!-- Sequences List (compact) -->
+    <div class="divide-y divide-gray-100 border border-gray-200 rounded-lg mb-8 bg-white">
+      <% @sequences.each do |seq| %>
+        <label class="flex items-center gap-3 px-4 py-3">
+          <input type="checkbox" name="sequences[]" value="<%= seq[:id] %>" 
+                 class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 sequence-checkbox">
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-gray-900 truncate"><%= seq[:name] || t('prproj_uploads.unnamed') %></div>
+          </div>
+          <div class="text-sm text-gray-500 whitespace-nowrap">
+            <% if seq[:duration].present? %>
+              <%= seq[:duration] %>
+            <% end %>
+          </div>
+        </label>
+      <% end %>
     </div>
 
-    <!-- Selection Info -->
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
-      <div class="flex items-center justify-between mb-4">
-        <span class="text-gray-600"><%= @sequences.size %> Sequenzen gefunden</span>
-        <span id="selected-count" class="text-gray-500 font-medium">0 ausgewählt</span>
-      </div>
-      <div class="flex gap-2">
-        <button type="button" id="select-all" class="text-sm text-blue-600 hover:text-blue-800 font-medium">Alle</button>
-        <span class="text-gray-300">|</span>
-        <button type="button" id="deselect-all" class="text-sm text-gray-600 hover:text-gray-800 font-medium">Keine</button>
-      </div>
-    </div>
-
-      <%= form_with url: batch_analyze_prproj_upload_path(@prproj_upload, locale: I18n.locale), method: :post, local: true do |f| %>
-      <!-- Sequenzen Liste (kompakt) -->
-      <div class="divide-y divide-gray-100 border border-gray-200 rounded-lg mb-8 bg-white">
-        <% @sequences.each do |seq| %>
-          <label class="flex items-center gap-3 px-4 py-3">
-            <input type="checkbox" name="sequences[]" value="<%= seq[:id] %>" 
-                   class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 sequence-checkbox">
-            <div class="flex-1 min-w-0">
-              <div class="font-medium text-gray-900 truncate"><%= seq[:name] || "Unbenannt" %></div>
-            </div>
-            <div class="text-sm text-gray-500 whitespace-nowrap">
-              <% if seq[:duration].present? %>
-                <%= seq[:duration] %>
-              <% end %>
-            </div>
-          </label>
-        <% end %>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" 
-              class="w-full bg-voidfiles-blue hover:bg-voidfiles-blue/90 text-white font-semibold py-4 rounded-xl mt-6 block">
-        Analyse starten
-      </button>
-    <% end %>
-  </main>
-
-  <!-- Footer -->
-  <footer class="text-center text-sm text-gray-400 py-8">
-    VoidFiles • Premiere Pro Projekt-Analyse
-  </footer>
-</div>
+    <!-- Submit Button -->
+    <button type="submit" 
+            class="w-full bg-voidfiles-blue hover:bg-voidfiles-blue/90 text-white font-semibold py-4 rounded-xl mt-6 block"
+            data-please-select="<%= t('prproj_uploads.please_select') %>"
+            data-starting="<%= t('prproj_uploads.analysis_starting') %>">
+      <%= t('prproj_uploads.start_analysis') %>
+    </button>
+  <% end %>
+</main>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -63,13 +55,24 @@ document.addEventListener('DOMContentLoaded', function() {
   const deselectAllBtn = document.getElementById('deselect-all');
   const form = document.querySelector('form');
   const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+  
+  // Get translations from data attributes
+  const selectedCountZero = document.getElementById('selected-count').dataset.zero;
+  const pleaseSelect = submitBtn ? submitBtn.dataset.pleaseSelect : '';
+  const analysisStarting = submitBtn ? submitBtn.dataset.starting : '';
 
   // Update counter
   function updateCounter() {
     const checked = document.querySelectorAll('.sequence-checkbox:checked').length;
     const counter = document.getElementById('selected-count');
     if (counter) {
-      counter.textContent = `${checked} Sequenz${checked !== 1 ? 'en' : ''} ausgewählt`;
+      if (checked === 0) {
+        counter.textContent = selectedCountZero;
+      } else {
+        const singularText = '<%= j t('prproj_uploads.sequences_selected') %>';
+        const pluralText = '<%= j t('prproj_uploads.sequences_selected_plural') %>';
+        counter.textContent = `${checked} ${checked === 1 ? singularText : pluralText}`;
+      }
       counter.className = checked > 0 ? 'text-green-600 font-medium' : 'text-gray-500';
     }
   }
@@ -91,14 +94,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const checked = document.querySelectorAll('.sequence-checkbox:checked').length;
     if (checked === 0) {
       e.preventDefault();
-      alert('Bitte wähle mindestens eine Sequenz aus.');
+      alert(pleaseSelect);
       return false;
     }
 
     // Show loading state
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Analyse wird gestartet...`;
+      submitBtn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> ${analysisStarting}`;
     }
   });
 
