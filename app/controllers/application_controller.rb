@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_up_path_for(resource)
-    flash[:notice] = t("devise.registrations.signed_up")
     dashboard_path(locale: I18n.locale)
   end
 
