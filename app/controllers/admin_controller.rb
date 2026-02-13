@@ -9,11 +9,11 @@ class AdminController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user == current_user
-      redirect_to admin_path(locale: I18n.locale), alert: I18n.t('admin.cannot_delete_self')
+      redirect_to admin_path(locale: I18n.locale), alert: I18n.t("admin.cannot_delete_self")
     elsif @user.destroy
-      redirect_to admin_path(locale: I18n.locale), notice: I18n.t('admin.user_deleted')
+      redirect_to admin_path(locale: I18n.locale), notice: I18n.t("admin.user_deleted")
     else
-      redirect_to admin_path(locale: I18n.locale), alert: I18n.t('admin.delete_failed')
+      redirect_to admin_path(locale: I18n.locale), alert: I18n.t("admin.delete_failed")
     end
   end
 
