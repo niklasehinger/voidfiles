@@ -1,31 +1,34 @@
 <header class="w-full bg-white/80 backdrop-blur border-b border-gray-100 sticky top-0 z-30">
-  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+    <!-- Logo -->
     <div class="flex items-center gap-2">
       <%= link_to root_path(locale: I18n.locale), class: 'flex items-center gap-2' do %>
         <img src="/voidfiles_64x64.png" alt="VoidFiles Logo" class="w-8 h-8 rounded-lg bg-voidfiles-blue" />
         <span class="font-bold text-lg text-voidfiles-navy tracking-tight">VoidFiles</span>
       <% end %>
     </div>
-    <div class="flex-1 flex justify-center">
-      <nav class="hidden md:flex gap-8 text-base font-medium">
-        <% if user_signed_in? %>
-          <%= link_to t('navigation.dashboard', default: 'Dashboard'), dashboard_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' %>
-          <% if current_user.admin? %>
-            <%= link_to 'Admin', admin_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' %>
-          <% end %>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex gap-8 text-base font-medium">
+      <% if user_signed_in? %>
+        <%= link_to t('navigation.dashboard', default: 'Dashboard'), dashboard_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' %>
+        <% if current_user.admin? %>
+          <%= link_to 'Admin', admin_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' %>
         <% end %>
-        <%= link_to features_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
-          <%= t('navigation.features') %>
-        <% end %>
-        <%= link_to pricing_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
-          <%= t('navigation.pricing') %>
-        <% end %>
-        <%= link_to faq_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
-          <%= t('navigation.faq') %>
-        <% end %>
-      </nav>
-    </div>
-    <div class="flex items-center gap-3">
+      <% end %>
+      <%= link_to features_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
+        <%= t('navigation.features') %>
+      <% end %>
+      <%= link_to pricing_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
+        <%= t('navigation.pricing') %>
+      <% end %>
+      <%= link_to faq_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
+        <%= t('navigation.faq') %>
+      <% end %>
+    </nav>
+
+    <!-- Desktop Right Side -->
+    <div class="hidden md:flex items-center gap-3">
       <% unless user_signed_in? %>
         <%= link_to t('header.login', default: 'Anmelden'), new_user_session_path(locale: I18n.locale), class: 'px-4 py-2 rounded-lg font-medium text-voidfiles-navy hover:text-voidfiles-blue transition' %>
       <% end %>
@@ -34,7 +37,56 @@
       <% else %>
         <%= link_to t('header.cta', default: 'Kostenlos starten'), new_user_registration_path(locale: I18n.locale), class: 'px-4 py-2 rounded-lg font-medium bg-voidfiles-blue text-white shadow hover:bg-voidfiles-navy transition' %>
       <% end %>
-      <span class="ml-4"><%= render 'shared/language_switcher' %></span>
+      <%= render 'shared/language_switcher' %>
     </div>
+
+    <!-- Mobile Menu Button -->
+    <button type="button" id="mobile-menu-btn" class="md:hidden p-2 text-voidfiles-navy hover:text-voidfiles-blue transition" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
   </div>
-</header> 
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+    <nav class="flex flex-col px-4 py-4 space-y-3 text-base font-medium">
+      <% if user_signed_in? %>
+        <%= link_to t('navigation.dashboard', default: 'Dashboard'), dashboard_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2' %>
+        <% if current_user.admin? %>
+          <%= link_to 'Admin', admin_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2' %>
+        <% end %>
+        <%= link_to t('profile.title', default: 'Mein Profil'), profile_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2' %>
+      <% else %>
+        <%= link_to t('header.login', default: 'Anmelden'), new_user_session_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2' %>
+        <%= link_to t('header.cta', default: 'Kostenlos starten'), new_user_registration_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2' %>
+      <% end %>
+      <div class="border-t border-gray-100 pt-3 mt-3">
+        <%= link_to t('navigation.features'), features_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2 block' %>
+        <%= link_to t('navigation.pricing'), pricing_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2 block' %>
+        <%= link_to t('navigation.faq'), faq_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2 block' %>
+      </div>
+      <!-- Language Switcher for Mobile -->
+      <div class="border-t border-gray-100 pt-3 mt-3">
+        <span class="text-sm text-gray-500 mb-2 block"><%= t('language_switcher.language') || 'Sprache' %>:</span>
+        <div class="flex flex-wrap gap-2">
+          <%= link_to "Deutsch", url_for(locale: :de), class: "px-3 py-1 rounded #{'bg-voidfiles-blue text-white' if I18n.locale == :de else 'bg-gray-100 text-voidfiles-navy hover:bg-voidfiles-blue/10'}" %>
+          <%= link_to "English", url_for(locale: :en), class: "px-3 py-1 rounded #{'bg-voidfiles-blue text-white' if I18n.locale == :en else 'bg-gray-100 text-voidfiles-navy hover:bg-voidfiles-blue/10'}" %>
+          <%= link_to "Español", url_for(locale: :es), class: "px-3 py-1 rounded #{'bg-voidfiles-blue text-white' if I18n.locale == :es else 'bg-gray-100 text-voidfiles-navy hover:bg-voidfiles-blue/10'}" %>
+          <%= link_to "Français", url_for(locale: :fr), class: "px-3 py-1 rounded #{'bg-voidfiles-blue text-white' if I18n.locale == :fr else 'bg-gray-100 text-voidfiles-navy hover:bg-voidfiles-blue/10'}" %>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      var menu = document.getElementById('mobile-menu');
+      var btn = document.getElementById('mobile-menu-btn');
+      if (!menu.contains(event.target) && !btn.contains(event.target)) {
+        menu.classList.add('hidden');
+      }
+    });
+  </script>
+</header>

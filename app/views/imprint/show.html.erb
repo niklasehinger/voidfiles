@@ -1,0 +1,69 @@
+<!-- Imprint Section -->
+<section class="py-20 bg-voidfiles-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-extrabold text-voidfiles-navy mb-4"><%= t('imprint.title') %></h1>
+    </div>
+
+    <div class="space-y-8">
+      <!-- Company Info -->
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-4"><%= t('imprint.company_info') %></h2>
+        <p class="text-gray-700">
+          <%= t('imprint.company_name') %><br>
+          <%= t('imprint.address') %><br>
+          <%= t('imprint.city') %>
+        </p>
+      </div>
+
+      <!-- Contact -->
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-4"><%= t('imprint.contact') %></h2>
+        <p class="text-gray-700">
+          <%= t('imprint.email_label') %>: <a href="mailto:<%= t('imprint.email') %>" class="text-voidfiles-blue hover:underline"><%= t('imprint.email') %></a>
+        </p>
+      </div>
+
+      <!-- Managing Director -->
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-4"><%= t('imprint.management') %></h2>
+        <p class="text-gray-700">
+          <%= t('imprint.ceo') %>
+        </p>
+      </div>
+
+      <!-- Register Info -->
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-4"><%= t('imprint.register_info') %></h2>
+        <p class="text-gray-700">
+          <%= t('imprint.register_court') %><br>
+          <%= t('imprint.register_number') %>
+        </p>
+      </div>
+
+      <!-- VAT -->
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-4"><%= t('imprint.vat_info') %></h2>
+        <p class="text-gray-700">
+          <%= t('imprint.vat_id') %>
+        </p>
+      </div>
+
+      <!-- Liability -->
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-4"><%= t('imprint.liability') %></h2>
+        <p class="text-gray-700">
+          <%= t('imprint.liability_text') %>
+        </p>
+      </div>
+
+      <!-- Copyright -->
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-semibold text-voidfiles-blue mb-4"><%= t('imprint.copyright') %></h2>
+        <p class="text-gray-700">
+          <%= t('imprint.copyright_text') %>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

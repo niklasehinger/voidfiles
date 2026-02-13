@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get "dashboard", to: "dashboard#index", as: :dashboard
     post "dashboard", to: "dashboard#create", as: :dashboard_index
     get "admin", to: "admin#index", as: :admin
+    get "imprint", to: "imprint#show", as: :imprint
     delete "admin/users/:id", to: "admin#destroy", as: :admin_user_destroy
 
     resources :prproj_uploads do

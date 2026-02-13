@@ -163,6 +163,27 @@ es:
   footer:
     slogan: "Análisis inteligente de proyectos de Adobe Premiere Pro"
     tech: "Desarrollado con Ruby on Rails y Tailwind CSS."
+    imprint: "Aviso legal"
+  imprint:
+    title: "Aviso legal"
+    company_info: "Información según la Ley de Servicios de la Sociedad de la Información (LSSI)"
+    company_name: "VoidFiles"
+    address: "Calle Principal 123"
+    city: "12345 Ciudad Ejemplo"
+    contact: "Contacto"
+    email_label: "Correo electrónico"
+    email: "info@voidfiles.example.com"
+    management: "Dirección"
+    ceo: "Juan García"
+    register_info: "Registro Mercantil"
+    register_court: "Registro Mercantil de Ciudad Ejemplo"
+    register_number: "Tomo 1234, Folio 567"
+    vat_info: "NIF / IVA"
+    vat_id: "ES B12345678"
+    liability: "Exención de responsabilidad"
+    liability_text: "Los contenidos de esta página han sido elaborados con el máximo cuidado. Sin embargo, no podemos garantizar la exactitud, integridad o actualidad de los contenidos. Como proveedor de servicios, somos responsables de nuestros propios contenidos en estas páginas de acuerdo con las leyes generales según el Art. 7 párr. 1 de la LSSI. De acuerdo con los Arts. 8 a 10 de la LSSI, no estamos obligados como proveedor de servicios a supervisar la información de terceros transmitida o almacenada ni a investigar circunstancias que indiquen una actividad ilegal. Las obligaciones de eliminar o bloquear el uso de información bajo las leyes generales permanecen intactas. Sin embargo, la responsabilidad en este sentido solo es posible desde el momento en que se tenga conocimiento de una violación legal específica. Al tener conocimiento de tales violaciones legales, eliminaremos este contenido de inmediato."
+    copyright: "Derechos de autor"
+    copyright_text: "Los contenidos y obras creados por los operadores del sitio en estas páginas están sujetos a la legislación española sobre derechos de autor. La reproducción, procesamiento, distribución o cualquier forma de comercialización de dichos contenidos más allá del ámbito de la legislación sobre derechos de autor requerirá el consentimiento previo por escrito del respective autor o creador. Las descargas y copias de este sitio solo están permitidas para uso privado, no comercial. En la medida en que el contenido de este sitio no fue creado por el operador, se respetan los derechos de autor de terceros. En particular, el contenido de terceros está identificado como tal. Si tuviera conocimiento de una infracción de derechos de autor, le pedimos que nos lo notifique. Al tener conocimiento de violaciones legales, eliminaremos dicho contenido de inmediato."
   time:
     formats:
       short: "%d/%m/%Y, %H:%M"
