@@ -36,6 +36,9 @@ en:
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
       updated: "Your password has been changed successfully. You are now signed in."
       updated_not_active: "Your password has been changed successfully."
+      title: "Reset password"
+      subtitle: "Enter your email address to receive a link to reset your password."
+      submit: "Send reset link"
     registrations:
       title: "Sign up for free"
       subtitle: "Create an account to use Voidfiles to its full potential."

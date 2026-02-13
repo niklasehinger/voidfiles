@@ -34,6 +34,9 @@ de:
       send_paranoid_instructions: "Falls deine E-Mail-Adresse in unserer Datenbank existiert, erhältst du in wenigen Minuten eine E-Mail mit einem Link zum Zurücksetzen deines Passworts."
       updated: "Dein Passwort wurde erfolgreich geändert. Du bist jetzt angemeldet."
       updated_not_active: "Dein Passwort wurde erfolgreich geändert."
+      title: "Passwort zurücksetzen"
+      subtitle: "Gib deine E-Mail-Adresse ein, um einen Link zum Zurücksetzen deines Passworts zu erhalten."
+      submit: "Link zum Zurücksetzen senden"
     registrations:
       title: "Kostenlos registrieren"
       subtitle: "Erstelle einen Account, um Voidfiles vollumfänglich zu nutzen."
