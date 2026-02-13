@@ -38,6 +38,10 @@ de:
       subtitle: "Gib deine E-Mail-Adresse ein, um einen Link zum Zurücksetzen deines Passworts zu erhalten."
       submit: "Link zum Zurücksetzen senden"
       spam_notice: "Hinweis: Prüfe auch deinen Spam-Ordner, falls du die E-Mail nicht in deinem Posteingang findest."
+      edit_title: "Neues Passwort festlegen"
+      edit_subtitle: "Gib dein neues Passwort zweimal ein, um es zu bestätigen."
+      edit_submit: "Passwort ändern"
+      min_length: "mindestens %{count} Zeichen"
     registrations:
       title: "Kostenlos registrieren"
       subtitle: "Erstelle einen Account, um Voidfiles vollumfänglich zu nutzen."

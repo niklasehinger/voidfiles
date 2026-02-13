@@ -38,6 +38,10 @@ fr:
       subtitle: "Entrez votre adresse e-mail pour recevoir un lien de réinitialisation de votre mot de passe."
       submit: "Envoyer le lien de réinitialisation"
       spam_notice: "Remarque : Vérifiez également votre dossier de spam si vous ne trouvez pas l'e-mail dans votre boîte de réception."
+      edit_title: "Définir un nouveau mot de passe"
+      edit_subtitle: "Entrez votre nouveau mot de passe deux fois pour le confirmer."
+      edit_submit: "Changer le mot de passe"
+      min_length: "au moins %{count} caractères"
     registrations:
       title: "Inscription gratuite"
       subtitle: "Créez un compte pour profiter pleinement de Voidfiles."
