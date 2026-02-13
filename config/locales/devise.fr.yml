@@ -37,6 +37,7 @@ fr:
       title: "Réinitialiser le mot de passe"
       subtitle: "Entrez votre adresse e-mail pour recevoir un lien de réinitialisation de votre mot de passe."
       submit: "Envoyer le lien de réinitialisation"
+      spam_notice: "Remarque : Vérifiez également votre dossier de spam si vous ne trouvez pas l'e-mail dans votre boîte de réception."
     registrations:
       title: "Inscription gratuite"
       subtitle: "Créez un compte pour profiter pleinement de Voidfiles."

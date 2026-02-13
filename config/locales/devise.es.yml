@@ -37,6 +37,7 @@ es:
       title: "Restablecer contraseña"
       subtitle: "Introduce tu correo electrónico para recibir un enlace para restablecer tu contraseña."
       submit: "Enviar enlace de restablecimiento"
+      spam_notice: "Nota: También revisa tu carpeta de spam si no encuentras el correo en tu bandeja de entrada."
     registrations:
       title: "Regístrate gratis"
       subtitle: "Crea una cuenta para usar Voidfiles con todas sus funciones."

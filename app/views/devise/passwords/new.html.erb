@@ -2,7 +2,10 @@
   <div class="max-w-3xl mx-auto">
     <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8">
       <h1 class="text-3xl font-extrabold text-voidfiles-navy mb-2 text-center"><%= t("devise.passwords.title") %></h1>
-      <p class="text-center text-gray-500 mb-6"><%= t("devise.passwords.subtitle") %></p>
+      <p class="text-center text-gray-500 mb-4"><%= t("devise.passwords.subtitle") %></p>
+      <div class="bg-amber-50 border border-amber-200 text-amber-800 px-4 py-3 rounded-lg mb-6 text-sm">
+        <p><%= t("devise.passwords.spam_notice") %></p>
+      </div>
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, 'data-turbo' => 'false' }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="mb-4">

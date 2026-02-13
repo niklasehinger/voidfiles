@@ -39,6 +39,7 @@ en:
       title: "Reset password"
       subtitle: "Enter your email address to receive a link to reset your password."
       submit: "Send reset link"
+      spam_notice: "Note: Also check your spam folder if you don't find the email in your inbox."
     registrations:
       title: "Sign up for free"
       subtitle: "Create an account to use Voidfiles to its full potential."
