@@ -22,7 +22,7 @@ class PrprojUpload < ApplicationRecord
     return nil unless prproj_file.attached?
 
     @document = Nokogiri::XML(prproj_file.download) do |config|
-      config.strict.noblanks
+      config.nonet.noent
     end
     @document
   rescue => e
