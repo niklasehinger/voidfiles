@@ -1,43 +1,78 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="max-w-2xl mx-auto pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+  <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8">
+    <h2 class="text-2xl font-extrabold text-voidfiles-navy mb-6 text-center">
+      <%= t('devise.edit_profile', default: 'Profil bearbeiten') %>
+    </h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <!-- Avatar Upload -->
+      <div class="mb-6 flex flex-col items-center">
+        <div class="mb-4">
+          <% if resource.avatar.attached? %>
+            <%= image_tag resource.avatar.variant(resize: "150x150"), class: "w-32 h-32 rounded-full object-cover border-4 border-voidfiles-blue" %>
+          <% else %>
+            <div class="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center border-4 border-gray-300">
+              <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+          <% end %>
+        </div>
+        <div class="text-center">
+          <%= f.label :avatar, t('devise.avatar', default: 'Profilbild'), class: "text-sm font-medium text-voidfiles-navy cursor-pointer" %>
+          <%= f.file_field :avatar, accept: "image/*", class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-voidfiles-blue file:text-white hover:file:bg-voidfiles-navy mt-1" %>
+        </div>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <div class="mb-4">
+        <%= f.label :name, t('devise.name', default: 'Name'), class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.text_field :name, autocomplete: "name", class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-voidfiles-blue focus:border-transparent" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <div class="mb-4">
+        <%= f.label :email, t('devise.email', default: 'E-Mail'), class: "block text-sm font-medium text-gray-700 mb-1" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-voidfiles-blue focus:border-transparent" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div class="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-700">
+          <%= t('devise.waiting_confirmation', default: 'Warte auf Bestätigung von:') %> <%= resource.unconfirmed_email %>
+        </div>
+      <% end %>
+
+      <div class="mb-4">
+        <%= f.label :password, t('devise.new_password', default: 'Neues Passwort') %> <i>(<%= t('devise.leave_blank', default: 'leer lassen wenn nicht geändert') %>)</i><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-voidfiles-blue focus:border-transparent" %>
+        <% if @minimum_password_length %>
+          <em class="text-sm text-gray-500"><%= @minimum_password_length %> <%= t('devise.characters_minimum', default: 'Zeichen Minimum') %></em>
+        <% end %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :password_confirmation, t('devise.password_confirmation', default: 'Passwort bestätigen'), class: "block text-sm font-medium text-gray-700 mb-1" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-voidfiles-blue focus:border-transparent" %>
+      </div>
+
+      <div class="mb-6">
+        <%= f.label :current_password, t('devise.current_password', default: 'Aktuelles Passwort') %> <i>(<%= t('devise.required_to_confirm', default: 'erforderlich zur Bestätigung') %>)</i><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-voidfiles-blue focus:border-transparent" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit t('devise.update', default: 'Aktualisieren'), class: "w-full bg-voidfiles-blue text-white font-bold py-3 px-4 rounded-lg hover:bg-voidfiles-navy transition cursor-pointer" %>
+      </div>
     <% end %>
+
+    <div class="mt-8 pt-6 border-t border-gray-200">
+      <h3 class="text-lg font-bold text-voidfiles-navy mb-2"><%= t('devise.cancel_account', default: 'Konto löschen') %></h3>
+      <p class="text-gray-500 mb-4"><%= t('devise.unhappy', default: 'Unzufrieden?') %></p>
+      <%= button_to t('devise.cancel_my_account', default: 'Mein Konto löschen'), registration_path(resource_name), data: { confirm: t('devise.are_you_sure', default: 'Sind Sie sicher?'), turbo_confirm: t('devise.are_you_sure', default: 'Sind Sie sicher?') }, method: :delete, class: "text-red-600 hover:text-red-800 font-medium" %>
+    </div>
+
+    <div class="mt-4">
+      <%= link_to "← #{t('devise.back', default: 'Zurück')}", :back, class: "text-voidfiles-blue hover:underline" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

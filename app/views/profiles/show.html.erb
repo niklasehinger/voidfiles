@@ -1,13 +1,27 @@
 <section class="max-w-3xl mx-auto pt-16 pb-8 px-4 sm:px-6 lg:px-8">
   <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8">
-    <h1 class="text-3xl font-extrabold text-voidfiles-navy mb-2 text-center">
-      <%= t('profile.title', default: 'Dein Profil') %>
-    </h1>
-    <p class="text-center text-gray-500 mb-6">
-      <% user_name = (@user.respond_to?(:name) ? @user.name : @user[:name]) %>
-      <%= t('profile.welcome', default: 'Willkommen, %{name}!', name: user_name.presence || '-') %>
-    </p>
-    <%#= debug @user %>
+    <!-- Profile Header with Avatar -->
+    <div class="flex flex-col items-center mb-8">
+      <div class="mb-4">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar.variant(resize: "150x150"), class: "w-32 h-32 rounded-full object-cover border-4 border-voidfiles-blue" %>
+        <% else %>
+          <div class="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center border-4 border-gray-300">
+            <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+        <% end %>
+      </div>
+      <h1 class="text-3xl font-extrabold text-voidfiles-navy mb-2 text-center">
+        <%= t('profile.title', default: 'Dein Profil') %>
+      </h1>
+      <p class="text-center text-gray-500 mb-4">
+        <% user_name = (@user.respond_to?(:name) ? @user.name : @user[:name]) %>
+        <%= t('profile.welcome', default: 'Willkommen, %{name}!', name: user_name.presence || '-') %>
+      </p>
+      <%= link_to t('profile.edit', default: 'Profil bearbeiten'), edit_user_registration_path(locale: I18n.locale), class: "text-voidfiles-blue hover:underline font-medium" %>
+    </div>
     
     <!-- Recent Uploads Section -->
     <% if @prproj_uploads.any? %>
