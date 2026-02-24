@@ -4,14 +4,14 @@
       <%= t('devise.edit_profile', default: 'Profil bearbeiten') %>
     </h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true, data: { turbo: false } }, local: true) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <!-- Avatar Upload -->
       <div class="mb-6 flex flex-col items-center">
         <div class="mb-4">
-          <% if resource.avatar.attached? %>
-            <%= image_tag resource.avatar.variant(resize: "150x150"), class: "w-32 h-32 rounded-full object-cover border-4 border-voidfiles-blue" %>
+          <% if resource.avatar.attached? && resource.avatar.persisted? %>
+            <%= image_tag resource.avatar, class: "w-32 h-32 rounded-full object-cover border-4 border-voidfiles-blue" %>
           <% else %>
             <div class="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center border-4 border-gray-300">
               <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 24 24">

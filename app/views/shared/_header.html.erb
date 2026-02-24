@@ -32,7 +32,7 @@
       <% if user_signed_in? %>
         <%= link_to profile_path(locale: I18n.locale), class: 'flex items-center gap-2 px-3 py-1 rounded-lg hover:bg-gray-100 transition' do %>
           <% if current_user.avatar.attached? %>
-            <%= image_tag current_user.avatar.variant(resize: "32x32"), class: "w-8 h-8 rounded-full object-cover" %>
+            <%= image_tag current_user.avatar, class: "w-8 h-8 rounded-full object-cover" %>
           <% else %>
             <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
               <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
@@ -62,7 +62,7 @@
       <% if user_signed_in? %>
         <%= link_to profile_path(locale: I18n.locale), class: 'flex items-center gap-3 py-2' do %>
           <% if current_user.avatar.attached? %>
-            <%= image_tag current_user.avatar.variant(resize: "40x40"), class: "w-10 h-10 rounded-full object-cover" %>
+            <%= image_tag current_user.avatar, class: "w-10 h-10 rounded-full object-cover" %>
           <% else %>
             <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
               <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get "profiles/show"
 
   scope "(:locale)", locale: /en|de|es|fr/ do
-    devise_for :users, controllers: { sessions: "sessions" }
+    devise_for :users, controllers: { sessions: "sessions", registrations: "registrations" }
 
     # Root path based on authentication
     root "home#index"
