@@ -19,9 +19,6 @@
       <%= link_to features_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
         <%= t('navigation.features') %>
       <% end %>
-      <%= link_to pricing_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
-        <%= t('navigation.pricing') %>
-      <% end %>
       <%= link_to faq_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition' do %>
         <%= t('navigation.faq') %>
       <% end %>
@@ -63,7 +60,6 @@
       <% end %>
       <div class="border-t border-gray-100 pt-3 mt-3">
         <%= link_to t('navigation.features'), features_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2 block' %>
-        <%= link_to t('navigation.pricing'), pricing_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2 block' %>
         <%= link_to t('navigation.faq'), faq_path(locale: I18n.locale), class: 'text-voidfiles-navy hover:text-voidfiles-blue transition py-2 block' %>
       </div>
       <!-- Language Switcher for Mobile -->
